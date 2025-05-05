@@ -11,7 +11,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="GameServices\" />
+    <Folder Include="GameServices\Interface\" />
   </ItemGroup>
 
 </Project>
