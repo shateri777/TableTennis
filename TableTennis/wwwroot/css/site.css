@@ -1,31 +1,160 @@
-html {
-  font-size: 14px;
+﻿html {
+font-size: 14px;
 }
 
 @media (min-width: 768px) {
-  html {
-    font-size: 16px;
-  }
+html {
+font-size: 16px;
+}
 }
 
 .btn:focus, .btn:active:focus, .btn-link.nav-link:focus, .form-control:focus, .form-check-input:focus {
-  box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
+box-shadow: 0 0 0 0.1rem white, 0 0 0 0.25rem #258cfb;
 }
 
 html {
-  position: relative;
-  min-height: 100%;
+position: relative;
+min-height: 100%;
 }
 
 body {
-  margin-bottom: 60px;
+margin-bottom: 60px;
 }
 
-.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
-  color: var(--bs-secondary-color);
-  text-align: end;
-}
+/*.form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
+color: var(--bs-secondary-color);
+text-align: end;
+}*/
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
-  text-align: start;
+text-align: start;
+}
+
+* {
+box-sizing: border-box;
+margin: 0;
+padding: 0;
+}
+
+body {
+font-family: Arial, sans-serif; /* Eller den font familj ni använder */
+}
+
+.site-header {
+background-color: #4a0012; /* Uppskattad mörk vinröd färg från bilden */
+padding: 15px 30px; /* Justera padding efter behov */
+color: #ffffff; /* Vit textfärg som standard */
+}
+
+.header-top-row {
+display: flex; /* Lägg elementen på rad */
+justify-content: space-between; /* Sprid ut logo/titel och sociala ikoner */
+align-items: center; /* Centrera vertikalt på raden */
+padding-bottom: 20px; /* Avstånd ner till menyn */
+width: 50%;
+margin: 0 auto;
+}
+
+.logo-title-group {
+display: flex; /* Lägg logga och titel på rad */
+align-items: center; /* Centrera vertikalt */
+}
+
+.logo-link {
+display: inline-block; /* För att marginal ska funka */
+margin-right: 20px; /* Avstånd mellan logga och titel */
+line-height: 0; /* Undvik extra utrymme under bilden */
+}
+
+.logo-image {
+height: 70px; /* Justera höjd efter behov */
+width: auto; /* Behåll proportioner */
+vertical-align: middle; /* För bättre linjering med texten */
+}
+
+.site-title {
+font-size: 48px;
+font-weight: bold;
+text-transform: uppercase;
+color: #ffffff !important;
+}
+
+.site-title a {
+    text-decoration: none; /* Ingen understrykning */
+    color: #ffffff !important;
+}
+
+.social-icons ul {
+list-style: none; /* Ta bort punkter */
+}
+
+.social-icons li {
+margin-bottom: 8px; /* Avstånd mellan ikonerna */
+}
+
+.social-icons li:last-child {
+margin-bottom: 0; /* Inget avstånd efter sista ikonen */
+}
+
+.social-icons img {
+height: 18px; /* Små ikoner (justera) */
+width: auto;
+display: block; /* För att marginal ska funka korrekt */
+}
+
+.main-navigation {
+text-align: center; /* Centrera navigeringsmenyn */
+width: 50%;
+margin: 0 auto;
+}
+
+.main-navigation ul {
+list-style: none; /* Ta bort punkter */
+display: inline-block; /* Gör att ul kan centreras */
+}
+
+.main-navigation li {
+display: inline-block; /* Lägg menyvalen på rad */
+margin: 0 5px; /* Lite luft mellan menyvalen */
+padding: 0 15px; /* Utrymme för separatorn */
+position: relative; /* För att positionera separatorn */
+border-left: 1px solid rgba(255, 255, 255, 0.5); /* Separatorlinje */
+}
+
+/* Ta bort linje för första menyvalet */
+.main-navigation li:first-child {
+    border-left: none;
+    padding-left: 0; /* Justera om "START" inte ska ha padding vänster */
+}
+
+.main-navigation a {
+color: #ffffff !important; /* Vit text */
+text-decoration: none; /* Ingen understrykning */
+font-size: 14px; /* Justera textstorlek */
+font-weight: bold; /* Fet stil */
+text-transform: uppercase; /* Versaler */
+display: inline-block; /* För att padding ska fungera */
+padding: 8px 10px; /* Padding inuti länken */
+line-height: 1; /* För att kontrollera höjden */
+}
+
+/* Stil för aktivt menyval (START-knappen) */
+.main-navigation li.active {
+border-left: none; /* Aktiv knapp har ingen vänsterlinje i bilden */
+padding-left: 0; /* Justera padding för aktiv */
+}
+
+.main-navigation li.active a {
+    background-color: #c85a46; /* Uppskattad orangebrun färg */
+    color: #ffffff !important; /* Vit text på aktiv knapp */
+
+}
+
+/* Hover-effekt (valfritt, men vanligt) */
+.main-navigation a:hover {
+opacity: 0.8; /* Gör länken lite genomskinlig vid hover */
+}
+
+.main-navigation li.active a:hover {
+opacity: 0.9; /* Annan effekt för aktiv länk om man vill */
 }
