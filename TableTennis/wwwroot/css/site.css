@@ -42,17 +42,21 @@ font-family: Arial, sans-serif; /* Eller den font familj ni använder */
 
 .site-header {
 background-color: #4a0012; /* Uppskattad mörk vinröd färg från bilden */
-padding: 15px 30px; /* Justera padding efter behov */
+padding-top: 15px; /* Justera padding efter behov */
 color: #ffffff; /* Vit textfärg som standard */
 }
 
 .header-top-row {
-display: flex; /* Lägg elementen på rad */
-justify-content: space-between; /* Sprid ut logo/titel och sociala ikoner */
-align-items: center; /* Centrera vertikalt på raden */
-padding-bottom: 20px; /* Avstånd ner till menyn */
-width: 50%;
-margin: 0 auto;
+    display: flex; /* Lägg elementen på rad */
+    justify-content: space-between; /* Sprid ut logo/titel och sociala ikoner */
+    align-items: center; /* Centrera vertikalt på raden */
+    max-width: 1200px; /* Sätt en maxbredd. 1200px är vanligt, men anpassa efter din design. */
+    /* Du kan också använda procent, t.ex. max-width: 90%; */
+    width: 100%; /* Se till att den tar upp tillgänglig bredd UPP TILL max-width */
+    margin-left: auto; /* Centrerar blocket horisontellt */
+    margin-right: auto; /* Centrerar blocket horisontellt */
+    padding-left: 135px; /* Lägg till lite luft på sidorna inuti detta block */
+    padding-right: 150px;
 }
 
 .logo-title-group {
@@ -67,16 +71,17 @@ line-height: 0; /* Undvik extra utrymme under bilden */
 }
 
 .logo-image {
-height: 70px; /* Justera höjd efter behov */
+height: 90px; /* Justera höjd efter behov */
 width: auto; /* Behåll proportioner */
-vertical-align: middle; /* För bättre linjering med texten */
+vertical-align: middle /* För bättre linjering med texten */
 }
 
 .site-title {
-font-size: 48px;
-font-weight: bold;
+font-size: 70px;
+font-weight: bolder;
 text-transform: uppercase;
 color: #ffffff !important;
+text-align: center;
 }
 
 .site-title a {
@@ -97,15 +102,16 @@ margin-bottom: 0; /* Inget avstånd efter sista ikonen */
 }
 
 .social-icons img {
-height: 18px; /* Små ikoner (justera) */
+height: 25px; /* Små ikoner (justera) */
 width: auto;
 display: block; /* För att marginal ska funka korrekt */
 }
 
 .main-navigation {
-text-align: center; /* Centrera navigeringsmenyn */
-width: 50%;
-margin: 0 auto;
+    text-align: center; /* Centrera navigeringsmenyn */
+    width: 100%;
+    margin: 0 auto;
+    border-bottom: 5px solid #ffd800;
 }
 
 .main-navigation ul {
