@@ -7,6 +7,7 @@ namespace TableTennis
 {
     public class Program
     {
+        //TEST
         public static void Main(string[] args)
         {
             var builder = WebApplication.CreateBuilder(args);
