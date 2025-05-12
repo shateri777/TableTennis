@@ -8,6 +8,15 @@
         public bool IsPlayer1Serve { get; set; } = true;
         public int ServeCounter { get; set; } = 0;
 
+        // Player information
+        public string Player1UserName { get; set; }
+        public string Player2UserName { get; set; }
+        public int Player1Age { get; set; }
+        public int Player2Age { get; set; }
+        public string SetGender { get; set; }
+        public DateOnly MatchDate { get; set; }
+        public string WinnerPlayer { get; set; }
+
         public void AddPointToPlayer1()
         {
             Player1Score++;
