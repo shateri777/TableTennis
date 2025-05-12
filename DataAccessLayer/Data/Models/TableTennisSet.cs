@@ -8,14 +8,16 @@
         public bool IsPlayer1Serve { get; set; } = true;
         public int ServeCounter { get; set; } = 0;
 
+        public int Handicap { get; set; } = 0; // standard värde för handikap är 0, kan ändras vid behov
+
         // Player information
-        public string Player1UserName { get; set; }
-        public string Player2UserName { get; set; }
+        public string Player1UserName { get; set; } = string.Empty; // Non-null value
+        public string Player2UserName { get; set; } = string.Empty; // Non-null value
         public int Player1Age { get; set; }
         public int Player2Age { get; set; }
-        public string SetGender { get; set; }
-        public DateOnly MatchDate { get; set; }
-        public string WinnerPlayer { get; set; }
+        public string SetGender { get; set; } = String.Empty;
+        public DateOnly MatchDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
+        public string WinnerPlayer { get; set; }  = string.Empty; // Non-null value
 
         public void AddPointToPlayer1()
         {
@@ -60,6 +62,15 @@
                 IsPlayer1Serve = !IsPlayer1Serve; // Växla servern
                 ServeCounter = 0; // Nollställ räknaren
             }
+        }
+
+        public void ResetSet() //mySet.ReSet(); för att start om nya matcher.                    
+        {
+            Player1Score = 0;
+            Player2Score = 0;
+            IsPlayer1Serve = true;
+            ServeCounter = 0;
+            MatchDate = DateOnly.FromDateTime(DateTime.Now);
         }
     }
 }

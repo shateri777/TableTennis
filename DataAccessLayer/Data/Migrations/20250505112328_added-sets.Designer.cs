@@ -13,7 +13,7 @@ namespace TableTennis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
     [Migration("20250505112328_added-sets")]
-    partial class addedsets
+    partial class AddedSets
     {
         /// <inheritdoc />
         protected override void BuildTargetModel(ModelBuilder modelBuilder)

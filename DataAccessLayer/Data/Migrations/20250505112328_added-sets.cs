@@ -5,7 +5,7 @@
 namespace TableTennis.Data.Migrations
 {
     /// <inheritdoc />
-    public partial class addedsets : Migration
+    public partial class AddedSets : Migration
     {
         /// <inheritdoc />
         protected override void Up(MigrationBuilder migrationBuilder)
