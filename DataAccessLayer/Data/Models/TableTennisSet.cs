@@ -7,17 +7,17 @@
         public int Player2Score { get; set; }
         public bool IsPlayer1Serve { get; set; } = true;
         public int ServeCounter { get; set; } = 0;
-
-        public int Handicap { get; set; } = 0; // standard värde för handikap är 0, kan ändras vid behov
+        public int Handicap { get; set; } = 0; // standard värde för handikap är 0
 
         // Player information
-        public string Player1UserName { get; set; } = string.Empty; // Non-null value
-        public string Player2UserName { get; set; } = string.Empty; // Non-null value
+        public string Player1UserName { get; set; } = string.Empty; 
+        public string Player2UserName { get; set; } = string.Empty; 
         public int Player1Age { get; set; }
         public int Player2Age { get; set; }
         public string SetGender { get; set; } = String.Empty;
         public DateOnly MatchDate { get; set; } = DateOnly.FromDateTime(DateTime.Now);
-        public string WinnerPlayer { get; set; }  = string.Empty; // Non-null value
+        public string WinnerPlayer { get; set; }  = string.Empty; 
+        public string MatchTitle => $"{Player1UserName} vs {Player2UserName}";
 
         public void AddPointToPlayer1()
         {
