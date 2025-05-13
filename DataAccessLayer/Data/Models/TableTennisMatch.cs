@@ -19,7 +19,7 @@ namespace DataAccessLayer.Data.Models
         public int Player2Age { get; set; }
         public string SetGender { get; set; }
         public int SetCounter { get; set; }
-        public string WinnerPlayer { get; set; } = null!;
+        public string? WinnerPlayer { get; set; }
         public DateTime MatchDate { get; set; }
         public bool IsAcitve { get; set; } = true;
     }
