@@ -1,8 +1,8 @@
-﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using DataAccessLayer.Data.Models;
+using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using TableTennis.Data.Models;
 
-namespace TableTennis.Data
+namespace DataAccessLayer.Data
 {
     public class ApplicationDbContext : IdentityDbContext
     {
@@ -11,6 +11,7 @@ namespace TableTennis.Data
         {
         }
         public DbSet<TableTennisSet> Sets { get; set; }
+        public DbSet<TableTennisMatch> Match{ get; set; }
 
     }
 }

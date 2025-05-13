@@ -4,32 +4,21 @@
 }
 <h2>Table Tennis Scoreboard</h2>
 
-@if (string.IsNullOrEmpty(Model.Winner))
-{
-    <form method="post">
-        <input type="hidden" asp-for="CurrentSet.Id" />
+<p>Välj kön till matchen.</p>
 
-        <div>
-            <p>Match Id: @Model.CurrentSet.Id</p>
-            <p>Player 1 Score: @Model.CurrentSet.Player1Score</p>
-            <p>Player 2 Score: @Model.CurrentSet.Player2Score</p>
-            <p>Current Server: @(Model.CurrentSet.IsPlayer1Serve ? "Player 1" : "Player 2")</p>
+<head>
+    <meta charset="UTF-8">
+    <title>Välj kön</title>
+</head>
+<section class="gender">
+
+    <div class="gender-selection">
+        <h1>Välj kön</h1>
+        <div class="gender-buttons">
+            <button asp-page="TableTennisMatch"class="gender-button male">♂️ Kille</button>
+            <button class="gender-button female">♀️ Tjej</button>
         </div>
-
-        <div>
-            <button asp-page-handler="AddPointToPlayer1">Add Point to Player 1</button>
-            <button asp-page-handler="AddPointToPlayer2">Add Point to Player 2</button>
-        </div>
-    </form>
-}
-
-
-else
-{
-    <div>
-        <h3>Winner is @Model.Winner!</h3>
-        <form method="post">
-            <button asp-page-handler="StartNewGame">Start New Game</button>
-        </form>
     </div>
-}
+
+</section>
+</html>

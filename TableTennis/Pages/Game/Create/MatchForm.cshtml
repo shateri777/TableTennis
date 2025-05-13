@@ -1,0 +1,68 @@
+﻿@page
+@model TableTennis.Pages.Game.Create.MatchFormModel
+@{
+}
+
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8">
+    <title>Pingis Match Setup</title>
+ 
+</head>
+<body>
+
+    <div class="pingis-setup">
+        <h1>Starta Pingismatch</h1>
+
+        <form>
+            <div class="form-wrapper">
+                <!-- Spelare 1 -->
+                <div class="player-form">
+                    <h2>Spelare 1</h2>
+                    <label>
+                        Förnamn:
+                        <input type="text" asp-for="@Model.Player1FirstName" name="player1_firstname" required>
+                    </label>
+                    <label>
+                        Efternamn:
+                        <input type="text" asp-for="@Model.Player1LastName" name="player1_lastname" required>
+                    </label>
+                    <label>
+                        Ålder:
+                        <input type="number" asp-for="@Model.Player1Age" name="player1_age" required>
+                    </label>
+                </div>
+
+                <!-- Spelare 2 -->
+                <div class="player-form">
+                    <h2>Spelare 2</h2>
+                    <label>
+                        Förnamn:
+                        <input type="text" asp-for="@Model.Player2FirstName" name="player2_firstname" required>
+                    </label>
+                    <label>
+                        Efternamn:
+                        <input type="text" asp-for="@Model.Player2LastName" name="player1_lastname" required>
+                    </label>
+                    <label>
+                        Ålder:
+                        <input type="number" asp-for="@Model.Player2Age" name="player1_age" required>
+                    </label>
+                </div>
+            </div>
+
+            <!-- Set-alternativ -->
+            <div class="set-options">
+                <h2>Välj matchformat</h2>
+                <label><input type="radio" name="sets" value="3" required> Bäst av 3</label>
+                <label><input type="radio" name="sets" value="5"> Bäst av 5</label>
+                <label><input type="radio" name="sets" value="7"> Bäst av 7</label>
+            </div>
+
+            <button type="submit" class="submit-btn">Starta Match</button>
+        </form>
+    </div>
+
+</body>
+</html>

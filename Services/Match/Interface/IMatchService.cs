@@ -9,10 +9,10 @@ namespace Services.Match.Interface
 {
     public interface IMatchService
     {
-        SetsDTO AddPointToPlayer1(int matchId);
-        SetsDTO AddPointToPlayer2(int matchId);
-        string CheckEndOfSet(int matchId);
-        void UpdateServe(int matchId);
-        void CreateSet(SetsDTO match);
+        //SetsDTO AddPointToPlayer1(int matchId);
+        //SetsDTO AddPointToPlayer2(int matchId);
+        //string CheckEndOfSet(int matchId);
+        //void UpdateServe(int matchId);
+        //void CreateSet(SetsDTO match);
     }
 }

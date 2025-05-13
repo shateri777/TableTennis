@@ -1,0 +1,23 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace DataAccessLayer.Data.Models
+{
+    public class TableTennisMatch
+    {
+        // Player information
+        public int Id { get; set; }
+        public string Player1FirstName { get; set; }
+        public string Player1LastName { get; set; }
+        public string Player2FirstName { get; set; }
+        public string Player2LastName { get; set; }
+        public int Player1Age { get; set; }
+        public int Player2Age { get; set; }
+        public string SetGender { get; set; }
+        public string WinnerPlayer { get; set; }
+        public bool IsAcitve { get; set; } = true;
+    }
+}

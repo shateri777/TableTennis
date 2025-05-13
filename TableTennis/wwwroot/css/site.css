@@ -164,3 +164,110 @@ opacity: 0.8; /* Gör länken lite genomskinlig vid hover */
 .main-navigation li.active a:hover {
 opacity: 0.9; /* Annan effekt för aktiv länk om man vill */
 }
+
+
+/* START Gender Selection */
+
+.gender {
+    font-family: Arial, sans-serif;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.gender-selection {
+    background-color: white;
+    padding: 30px 50px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    text-align: center;
+}
+
+.gender-selection h1 {
+    margin-bottom: 30px;
+}
+
+.gender-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.gender-button {
+    padding: 20px 40px;
+    font-size: 24px;
+    border: none;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: transform 0.2s;
+}
+
+    .gender-button:hover {
+        transform: scale(1.05);
+    }
+
+.male {
+    background-color: #2196F3;
+    color: white;
+}
+
+.female {
+    background-color: #E91E63;
+    color: white;
+}
+
+
+/* END Gender Selection */
+
+/* START Gender Form */
+
+.pingis-setup {
+    font-family: Arial, sans-serif;
+    margin: 40px;
+    background-color: #f4f4f4;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.pingis-setup .form-wrapper {
+    display: flex;
+    justify-content: space-between;
+    gap: 20px;
+    background-color: white;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.pingis-setup .player-form {
+    width: 45%;
+}
+
+    .pingis-setup .player-form h2 {
+        text-align: center;
+    }
+
+.pingis-setup label {
+    display: block;
+    margin-top: 10px;
+}
+
+.pingis-setup .set-options {
+    margin-top: 20px;
+    text-align: center;
+}
+
+    .pingis-setup .set-options h2 {
+        margin-bottom: 10px;
+    }
+
+.pingis-setup .submit-btn {
+    display: block;
+    margin: 20px auto;
+    padding: 10px 20px;
+    font-size: 16px;
+}
+
+
+/* END Gender Form */
