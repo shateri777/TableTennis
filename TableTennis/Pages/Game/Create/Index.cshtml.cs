@@ -17,6 +17,8 @@ namespace TableTennis.Pages.Game.Create
             _matchService = matchService;
         }
 
+        public string SetGender { get; set; }
+
         //public List<TableTennisSet> Sets { get; set; }
 
         //[BindProperty]
@@ -63,7 +65,7 @@ namespace TableTennis.Pages.Game.Create
         //    // Skapa ett nytt set och lägg till det i databasen
         //    CurrentSet = new SetsDTO();
         //    _matchService.CreateSet(CurrentSet);
-            
+
         //    // Återställ Winner till null för nästa omgång
         //    Winner = null;
         //}

@@ -15,7 +15,7 @@
     <div class="pingis-setup">
         <h1>Starta Pingismatch</h1>
 
-        <form>
+        <form method="post">
             <div class="form-wrapper">
                 <!-- Spelare 1 -->
                 <div class="player-form">
@@ -55,9 +55,9 @@
             <!-- Set-alternativ -->
             <div class="set-options">
                 <h2>Välj matchformat</h2>
-                <label><input type="radio" name="sets" value="3" required> Bäst av 3</label>
-                <label><input type="radio" name="sets" value="5"> Bäst av 5</label>
-                <label><input type="radio" name="sets" value="7"> Bäst av 7</label>
+                <label><input type="radio" asp-for="@Model.ChoosenSet" name="sets" value="3" required> Bäst av 3</label>
+                <label><input type="radio" asp-for="@Model.ChoosenSet" name="sets" value="5"> Bäst av 5</label>
+                <label><input type="radio" asp-for="@Model.ChoosenSet" name="sets" value="7"> Bäst av 7</label>
             </div>
 
             <button type="submit" class="submit-btn">Starta Match</button>

@@ -9,8 +9,10 @@ namespace DataAccessLayer.Data.DTO
     public class SetsDTO
     {
         public int Id { get; set; }
-        public string Player1UserName { get; set; }
-        public string Player2UserName { get; set; }
+        public string Player1FirstName { get; set; }
+        public string Player1LastName { get; set; }
+        public string Player2FirstName { get; set; }
+        public string Player2LastName { get; set; }
         public int Player1Age { get; set; }
         public int Player2Age { get; set; }
         public string SetGender { get; set; }
@@ -18,7 +20,7 @@ namespace DataAccessLayer.Data.DTO
         public int Player2Score { get; set; }
         public bool IsPlayer1Serve { get; set; }
         public int ServeCounter { get; set; }
-        public DateOnly MatchDate { get; set; }
+        public DateTime MatchDate { get; set; }
         public string WinnerPlayer { get; set; }
 
     }

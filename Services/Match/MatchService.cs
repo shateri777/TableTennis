@@ -17,6 +17,25 @@ namespace Services.Match
         {
             _dbContext = dbContext;
         }
+
+        public void CreateMatch(SetsDTO setDTO)
+        {
+            var set = new DataAccessLayer.Data.Models.TableTennisMatch
+            {
+                Player1FirstName = setDTO.Player1FirstName,
+                Player1LastName = setDTO.Player1LastName,
+                Player2FirstName = setDTO.Player2FirstName,
+                Player2LastName = setDTO.Player2LastName,
+                Player1Age = setDTO.Player1Age,
+                Player2Age = setDTO.Player2Age,
+                SetGender = setDTO.SetGender,
+                MatchDate = setDTO.MatchDate
+            };
+            _dbContext.Match.Add(set);
+            _dbContext.SaveChanges();
+        }
+
+
         // TO DO
         //public SetsDTO AddPointToPlayer1(int matchId)
         //{
@@ -82,23 +101,6 @@ namespace Services.Match
         //    }
         //    _dbContext.SaveChanges();
         //}
-        //public void CreateSet(SetsDTO setDTO)
-        //{
-        //    var set = new TableTennis.Data.Models.TableTennisSet
-        //    {
-        //        Player1UserName = setDTO.Player1UserName,
-        //        Player2UserName = setDTO.Player2UserName,
-        //        Player1Age = setDTO.Player1Age,
-        //        Player2Age = setDTO.Player2Age,
-        //        SetGender = setDTO.SetGender,           
-        //        Player1Score = setDTO.Player1Score,
-        //        Player2Score = setDTO.Player2Score,
-        //        IsPlayer1Serve = setDTO.IsPlayer1Serve,
-        //        ServeCounter = setDTO.ServeCounter, 
-        //        MatchDate = setDTO.MatchDate,
-        //    };
-        //    _dbContext.Sets.Add(set);
-        //    _dbContext.SaveChanges();
-        //}
+
     }
 }
