@@ -1,6 +1,7 @@
 using DataAccessLayer.Data.DTO;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Pingis.ViewModels;
 using Services.Match.Interface;
 using TableTennis.ViewModels;
 
@@ -36,6 +37,18 @@ namespace TableTennis.Pages.Game.Create
 
             if(ModelState.IsValid)
             {
+                var newMatch = new MatchDTO
+                {
+                    Player1FirstName = FormVM.Player1FirstName,
+                    Player1LastName = FormVM.Player1LastName,
+                    Player2FirstName = FormVM.Player2FirstName,
+                    Player2LastName = FormVM.Player2LastName,
+                    Player1Age = FormVM.Player1Age,
+                    Player2Age = FormVM.Player2Age,
+                    SetGender = ChoosenSet.ToString(),
+                    MatchDate = DateTime.Now
+                };
+                _matchService.CreateMatch(newMatch);
                 //var newMatch = new SetsDTO
                 //{
                 //    Player1FirstName = Player1FirstName,

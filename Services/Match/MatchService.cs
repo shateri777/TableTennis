@@ -18,22 +18,24 @@ namespace Services.Match
             _dbContext = dbContext;
         }
 
-        public void CreateMatch(SetsDTO setDTO)
+        public void CreateMatch(MatchDTO matchDTO)
         {
             var set = new DataAccessLayer.Data.Models.TableTennisMatch
             {
-                Player1FirstName = setDTO.Player1FirstName,
-                Player1LastName = setDTO.Player1LastName,
-                Player2FirstName = setDTO.Player2FirstName,
-                Player2LastName = setDTO.Player2LastName,
-                Player1Age = setDTO.Player1Age,
-                Player2Age = setDTO.Player2Age,
-                SetGender = setDTO.SetGender,
-                MatchDate = setDTO.MatchDate
+                Player1FirstName = matchDTO.Player1FirstName,
+                Player1LastName = matchDTO.Player1LastName,
+                Player2FirstName = matchDTO.Player2FirstName,
+                Player2LastName = matchDTO.Player2LastName,
+                Player1Age = matchDTO.Player1Age,
+                Player2Age = matchDTO.Player2Age,
+                SetGender = matchDTO.SetGender,
+                MatchDate = matchDTO.MatchDate
             };
             _dbContext.Match.Add(set);
             _dbContext.SaveChanges();
         }
+
+
 
 
         // TO DO
