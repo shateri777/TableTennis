@@ -1,6 +1,8 @@
 using DataAccessLayer.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using Services.Match;
+using Services.Match.Interface;
 using TableTennis.Data;
 
 namespace TableTennis
@@ -22,6 +24,7 @@ namespace TableTennis
                 .AddEntityFrameworkStores<ApplicationDbContext>();
             builder.Services.AddRazorPages();
             builder.Services.AddTransient<DataInitializer>();
+            builder.Services.AddTransient<IMatchService, MatchService>();
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())

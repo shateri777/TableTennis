@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace DataAccessLayer.Data.DTO
 {
-    public class Sets
+    public class SetsDTO
     {
         public int Id { get; set; }
         public string Player1UserName { get; set; }
@@ -16,7 +16,7 @@ namespace DataAccessLayer.Data.DTO
         public string SetGender { get; set; }
         public int Player1Score { get; set; }
         public int Player2Score { get; set; }
-        public int IsPlayer1Servce { get; set; }
+        public bool IsPlayer1Serve { get; set; }
         public int ServeCounter { get; set; }
         public DateOnly MatchDate { get; set; }
         public string WinnerPlayer { get; set; }
