@@ -59,7 +59,18 @@
             <ul>
                 <li class="active"><a href="/Index">START</a></li>
                 <li><a asp-page="/Game/Create/Index">Starta Match</a></li>
-                <li><a asp-page="/Game/ReadAll/Index">Visa Historik</a></li>
+                @if (User.Identity.IsAuthenticated)
+                {
+                    @if (User.IsInRole("Admin"))
+                    {
+                        <li><a asp-page="/Game/ReadAll/Index">Visa Historik</a></li>
+                    }
+                    <li class="logout"><partial name="_LoginPartial" /></li>
+                }
+                else
+                {
+                    <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                }
             </ul>
         </nav>
     </header>

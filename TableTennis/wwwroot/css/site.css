@@ -165,6 +165,26 @@ opacity: 0.8; /* Gör länken lite genomskinlig vid hover */
 opacity: 0.9; /* Annan effekt för aktiv länk om man vill */
 }
 
+/* START Identity styling */
+
+.logout form button[type="submit"] {
+    color: #ffffff !important; /* Vit text */
+    font-size: 14px;
+    font-weight: bold;
+    text-transform: uppercase;
+    background-color: transparent !important; /* Om det är en länk-stilad knapp */
+    border: none !important; /* Om det är en länk-stilad knapp */
+    padding: 0.5rem 1rem; /* Justera efter behov */
+}
+
+    .logout form button[type="submit"]:hover {
+        opacity: 0.8; /* Lite mörkare vit vid hover, till exempel */
+    }
+
+/* End Identity styling */
+
+
+
 
 /* START Gender Selection */
 
