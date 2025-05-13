@@ -4,6 +4,7 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TableTennis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250513103955_added relation between match and set")]
+    partial class addedrelationbetweenmatchandset
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -82,42 +85,17 @@ namespace TableTennis.Data.Migrations
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
 
-                    b.Property<bool>("IsActive")
+                    b.Property<bool>("IsAcitve")
                         .HasColumnType("bit");
 
                     b.Property<bool>("IsPlayer1Serve")
                         .HasColumnType("bit");
 
-                    b.Property<DateTime>("MatchDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("MatchIdId")
+                    b.Property<int>("MatchId")
                         .HasColumnType("int");
-
-                    b.Property<int>("Player1Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Player1FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Player1LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Player1Score")
                         .HasColumnType("int");
-
-                    b.Property<int>("Player2Age")
-                        .HasColumnType("int");
-
-                    b.Property<string>("Player2FirstName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Player2LastName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Player2Score")
                         .HasColumnType("int");
@@ -125,17 +103,12 @@ namespace TableTennis.Data.Migrations
                     b.Property<int>("ServeCounter")
                         .HasColumnType("int");
 
-                    b.Property<string>("SetGender")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("WinnerPlayer")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int?>("TableTennisMatchId")
+                        .HasColumnType("int");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MatchIdId");
+                    b.HasIndex("TableTennisMatchId");
 
                     b.ToTable("Sets");
                 });
@@ -344,13 +317,9 @@ namespace TableTennis.Data.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Data.Models.TableTennisSet", b =>
                 {
-                    b.HasOne("DataAccessLayer.Data.Models.TableTennisMatch", "MatchId")
+                    b.HasOne("DataAccessLayer.Data.Models.TableTennisMatch", null)
                         .WithMany("SetIds")
-                        .HasForeignKey("MatchIdId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("MatchId");
+                        .HasForeignKey("TableTennisMatchId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>

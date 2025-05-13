@@ -4,13 +4,11 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataAccessLayer.Data.Models
+namespace DataAccessLayer.Data.DTO
 {
-    public class TableTennisMatch
+    public class MatchDTO
     {
-        // Player information
         public int Id { get; set; }
-        public List<TableTennisSet> SetIds { get; set; }
         public string Player1FirstName { get; set; }
         public string Player1LastName { get; set; }
         public string Player2FirstName { get; set; }
@@ -18,9 +16,6 @@ namespace DataAccessLayer.Data.Models
         public int Player1Age { get; set; }
         public int Player2Age { get; set; }
         public string SetGender { get; set; }
-        public int SetCounter { get; set; }
-        public string WinnerPlayer { get; set; }
         public DateTime MatchDate { get; set; }
-        public bool IsAcitve { get; set; } = true;
     }
 }
