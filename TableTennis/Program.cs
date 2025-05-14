@@ -25,6 +25,7 @@ namespace TableTennis
             builder.Services.AddRazorPages();
             builder.Services.AddTransient<DataInitializer>();
             builder.Services.AddTransient<IMatchService, MatchService>();
+            builder.Services.AddTransient<ISetService, SetService>();
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())

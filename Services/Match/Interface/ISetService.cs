@@ -9,6 +9,7 @@ namespace Services.Match.Interface
 {
     public interface ISetService
     {
-        SetsDTO CreateSet(SetsDTO setDTO);
+        void CreateSet(int matchId);
+        int AddPointToPlayer1(int matchId);
     }
 }

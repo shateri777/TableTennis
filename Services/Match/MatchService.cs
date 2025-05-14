@@ -20,7 +20,7 @@ namespace Services.Match
 
         public int CreateMatch(MatchDTO matchDTO)
         {
-            var set = new DataAccessLayer.Data.Models.TableTennisMatch
+            var match = new DataAccessLayer.Data.Models.TableTennisMatch
             {
                 Player1FirstName = matchDTO.Player1FirstName,
                 Player1LastName = matchDTO.Player1LastName,
@@ -33,10 +33,10 @@ namespace Services.Match
                 BestOfSets = matchDTO.BestOfSets,
             };
 
-            _dbContext.Match.Add(set);
+            _dbContext.Match.Add(match);
             _dbContext.SaveChanges();
 
-            return set.Id;
+            return match.Id;
         }
 
 
@@ -64,20 +64,7 @@ namespace Services.Match
 
 
 
-        // TO DO
-        //public SetsDTO AddPointToPlayer1(int matchId)
-        //{
-        //    var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
-        //    var matchDTO = new SetsDTO
-        //    {
-        //        Player1Score = match.Player1Score,
-        //    };
-        //    match.Player1Score += matchDTO.Player1Score;
-        //    _dbContext.Update(match);
-        //    _dbContext.SaveChanges();
-        //    CheckEndOfSet(matchId);
-        //    return matchDTO;
-        //}
+        
         //// TO DO
         //public SetsDTO AddPointToPlayer2(int matchId)
         //{

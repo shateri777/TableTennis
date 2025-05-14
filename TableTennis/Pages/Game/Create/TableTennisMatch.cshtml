@@ -9,6 +9,7 @@
 {
     <form method="post">
         <input type="hidden" asp-for="@Model.Id" />
+        <input type="hidden" asp-for="@Model.MatchId" />
 
         <div>
             <p>Player 1: @Model.MatchFormVM.Player1FirstName</p>

@@ -1,3 +1,4 @@
+using DataAccessLayer.Data.DTO;
 using DataAccessLayer.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
@@ -12,13 +13,13 @@ namespace TableTennis.Pages.Game.Create
     {
 
         private readonly IMatchService _matchService;
+        private readonly ISetService _setService;
 
-        public TableTennisMatchModel(IMatchService matchService)
+        public TableTennisMatchModel(IMatchService matchService, ISetService setService)
         {
             _matchService = matchService;
+            _setService = setService;
         }
-
-
 
 
         public int Id { get; set; }
@@ -29,8 +30,6 @@ namespace TableTennis.Pages.Game.Create
         public MatchFormVM MatchFormVM { get; set; }
 
 
-
-
         public void OnGet(int matchId)
         {
 
@@ -38,8 +37,7 @@ namespace TableTennis.Pages.Game.Create
 
             if (match == null)
             {
-                // Gör något bättre än att krascha – kanske redirect eller felmeddelande?
-                RedirectToPage("/Error"); // eller return NotFound();
+                RedirectToPage("/Error");
                 return;
             }
 
@@ -54,22 +52,50 @@ namespace TableTennis.Pages.Game.Create
                 Player2Age = match.Player2Age
             };
 
+
+            MatchId = matchId;
+
+
             SetVM = new SetVM
+            {
+                MatchId = matchId,
+            };
+
+            _setService.CreateSet(MatchId);
+        }
+
+        public IActionResult OnPostAddPointToPlayer1(int matchId)
+        {
+            var match = _matchService.findMatchId(matchId);
+
+            if (match == null)
+            {
+                RedirectToPage("/Error");
+                return Page();
+            }
+
+
+            MatchFormVM = new MatchFormVM
             {
                 Player1FirstName = match.Player1FirstName,
                 Player1LastName = match.Player1LastName,
                 Player2FirstName = match.Player2FirstName,
                 Player2LastName = match.Player2LastName,
-                SetGender = match.SetGender,
-                MatchDate = match.MatchDate
+                Player1Age = match.Player1Age,
+                Player2Age = match.Player2Age
             };
 
+
+            MatchId = matchId;
+            SetVM.Player1Score = _setService.AddPointToPlayer1(matchId);
+
+            return Page();
         }
 
-
-        //public IActionResult OnPostAddPointToPlayer1()
+        //public void AddPointToPlayer1()
         //{
-        //    // logik här
+        //    Player1Score++;
+        //    CheckEndOfSet();
         //}
 
         //public IActionResult OnPostAddPointToPlayer2()
