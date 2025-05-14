@@ -7,68 +7,72 @@
 <html lang="sv">
 <head>
     <meta charset="UTF-8">
-    <title>Pingis Match Setup</title>
- 
+    <title>Starta Pingismatch</title>
+    <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
 
-    <div class="pingis-setup">
-        <h1>Starta Pingismatch</h1>
+    <section class="match-setup">
+        <div class="match-container">
+            <h1 class="match-title">Starta Pingismatch</h1>
 
-        <form method="post">
-            <div class="form-wrapper">
-                <!-- Spelare 1 -->
-                <div class="player-form">
-                    <h2>Spelare 1</h2>
-                    <label>
-                        Förnamn:
-                        <input type="text" asp-for="@Model.FormVM.Player1FirstName">
-                        <span class="validation-error" asp-validation-for="@Model.FormVM.Player1FirstName"></span>
-                    </label>
-                    <label>
-                        Efternamn:
-                        <input type="text" asp-for="@Model.FormVM.Player1LastName">
-                        <span class="validation-error" asp-validation-for="@Model.FormVM.Player1LastName"></span>
-                    </label>
-                    <label>
-                        Ålder:
-                        <input type="number" asp-for="@Model.FormVM.Player1Age">
-                        <span class="validation-error" asp-validation-for="@Model.FormVM.Player1Age"></span>
-                    </label>
+            <form method="post">
+                <div class="form-wrapper">
+                    <!-- Spelare 1 -->
+                    <div class="player-form">
+                        <h2>Spelare 1</h2>
+                        <label>
+                            Förnamn:
+                            <input type="text" asp-for="@Model.FormVM.Player1FirstName">
+                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player1FirstName"></span>
+                        </label>
+                        <label>
+                            Efternamn:
+                            <input type="text" asp-for="@Model.FormVM.Player1LastName">
+                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player1LastName"></span>
+                        </label>
+                        <label>
+                            Ålder:
+                            <input type="number" asp-for="@Model.FormVM.Player1Age">
+                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player1Age"></span>
+                        </label>
+                    </div>
+
+                    <!-- Spelare 2 -->
+                    <div class="player-form">
+                        <h2>Spelare 2</h2>
+                        <label>
+                            Förnamn:
+                            <input type="text" asp-for="@Model.FormVM.Player2FirstName">
+                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player2FirstName"></span>
+                        </label>
+                        <label>
+                            Efternamn:
+                            <input type="text" asp-for="@Model.FormVM.Player2LastName">
+                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player2LastName"></span>
+                        </label>
+                        <label>
+                            Ålder:
+                            <input type="number" asp-for="@Model.FormVM.Player2Age">
+                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player2Age"></span>
+                        </label>
+                    </div>
                 </div>
 
-                <!-- Spelare 2 -->
-                <div class="player-form">
-                    <h2>Spelare 2</h2>
-                    <label>
-                        Förnamn:
-                        <input type="text" asp-for="@Model.FormVM.Player2FirstName" >
-                        <span class="validation-error" asp-validation-for="@Model.FormVM.Player2FirstName"></span>
-                    </label>
-                    <label>
-                        Efternamn:
-                        <input type="text" asp-for="@Model.FormVM.Player2LastName">
-                        <span class="validation-error" asp-validation-for="@Model.FormVM.Player2LastName"></span>
-                    </label>
-                    <label>
-                        Ålder:
-                        <input type="number" asp-for="@Model.FormVM.Player2Age">
-                        <span class="validation-error" asp-validation-for="@Model.FormVM.Player2Age"></span>
-                    </label>
+                <!-- Set-alternativ -->
+                <div class="set-options">
+                    <h2>Välj matchformat</h2>
+                    <div class="set-radios">
+                        <label><input type="radio" asp-for="@Model.ChoosenSet" value="3" required> Bäst av 3</label>
+                        <label><input type="radio" asp-for="@Model.ChoosenSet" value="5"> Bäst av 5</label>
+                        <label><input type="radio" asp-for="@Model.ChoosenSet" value="7"> Bäst av 7</label>
+                    </div>
                 </div>
-            </div>
 
-            <!-- Set-alternativ -->
-            <div class="set-options">
-                <h2>Välj matchformat</h2>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="3" required> Bäst av 3</label>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="5"> Bäst av 5</label>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="7"> Bäst av 7</label>
-            </div>
-
-            <button type="submit" class="submit-btn" asp-route-FormVM="@Model.FormVM">Starta Match</button>
-        </form>
-    </div>
+                <button type="submit" class="submit-btn" asp-route-FormVM="@Model.FormVM">Starta Match</button>
+            </form>
+        </div>
+    </section>
 
 </body>
 </html>
