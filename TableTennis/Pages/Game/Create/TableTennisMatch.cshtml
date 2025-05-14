@@ -4,16 +4,22 @@
 }
 
 
-@* @if (string.IsNullOrEmpty(Model.Winner))
+
+@if (string.IsNullOrEmpty(@Model.SetVM.WinnerPlayer))
 {
     <form method="post">
-        <input type="hidden" asp-for="CurrentSet.Id" />
+        <input type="hidden" asp-for="@Model.Id" />
 
         <div>
-            <p>Match Id: @Model.CurrentSet.Id</p>
-            <p>Player 1 Score: @Model.CurrentSet.Player1Score</p>
-            <p>Player 2 Score: @Model.CurrentSet.Player2Score</p>
-            <p>Current Server: @(Model.CurrentSet.IsPlayer1Serve ? "Player 1" : "Player 2")</p>
+            <p>Player 1: @Model.MatchFormVM.Player1FirstName</p>
+            <p>Player 2: @Model.MatchFormVM.Player2FirstName</p>
+        </div>
+
+
+        <div>       
+            <p>Player 1 Score: @Model.SetVM.Player1Score</p>
+            <p>Player 2 Score: @Model.SetVM.Player2Score</p>
+            <p>Current Server: @(Model.SetVM.IsPlayer1Serve ? "Player 1" : "Player 2")</p>
         </div>
 
         <div>
@@ -23,13 +29,12 @@
     </form>
 }
 
-
 else
 {
     <div>
-        <h3>Winner is @Model.Winner!</h3>
+        <h3>Winner is @Model.SetVM.WinnerPlayer!</h3>
         <form method="post">
             <button asp-page-handler="StartNewGame">Start New Game</button>
         </form>
     </div>
-} *@
+}

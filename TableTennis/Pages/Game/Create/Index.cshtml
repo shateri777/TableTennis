@@ -15,8 +15,9 @@
     <div class="gender-selection">
         <h1>Välj kön</h1>
         <div class="gender-buttons">
-            <a asp-page="./MatchForm" class="gender-button male">♂️ Kille</a>
-            <a  asp-page="./MatchForm" asp-for="@Model.SetGender" class="gender-button female">♀️ Tjej</a>
+            <a asp-page="./MatchForm" asp-route-gender="Male" class="gender-button male">♂️ Kille</a>
+            <a asp-page="./MatchForm" asp-route-gender="Female" class="gender-button female">♀️ Tjej</a>
+
         </div>
     </div>
 

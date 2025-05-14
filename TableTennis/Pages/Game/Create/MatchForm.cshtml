@@ -16,6 +16,8 @@
         <h1>Starta Pingismatch</h1>
 
         <form method="post">
+            <input type="hidden" asp-for="FormVM.SetGender" />
+
             <div class="form-wrapper">
                 <!-- Spelare 1 -->
                 <div class="player-form">
@@ -66,7 +68,11 @@
                 <label><input type="radio" asp-for="@Model.ChoosenSet" value="7"> Bäst av 7</label>
             </div>
 
-            <button type="submit" class="submit-btn" asp-route-FormVM="@Model.FormVM">Starta Match</button>
+            
+            <button type="submit" asp-page="/Game/Create/TableTennisMatch" asp-route-matchId="@Model.FormVM.Id" class="submit-btn">
+                Starta Match
+            </button>
+
         </form>
     </div>
 

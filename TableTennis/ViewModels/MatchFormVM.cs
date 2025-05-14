@@ -4,6 +4,9 @@ namespace TableTennis.ViewModels
 {
     public class MatchFormVM
     {
+
+        public int Id { get; set; }
+
         [Required]
         [StringLength(50, MinimumLength = 2, ErrorMessage = "Namnet måste vara minst 2 bokstäver, max 50.")]
         public string Player1FirstName { get; set; }
@@ -27,5 +30,6 @@ namespace TableTennis.ViewModels
         [Required]
         [Range(1, 100, ErrorMessage = "Åldern måste vara mellan 1 och 100.")]
         public int Player2Age { get; set; }
+        public string SetGender { get; set; }
     }
 }

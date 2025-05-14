@@ -21,9 +21,12 @@ namespace TableTennis.Pages.Game.Create
 
         public int ChoosenSet { get; set; }
 
-        public void OnGet()
+        public void OnGet(string gender)
         {
+            FormVM = new MatchFormVM();
+            FormVM.SetGender = gender;
         }
+
 
         public IActionResult OnPost()
         {

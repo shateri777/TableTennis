@@ -36,6 +36,27 @@ namespace Services.Match
         }
 
 
+        public MatchDTO findMatchId(int matchId)
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            if (match != null)
+            {
+                return new MatchDTO
+                {
+                    Id = match.Id,
+                    Player1FirstName = match.Player1FirstName,
+                    Player1LastName = match.Player1LastName,
+                    Player2FirstName = match.Player2FirstName,
+                    Player2LastName = match.Player2LastName,
+                    Player1Age = match.Player1Age,
+                    Player2Age = match.Player2Age,
+                    SetGender = match.SetGender,
+                    MatchDate = match.MatchDate
+                };
+            }
+            return null;
+        }
+
 
 
         // TO DO
