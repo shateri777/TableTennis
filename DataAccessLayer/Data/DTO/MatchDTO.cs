@@ -17,5 +17,6 @@ namespace DataAccessLayer.Data.DTO
         public int Player2Age { get; set; }
         public string SetGender { get; set; }
         public DateTime MatchDate { get; set; }
+        public int BestOfSets { get; set; }
     }
 }

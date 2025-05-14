@@ -63,15 +63,14 @@
             <!-- Set-alternativ -->
             <div class="set-options">
                 <h2>Välj matchformat</h2>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="3" required> Bäst av 3</label>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="5"> Bäst av 5</label>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="7"> Bäst av 7</label>
+                <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="3" required> Bäst av 3</label>
+                <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="5"> Bäst av 5</label>
+                <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="7"> Bäst av 7</label>
             </div>
 
-            
-            <button type="submit" asp-page="/Game/Create/TableTennisMatch" asp-route-matchId="@Model.FormVM.Id" class="submit-btn">
-                Starta Match
-            </button>
+
+            <button type="submit" class="submit-btn">Starta Match</button>
+
 
         </form>
     </div>

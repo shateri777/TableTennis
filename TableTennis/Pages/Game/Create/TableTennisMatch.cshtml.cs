@@ -54,6 +54,16 @@ namespace TableTennis.Pages.Game.Create
                 Player2Age = match.Player2Age
             };
 
+            SetVM = new SetVM
+            {
+                Player1FirstName = match.Player1FirstName,
+                Player1LastName = match.Player1LastName,
+                Player2FirstName = match.Player2FirstName,
+                Player2LastName = match.Player2LastName,
+                SetGender = match.SetGender,
+                MatchDate = match.MatchDate
+            };
+
         }
 
 

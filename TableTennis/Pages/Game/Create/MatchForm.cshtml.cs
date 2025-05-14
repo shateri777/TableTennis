@@ -19,8 +19,6 @@ namespace TableTennis.Pages.Game.Create
 
         public MatchFormVM FormVM { get; set; }
 
-        public int ChoosenSet { get; set; }
-
         public void OnGet(string gender)
         {
             FormVM = new MatchFormVM();
@@ -41,12 +39,15 @@ namespace TableTennis.Pages.Game.Create
                     Player2LastName = FormVM.Player2LastName,
                     Player1Age = FormVM.Player1Age,
                     Player2Age = FormVM.Player2Age,
-                    SetGender = ChoosenSet.ToString(),
+                    SetGender = FormVM.SetGender,
+                    BestOfSets = FormVM.BestOfSets,
                     MatchDate = DateTime.Now
                 };
-                _matchService.CreateMatch(newMatch);
 
-                return RedirectToPage("/Game/Create/TableTennisMatch");
+
+                int createdMatchId = _matchService.CreateMatch(newMatch);
+                return RedirectToPage("/Game/Create/TableTennisMatch", new { matchId = createdMatchId });
+
             }
             return Page();
         }

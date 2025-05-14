@@ -14,7 +14,7 @@
         public bool IsPlayer1Serve { get; set; } = true;
         public int ServeCounter { get; set; } = 0;
         public DateTime MatchDate { get; set; }
-        public string WinnerPlayer { get; set; }
+        public string? WinnerPlayer { get; set; }
 
         //public void AddPointToPlayer1()
         //{

@@ -18,7 +18,7 @@ namespace Services.Match
             _dbContext = dbContext;
         }
 
-        public void CreateMatch(MatchDTO matchDTO)
+        public int CreateMatch(MatchDTO matchDTO)
         {
             var set = new DataAccessLayer.Data.Models.TableTennisMatch
             {
@@ -29,11 +29,16 @@ namespace Services.Match
                 Player1Age = matchDTO.Player1Age,
                 Player2Age = matchDTO.Player2Age,
                 SetGender = matchDTO.SetGender,
-                MatchDate = matchDTO.MatchDate
+                MatchDate = matchDTO.MatchDate,
+                BestOfSets = matchDTO.BestOfSets,
             };
+
             _dbContext.Match.Add(set);
             _dbContext.SaveChanges();
+
+            return set.Id;
         }
+
 
 
         public MatchDTO findMatchId(int matchId)

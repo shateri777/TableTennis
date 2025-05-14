@@ -31,5 +31,6 @@ namespace TableTennis.ViewModels
         [Range(1, 100, ErrorMessage = "Åldern måste vara mellan 1 och 100.")]
         public int Player2Age { get; set; }
         public string SetGender { get; set; }
+        public int BestOfSets { get; set; }
     }
 }
