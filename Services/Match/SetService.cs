@@ -81,19 +81,30 @@ namespace Services.Match
             }
             return 0;
         }
-        // TO DO
-        //public SetsDTO AddPointToPlayer1(int matchId)
-        //{
-        //    var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
-        //    var matchDTO = new SetsDTO
-        //    {
-        //        Player1Score = match.Player1Score,
-        //    };
-        //    match.Player1Score += matchDTO.Player1Score;
-        //    _dbContext.Update(match);
-        //    _dbContext.SaveChanges();
-        //    CheckEndOfSet(matchId);
-        //    return matchDTO;
-        //}
+
+        public bool UpdateServe(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+
+            // Öka ServeCounter varje gång en poäng läggs till
+            set.ServeCounter++;
+
+            // När ServeCounter når 2, växla servern och nollställ räknaren
+            if (set.ServeCounter >= 2)
+            {
+                set.IsPlayer1Serve = !set.IsPlayer1Serve; // Växla servern
+                set.ServeCounter = 0; // Nollställ räknaren
+            }
+            _dbContext.SaveChanges();
+
+            if (set.IsPlayer1Serve)
+            {
+                return true; // Player 1 serves
+            }
+            else
+            {
+                return false; // Player 2 serves
+            }
+        }
     }
 }

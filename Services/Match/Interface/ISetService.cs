@@ -14,5 +14,6 @@ namespace Services.Match.Interface
         int AddPointToPlayer2(int matchId);
         int GetPlayer1Score(int matchId);
         int GetPlayer2Score(int matchId);
+        bool UpdateServe(int matchId);
     }
 }

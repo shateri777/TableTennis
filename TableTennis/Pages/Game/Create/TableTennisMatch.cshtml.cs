@@ -92,6 +92,13 @@ namespace TableTennis.Pages.Game.Create
             MatchId = matchId;
             SetVM.Player1Score = _setService.AddPointToPlayer1(matchId);
 
+            var serve = _setService.UpdateServe(matchId);
+
+            if (serve)
+            {
+                SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
+            }
+
             return Page();
         }
 
@@ -122,6 +129,12 @@ namespace TableTennis.Pages.Game.Create
             MatchId = matchId;
             SetVM.Player2Score = _setService.AddPointToPlayer2(matchId);
 
+            var serve =_setService.UpdateServe(matchId);
+
+            if (serve)
+            {
+                SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
+            }
 
             return Page();
         }
