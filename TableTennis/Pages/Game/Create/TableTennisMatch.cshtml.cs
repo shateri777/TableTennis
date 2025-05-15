@@ -33,7 +33,7 @@ namespace TableTennis.Pages.Game.Create
         public void OnGet(int matchId)
         {
 
-            var match = _matchService.findMatchId(matchId);
+            var match = _matchService.FindMatchId(matchId);
 
             if (match == null)
             {
@@ -67,7 +67,7 @@ namespace TableTennis.Pages.Game.Create
         public IActionResult OnPostAddPointToPlayer1(int matchId)
         {
 
-            var match = _matchService.findMatchId(matchId);
+            var match = _matchService.FindMatchId(matchId);
 
             if (match == null)
             {
@@ -92,6 +92,23 @@ namespace TableTennis.Pages.Game.Create
             MatchId = matchId;
             SetVM.Player1Score = _setService.AddPointToPlayer1(matchId);
 
+            var endOfset =_setService.CheckEndOfSet(matchId);
+
+            if (endOfset == "Player1")
+            {
+                SetVM.WinnerPlayer = match.Player1FirstName;
+                _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+            }
+            else if (endOfset == "Player2")
+            {
+                SetVM.WinnerPlayer = match.Player2FirstName;
+                _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+            }
+            else
+            {
+                SetVM.WinnerPlayer = null;
+            }
+
             var serve = _setService.UpdateServe(matchId);
 
             if (serve)
@@ -104,7 +121,7 @@ namespace TableTennis.Pages.Game.Create
 
         public IActionResult OnPostAddPointToPlayer2(int matchId)
         {
-            var match = _matchService.findMatchId(matchId);
+            var match = _matchService.FindMatchId(matchId);
 
             if (match == null)
             {
@@ -128,6 +145,23 @@ namespace TableTennis.Pages.Game.Create
 
             MatchId = matchId;
             SetVM.Player2Score = _setService.AddPointToPlayer2(matchId);
+
+            var endOfset = _setService.CheckEndOfSet(matchId);
+
+            if (endOfset == "Player1")
+            {
+                SetVM.WinnerPlayer = match.Player1FirstName;
+                _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+            }
+            else if (endOfset == "Player2")
+            {
+                SetVM.WinnerPlayer = match.Player2FirstName;
+                _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+            }
+            else
+            {
+                SetVM.WinnerPlayer = null;
+            }
 
             var serve =_setService.UpdateServe(matchId);
 

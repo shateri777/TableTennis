@@ -106,5 +106,37 @@ namespace Services.Match
                 return false; // Player 2 serves
             }
         }
+
+        public string CheckEndOfSet(int matchId)
+        {
+            var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            if (match.Player1Score >= 11 || match.Player2Score >= 11)
+            {
+                if (Math.Abs(match.Player1Score - match.Player2Score) >= 2)
+                {
+                    // Kontrollera vem som har flest poäng för att avgöra vinnaren
+                    if (match.Player1Score > match.Player2Score)
+                    {
+                        return "Player1";
+                    }
+                    else
+                    {
+                        return "Player2";
+                    }
+                }
+            }
+            return null;
+        }
+
+        public void SetWinnerPlayer(int matchId, string winner)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            if (set != null)
+            {
+                set.WinnerPlayer = winner;
+                _dbContext.Update(set);
+                _dbContext.SaveChanges();
+            }
+        }
     }
 }

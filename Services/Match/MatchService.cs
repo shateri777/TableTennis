@@ -41,7 +41,7 @@ namespace Services.Match
 
 
 
-        public MatchDTO findMatchId(int matchId)
+        public MatchDTO FindMatchId(int matchId)
         {
             var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
             if (match != null)

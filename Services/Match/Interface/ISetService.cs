@@ -15,5 +15,7 @@ namespace Services.Match.Interface
         int GetPlayer1Score(int matchId);
         int GetPlayer2Score(int matchId);
         bool UpdateServe(int matchId);
+        string CheckEndOfSet(int matchId);
+        void SetWinnerPlayer(int matchId, string winner);
     }
 }

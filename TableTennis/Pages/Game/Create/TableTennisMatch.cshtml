@@ -22,7 +22,7 @@
         <div>       
             <p>Player 1 Score: @Model.SetVM.Player1Score</p>
             <p>Player 2 Score: @Model.SetVM.Player2Score</p>
-            <p>Current Server: @(Model.SetVM.IsPlayer1Serve ? "Player 1" : "Player 2")</p>
+            <p>Current Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)</p>
         </div>
 
         <div>
@@ -35,7 +35,7 @@
 else
 {
     <div>
-        <h3>Winner is @Model.SetVM.WinnerPlayer!</h3>
+        <h3>Vinnaren är @Model.SetVM.WinnerPlayer!</h3>
         <form method="post">
             <button asp-page-handler="StartNewGame">Start New Game</button>
         </form>

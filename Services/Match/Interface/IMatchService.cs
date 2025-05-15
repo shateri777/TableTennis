@@ -14,6 +14,6 @@ namespace Services.Match.Interface
         //string CheckEndOfSet(int matchId);
         //void UpdateServe(int matchId);
         int CreateMatch(MatchDTO matchDTO);
-        MatchDTO findMatchId(int matchId);
+        MatchDTO FindMatchId(int matchId);
     }
 }
