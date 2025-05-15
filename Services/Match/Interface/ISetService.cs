@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Data.DTO;
+using DataAccessLayer.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,5 +18,6 @@ namespace Services.Match.Interface
         bool UpdateServe(int matchId);
         string CheckEndOfSet(int matchId);
         void SetWinnerPlayer(int matchId, string winner);
+        SetsDTO GetActiveSetId(int matchId);
     }
 }

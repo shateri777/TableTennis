@@ -12,8 +12,11 @@
         <input type="hidden" asp-for="@Model.MatchId" />
         <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
         <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+        <input type="hidden" asp-for="@Model.SetCounter" />
+        <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
 
         <div>
+            <p>Spelar @Model.SetCounter av @Model.MatchFormVM.BestOfSets</p>
             <p>Player 1: @Model.MatchFormVM.Player1FirstName</p>
             <p>Player 2: @Model.MatchFormVM.Player2FirstName</p>
         </div>
@@ -37,7 +40,14 @@ else
     <div>
         <h3>Vinnaren är @Model.SetVM.WinnerPlayer!</h3>
         <form method="post">
-            <button asp-page-handler="StartNewGame">Start New Game</button>
+            <input type="hidden" asp-for="@Model.Id" />
+            <input type="hidden" asp-for="@Model.MatchId" />
+            <input type="hidden" asp-for="@Model.SetVM" />
+            <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+            <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+            <input type="hidden" asp-for="@Model.SetCounter" />
+            <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
+            <button asp-page-handler="ContinueSet">Spela nästa set</button>
         </form>
     </div>
 }

@@ -21,18 +21,23 @@ namespace Services.Match
 
         public void CreateSet(int matchId)
         {
+
             var set = new TableTennisSet
             {
                 MatchId = matchId,
+                Player1Score = 0,
+                Player2Score = 0,
+                IsPlayer1Serve = true,
+                ServeCounter = 0,
+                WinnerPlayer = null
             };
             _dbContext.Sets.Add(set);
             _dbContext.SaveChanges();
-
         }
 
         public int AddPointToPlayer1(int matchId)
         {
-            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
             if (set != null)
             {
                 set.Player1Score++;
@@ -48,7 +53,7 @@ namespace Services.Match
 
         public int AddPointToPlayer2(int matchId)
         {
-            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
             if (set != null)
             {
                 set.Player2Score++;
@@ -64,7 +69,7 @@ namespace Services.Match
 
         public int GetPlayer1Score(int matchId)
         {
-            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
             if (set != null)
             {
                 return set.Player1Score;
@@ -74,7 +79,7 @@ namespace Services.Match
 
         public int GetPlayer2Score(int matchId)
         {
-            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
             if (set != null)
             {
                 return set.Player2Score;
@@ -84,7 +89,7 @@ namespace Services.Match
 
         public bool UpdateServe(int matchId)
         {
-            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
 
             // Öka ServeCounter varje gång en poäng läggs till
             set.ServeCounter++;
@@ -109,7 +114,7 @@ namespace Services.Match
 
         public string CheckEndOfSet(int matchId)
         {
-            var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var match = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
             if (match.Player1Score >= 11 || match.Player2Score >= 11)
             {
                 if (Math.Abs(match.Player1Score - match.Player2Score) >= 2)
@@ -130,13 +135,26 @@ namespace Services.Match
 
         public void SetWinnerPlayer(int matchId, string winner)
         {
-            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
             if (set != null)
             {
                 set.WinnerPlayer = winner;
                 _dbContext.Update(set);
                 _dbContext.SaveChanges();
             }
+        }
+        public SetsDTO GetActiveSetId(int matchId)
+        {
+            var setId = _dbContext.Sets.FirstOrDefault(set => set.MatchId == matchId && set.WinnerPlayer == null);
+            var setDTO = new SetsDTO
+            {
+                Player1Score = 0,
+                WinnerPlayer = null,
+                Player2Score = 0,
+                ServeCounter = 0,
+                IsPlayer1Serve = true
+            };
+            return setDTO;
         }
     }
 }

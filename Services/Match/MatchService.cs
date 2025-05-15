@@ -55,6 +55,7 @@ namespace Services.Match
                     Player2LastName = match.Player2LastName,
                     Player1Age = match.Player1Age,
                     Player2Age = match.Player2Age,
+                    BestOfSets = match.BestOfSets,
                     SetGender = match.SetGender,
                     MatchDate = match.MatchDate
                 };
