@@ -11,5 +11,8 @@ namespace Services.Match.Interface
     {
         void CreateSet(int matchId);
         int AddPointToPlayer1(int matchId);
+        int AddPointToPlayer2(int matchId);
+        int GetPlayer1Score(int matchId);
+        int GetPlayer2Score(int matchId);
     }
 }

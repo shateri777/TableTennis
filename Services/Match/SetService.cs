@@ -45,6 +45,42 @@ namespace Services.Match
             }
             return 0;
         }
+
+        public int AddPointToPlayer2(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            if (set != null)
+            {
+                set.Player2Score++;
+                _dbContext.Update(set);
+                _dbContext.SaveChanges();
+                int score = set.Player2Score;
+
+                return score;
+                //CheckEndOfSet(matchId);
+            }
+            return 0;
+        }
+
+        public int GetPlayer1Score(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            if (set != null)
+            {
+                return set.Player1Score;
+            }
+            return 0;
+        }
+
+        public int GetPlayer2Score(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
+            if (set != null)
+            {
+                return set.Player2Score;
+            }
+            return 0;
+        }
         // TO DO
         //public SetsDTO AddPointToPlayer1(int matchId)
         //{

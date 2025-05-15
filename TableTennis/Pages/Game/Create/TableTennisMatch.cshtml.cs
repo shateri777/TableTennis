@@ -58,13 +58,44 @@ namespace TableTennis.Pages.Game.Create
 
             SetVM = new SetVM
             {
-                MatchId = matchId,
+                MatchId = matchId
             };
 
             _setService.CreateSet(MatchId);
         }
 
         public IActionResult OnPostAddPointToPlayer1(int matchId)
+        {
+
+            var match = _matchService.findMatchId(matchId);
+
+            if (match == null)
+            {
+                RedirectToPage("/Error");
+                return Page();
+            }
+
+
+            MatchFormVM = new MatchFormVM
+            {
+                Player1FirstName = match.Player1FirstName,
+                Player1LastName = match.Player1LastName,
+                Player2FirstName = match.Player2FirstName,
+                Player2LastName = match.Player2LastName,
+                Player1Age = match.Player1Age,
+                Player2Age = match.Player2Age
+            };
+
+            SetVM.Player1Score = _setService.GetPlayer1Score(matchId);
+            SetVM.Player2Score = _setService.GetPlayer2Score(matchId);
+
+            MatchId = matchId;
+            SetVM.Player1Score = _setService.AddPointToPlayer1(matchId);
+
+            return Page();
+        }
+
+        public IActionResult OnPostAddPointToPlayer2(int matchId)
         {
             var match = _matchService.findMatchId(matchId);
 
@@ -85,9 +116,12 @@ namespace TableTennis.Pages.Game.Create
                 Player2Age = match.Player2Age
             };
 
+            SetVM.Player1Score = _setService.GetPlayer1Score(matchId);
+            SetVM.Player2Score = _setService.GetPlayer2Score(matchId);
 
             MatchId = matchId;
-            SetVM.Player1Score = _setService.AddPointToPlayer1(matchId);
+            SetVM.Player2Score = _setService.AddPointToPlayer2(matchId);
+
 
             return Page();
         }

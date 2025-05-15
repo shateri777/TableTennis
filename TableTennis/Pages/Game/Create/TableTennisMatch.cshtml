@@ -10,6 +10,8 @@
     <form method="post">
         <input type="hidden" asp-for="@Model.Id" />
         <input type="hidden" asp-for="@Model.MatchId" />
+        <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+        <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
 
         <div>
             <p>Player 1: @Model.MatchFormVM.Player1FirstName</p>
