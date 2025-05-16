@@ -101,12 +101,22 @@ namespace TableTennis.Pages.Game.Create
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
                 SetCounter++;
+                var matchWinner = _matchService.CheckMatchWinner(matchId);
+                if (matchWinner != null)
+                {
+                    MatchFormVM.WinnerPlayer = matchWinner;
+                }
             }
             else if (endOfset == "Player2")
             {
                 SetVM.WinnerPlayer = match.Player2FirstName;
-                _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+                _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
                 SetCounter++;
+                var matchWinner = _matchService.CheckMatchWinner(matchId);
+                if (matchWinner != null)
+                {
+                    MatchFormVM.WinnerPlayer = matchWinner;
+                }
             }
             else
             {
@@ -157,12 +167,23 @@ namespace TableTennis.Pages.Game.Create
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
                 SetCounter++;
+                var matchWinner = _matchService.CheckMatchWinner(matchId);
+                if (matchWinner != null)
+                {
+                    MatchFormVM.WinnerPlayer = matchWinner;
+                }
+
             }
             else if (endOfset == "Player2")
             {
                 SetVM.WinnerPlayer = match.Player2FirstName;
-                _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+                _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
                 SetCounter++;
+                var matchWinner = _matchService.CheckMatchWinner(matchId);
+                if (matchWinner != null)
+                {
+                    MatchFormVM.WinnerPlayer = matchWinner;
+                }
             }
             else
             {
@@ -177,17 +198,6 @@ namespace TableTennis.Pages.Game.Create
 
             return Page();
         }
-
-        //public void AddPointToPlayer1()
-        //{
-        //    Player1Score++;
-        //    CheckEndOfSet();
-        //}
-
-        //public IActionResult OnPostAddPointToPlayer2()
-        //{
-        //    // logik här
-        //}
 
         public IActionResult OnPostContinueSet(int matchId)
         {
@@ -220,12 +230,6 @@ namespace TableTennis.Pages.Game.Create
                 ServeCounter = set.ServeCounter,
                 IsPlayer1Serve = set.IsPlayer1Serve,
             };
-            //SetVM = new SetVM
-            //{
-            //    Player1Score = 0,
-            //    Player2Score = 0,
-            //    WinnerPlayer = null
-            //};
             return Page();
         }
     }

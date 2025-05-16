@@ -15,5 +15,6 @@ namespace Services.Match.Interface
         //void UpdateServe(int matchId);
         int CreateMatch(MatchDTO matchDTO);
         MatchDTO FindMatchId(int matchId);
+        string CheckMatchWinner(int matchId);
     }
 }

@@ -63,6 +63,38 @@ namespace Services.Match
             return null;
         }
 
+        public string CheckMatchWinner(int matchId) 
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            var sets = _dbContext.Sets.Where(m => m.MatchId == matchId);
+            if (sets != null)
+            {
+                var player1Wins = sets.Count(s => s.WinnerPlayer == match.Player1FirstName);
+                var player2Wins = sets.Count(s => s.WinnerPlayer == match.Player2FirstName);
+                int winsNeeded = (match.BestOfSets / 2) + 1;
+
+                if (player1Wins >= winsNeeded)
+                {
+                    match.WinnerPlayer = match.Player1FirstName;
+                    _dbContext.Update(match);
+                    _dbContext.SaveChanges();
+                    return match.Player1FirstName;
+                }
+                else if (player2Wins >= winsNeeded)
+                {
+                    match.WinnerPlayer = match.Player2FirstName;
+                    _dbContext.Update(match);
+                    _dbContext.SaveChanges();
+                    return match.Player2FirstName;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
 
 
         
