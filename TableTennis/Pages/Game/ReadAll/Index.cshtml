@@ -6,10 +6,25 @@
 
 <div class="container mt-4">
     <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+    <form method="get" class="mb-4">
+        <div class="input-group">
+            <input type="text" asp-for="SearchTerm" class="form-control" placeholder="Sök på spelarnamn..." />
+            <div class="input-group-append">
+                <button type="submit" class="btn btn-primary">Sök</button>
+            </div>
+        </div>
+    </form>
 
     @if (Model.MatchHistories == null || !Model.MatchHistories.Any())
     {
-        <p class="text-center">Det finns ingen matchhistorik att visa ännu.</p>
+        @if (!string.IsNullOrEmpty(Model.SearchTerm))
+        {
+            <p class="text-center">Inga matcher hittades för söktermen "@Model.SearchTerm".</p>
+        }
+        else
+        {
+            <p class="text-center">Det finns ingen matchhistorik att visa ännu.</p>
+        }
     }
     else
     {
@@ -20,10 +35,10 @@
                         <th>Datum</th>
                         <th>Spelare 1</th>
                         <th>Ålder</th>
-                        <th>Set Vunna (Spelare 1)</th>
                         <th>Spelare 2</th>
                         <th>Ålder</th>
-                        <th>Set Vunna (Spelare 2)</th>
+                        <th>Resultat (Set)</th>
+                        <th>Bäst av</th>
                         <th>Kön (Match)</th>
                         <th>Matchvinnare</th>
                     </tr>
@@ -35,10 +50,10 @@
                             <td>@match.MatchDate.ToString("yyyy-MM-dd HH:mm")</td>
                             <td>@match.Player1FullName</td>
                             <td>@match.Player1Age</td>
-                            <td class="text-center">@match.Player1Score</td>
                             <td>@match.Player2FullName</td>
                             <td>@match.Player2Age</td>
-                            <td class="text-center">@match.Player2Score</td>
+                            <td class="text-center">@match.Player1Score - @match.Player2Score</td>
+                            <td class="text-center">@match.BestOfSets</td>
                             <td>@match.SetGender</td>
                             <td>@(string.IsNullOrEmpty(match.WinnerPlayer) ? "Ej avgjord" : match.WinnerPlayer)</td>
                         </tr>

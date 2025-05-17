@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using TableTennis.ViewModels;
 using Services.Match.Interface;
+using Microsoft.AspNetCore.Mvc;
 
 namespace TableTennis.Pages.Game.ReadAll
 {
@@ -16,9 +17,11 @@ namespace TableTennis.Pages.Game.ReadAll
             _setService = setService;
         }
         public IList<MatchHistoryVM> MatchHistories { get; set; } = new List<MatchHistoryVM>();
+        [BindProperty(SupportsGet = true)]
+        public string SearchTerm { get; set; }
         public void OnGet()
         {
-            var allMatchDTOs = _matchService.GetAllMatches();
+            var allMatchDTOs = _matchService.GetAllMatches(SearchTerm);
             if (allMatchDTOs != null)
             {
                 foreach (var matchDto in allMatchDTOs)

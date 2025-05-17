@@ -81,9 +81,22 @@ namespace Services.Match
             }
             return null;
         }
-        public List<MatchDTO> GetAllMatches()
+        public List<MatchDTO> GetAllMatches(string searchTerm)
         {
-            return _dbContext.Match
+            var query = _dbContext.Match.AsQueryable();
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                var lowerSearchTerm = searchTerm.ToLower();
+                query = query.Where(m =>
+                    (m.Player1FirstName.ToLower() + " " + m.Player1LastName.ToLower()).Contains(lowerSearchTerm) ||
+                    (m.Player2FirstName.ToLower() + " " + m.Player2LastName.ToLower()).Contains(lowerSearchTerm) ||
+                    m.Player1FirstName.ToLower().Contains(lowerSearchTerm) ||
+                    m.Player1LastName.ToLower().Contains(lowerSearchTerm) ||
+                    m.Player2FirstName.ToLower().Contains(lowerSearchTerm) ||
+                    m.Player2LastName.ToLower().Contains(lowerSearchTerm)
+                );
+            }
+            return query
                 .OrderByDescending(m => m.MatchDate)
                 .Select(m => new MatchDTO
                 {
