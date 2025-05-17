@@ -4,6 +4,7 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TableTennis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514123950_Updated realatinship between sets and match")]
+    partial class Updatedrealatinshipbetweensetsandmatch
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,17 +90,46 @@ namespace TableTennis.Data.Migrations
                     b.Property<bool>("IsPlayer1Serve")
                         .HasColumnType("bit");
 
+                    b.Property<DateTime>("MatchDate")
+                        .HasColumnType("datetime2");
+
                     b.Property<int>("MatchId")
                         .HasColumnType("int");
 
+                    b.Property<int>("Player1Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Player1FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player1LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<int>("Player1Score")
                         .HasColumnType("int");
+
+                    b.Property<int>("Player2Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Player2FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player2LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Player2Score")
                         .HasColumnType("int");
 
                     b.Property<int>("ServeCounter")
                         .HasColumnType("int");
+
+                    b.Property<string>("SetGender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("WinnerPlayer")
                         .HasColumnType("nvarchar(max)");

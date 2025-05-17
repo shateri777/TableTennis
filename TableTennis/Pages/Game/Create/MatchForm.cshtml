@@ -16,6 +16,8 @@
         <h1>Starta Pingismatch</h1>
 
         <form method="post">
+            <input type="hidden" asp-for="FormVM.SetGender" />
+
             <div class="form-wrapper">
                 <!-- Spelare 1 -->
                 <div class="player-form">
@@ -61,12 +63,15 @@
             <!-- Set-alternativ -->
             <div class="set-options">
                 <h2>Välj matchformat</h2>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="3" required> Bäst av 3</label>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="5"> Bäst av 5</label>
-                <label><input type="radio" asp-for="@Model.ChoosenSet" value="7"> Bäst av 7</label>
+                <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="3" required> Bäst av 3</label>
+                <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="5"> Bäst av 5</label>
+                <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="7"> Bäst av 7</label>
             </div>
 
-            <button type="submit" class="submit-btn" asp-route-FormVM="@Model.FormVM">Starta Match</button>
+
+            <button type="submit" class="submit-btn">Starta Match</button>
+
+
         </form>
     </div>
 

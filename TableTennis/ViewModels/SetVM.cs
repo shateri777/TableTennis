@@ -2,25 +2,14 @@
 {
     public class SetVM
     {
-        public string Player1FirstName { get; set; }
-        public string Player1LastName { get; set; }
-        public string Player2FirstName { get; set; }
-        public string Player2LastName { get; set; }
-        public int Player1Age { get; set; }
-        public int Player2Age { get; set; }
-        public string SetGender { get; set; }
+        public int MatchId { get; set; }
         public int Player1Score { get; set; }
         public int Player2Score { get; set; }
         public bool IsPlayer1Serve { get; set; } = true;
         public int ServeCounter { get; set; } = 0;
-        public DateTime MatchDate { get; set; }
-        public string WinnerPlayer { get; set; }
+        public string? WinnerPlayer { get; set; }
 
-        //public void AddPointToPlayer1()
-        //{
-        //    Player1Score++;
-        //    CheckEndOfSet();
-        //}
+       
 
         //public void AddPointToPlayer2()
         //{

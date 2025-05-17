@@ -4,6 +4,7 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TableTennis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250514101737_Renamed TableTennisMatch property SetCounter to BestOfSets")]
+    partial class RenamedTableTennisMatchpropertySetCountertoBestOfSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -87,11 +90,36 @@ namespace TableTennis.Data.Migrations
                     b.Property<bool>("IsPlayer1Serve")
                         .HasColumnType("bit");
 
-                    b.Property<int>("MatchId")
+                    b.Property<DateTime>("MatchDate")
+                        .HasColumnType("datetime2");
+
+                    b.Property<int>("MatchIdId")
                         .HasColumnType("int");
+
+                    b.Property<int>("Player1Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Player1FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player1LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Player1Score")
                         .HasColumnType("int");
+
+                    b.Property<int>("Player2Age")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Player2FirstName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Player2LastName")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<int>("Player2Score")
                         .HasColumnType("int");
@@ -99,12 +127,17 @@ namespace TableTennis.Data.Migrations
                     b.Property<int>("ServeCounter")
                         .HasColumnType("int");
 
+                    b.Property<string>("SetGender")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.Property<string>("WinnerPlayer")
+                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.HasKey("Id");
 
-                    b.HasIndex("MatchId");
+                    b.HasIndex("MatchIdId");
 
                     b.ToTable("Sets");
                 });
@@ -313,13 +346,13 @@ namespace TableTennis.Data.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Data.Models.TableTennisSet", b =>
                 {
-                    b.HasOne("DataAccessLayer.Data.Models.TableTennisMatch", "Match")
-                        .WithMany("Sets")
-                        .HasForeignKey("MatchId")
+                    b.HasOne("DataAccessLayer.Data.Models.TableTennisMatch", "MatchId")
+                        .WithMany("SetIds")
+                        .HasForeignKey("MatchIdId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
-                    b.Navigation("Match");
+                    b.Navigation("MatchId");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
@@ -375,7 +408,7 @@ namespace TableTennis.Data.Migrations
 
             modelBuilder.Entity("DataAccessLayer.Data.Models.TableTennisMatch", b =>
                 {
-                    b.Navigation("Sets");
+                    b.Navigation("SetIds");
                 });
 #pragma warning restore 612, 618
         }

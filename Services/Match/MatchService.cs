@@ -18,9 +18,9 @@ namespace Services.Match
             _dbContext = dbContext;
         }
 
-        public void CreateMatch(MatchDTO matchDTO)
+        public int CreateMatch(MatchDTO matchDTO)
         {
-            var set = new DataAccessLayer.Data.Models.TableTennisMatch
+            var match = new DataAccessLayer.Data.Models.TableTennisMatch
             {
                 Player1FirstName = matchDTO.Player1FirstName,
                 Player1LastName = matchDTO.Player1LastName,
@@ -29,29 +29,75 @@ namespace Services.Match
                 Player1Age = matchDTO.Player1Age,
                 Player2Age = matchDTO.Player2Age,
                 SetGender = matchDTO.SetGender,
-                MatchDate = matchDTO.MatchDate
+                MatchDate = matchDTO.MatchDate,
+                BestOfSets = matchDTO.BestOfSets,
             };
-            _dbContext.Match.Add(set);
+
+            _dbContext.Match.Add(match);
             _dbContext.SaveChanges();
+
+            return match.Id;
         }
 
 
 
+        public MatchDTO FindMatchId(int matchId)
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            if (match != null)
+            {
+                return new MatchDTO
+                {
+                    Id = match.Id,
+                    Player1FirstName = match.Player1FirstName,
+                    Player1LastName = match.Player1LastName,
+                    Player2FirstName = match.Player2FirstName,
+                    Player2LastName = match.Player2LastName,
+                    Player1Age = match.Player1Age,
+                    Player2Age = match.Player2Age,
+                    BestOfSets = match.BestOfSets,
+                    SetGender = match.SetGender,
+                    MatchDate = match.MatchDate
+                };
+            }
+            return null;
+        }
 
-        // TO DO
-        //public SetsDTO AddPointToPlayer1(int matchId)
-        //{
-        //    var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
-        //    var matchDTO = new SetsDTO
-        //    {
-        //        Player1Score = match.Player1Score,
-        //    };
-        //    match.Player1Score += matchDTO.Player1Score;
-        //    _dbContext.Update(match);
-        //    _dbContext.SaveChanges();
-        //    CheckEndOfSet(matchId);
-        //    return matchDTO;
-        //}
+        public string CheckMatchWinner(int matchId) 
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            var sets = _dbContext.Sets.Where(m => m.MatchId == matchId);
+            if (sets != null)
+            {
+                var player1Wins = sets.Count(s => s.WinnerPlayer == match.Player1FirstName);
+                var player2Wins = sets.Count(s => s.WinnerPlayer == match.Player2FirstName);
+                int winsNeeded = (match.BestOfSets / 2) + 1;
+
+                if (player1Wins >= winsNeeded)
+                {
+                    match.WinnerPlayer = match.Player1FirstName;
+                    _dbContext.Update(match);
+                    _dbContext.SaveChanges();
+                    return match.Player1FirstName;
+                }
+                else if (player2Wins >= winsNeeded)
+                {
+                    match.WinnerPlayer = match.Player2FirstName;
+                    _dbContext.Update(match);
+                    _dbContext.SaveChanges();
+                    return match.Player2FirstName;
+                }
+                else
+                {
+                    return null;
+                }
+            }
+            return null;
+        }
+
+
+
+        
         //// TO DO
         //public SetsDTO AddPointToPlayer2(int matchId)
         //{

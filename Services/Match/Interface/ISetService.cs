@@ -1,4 +1,5 @@
 ﻿using DataAccessLayer.Data.DTO;
+using DataAccessLayer.Data.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -9,6 +10,14 @@ namespace Services.Match.Interface
 {
     public interface ISetService
     {
-        SetsDTO CreateSet(SetsDTO setDTO);
+        void CreateSet(int matchId);
+        int AddPointToPlayer1(int matchId);
+        int AddPointToPlayer2(int matchId);
+        int GetPlayer1Score(int matchId);
+        int GetPlayer2Score(int matchId);
+        bool UpdateServe(int matchId);
+        string CheckEndOfSet(int matchId);
+        void SetWinnerPlayer(int matchId, string winner);
+        SetsDTO GetActiveSetId(int matchId);
     }
 }

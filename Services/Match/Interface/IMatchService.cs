@@ -13,6 +13,8 @@ namespace Services.Match.Interface
         //SetsDTO AddPointToPlayer2(int matchId);
         //string CheckEndOfSet(int matchId);
         //void UpdateServe(int matchId);
-        void CreateMatch(MatchDTO matchDTO);
+        int CreateMatch(MatchDTO matchDTO);
+        MatchDTO FindMatchId(int matchId);
+        string CheckMatchWinner(int matchId);
     }
 }
