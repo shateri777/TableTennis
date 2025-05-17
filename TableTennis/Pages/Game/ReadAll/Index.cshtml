@@ -1,5 +1,50 @@
 ﻿@page
 @model TableTennis.Pages.Game.ReadAll.IndexModel
 @{
+    ViewData["Title"] = "Matchhistorik";
 }
-<h1 class="text-center">Historik</h1>
+
+<div class="container mt-4">
+    <h1 class="text-center mb-4">@ViewData["Title"]</h1>
+
+    @if (Model.MatchHistories == null || !Model.MatchHistories.Any())
+    {
+        <p class="text-center">Det finns ingen matchhistorik att visa ännu.</p>
+    }
+    else
+    {
+        <div class="table-responsive">
+            <table class="table table-striped table-hover table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Datum</th>
+                        <th>Spelare 1</th>
+                        <th>Ålder</th>
+                        <th>Set Vunna (Spelare 1)</th>
+                        <th>Spelare 2</th>
+                        <th>Ålder</th>
+                        <th>Set Vunna (Spelare 2)</th>
+                        <th>Kön (Match)</th>
+                        <th>Matchvinnare</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var match in Model.MatchHistories)
+                    {
+                        <tr>
+                            <td>@match.MatchDate.ToString("yyyy-MM-dd HH:mm")</td>
+                            <td>@match.Player1FullName</td>
+                            <td>@match.Player1Age</td>
+                            <td class="text-center">@match.Player1Score</td>
+                            <td>@match.Player2FullName</td>
+                            <td>@match.Player2Age</td>
+                            <td class="text-center">@match.Player2Score</td>
+                            <td>@match.SetGender</td>
+                            <td>@(string.IsNullOrEmpty(match.WinnerPlayer) ? "Ej avgjord" : match.WinnerPlayer)</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+    }
+</div>

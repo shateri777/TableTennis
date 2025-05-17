@@ -1,10 +1,5 @@
 ﻿using DataAccessLayer.Data.DTO;
 using Services.Match.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using DataAccessLayer.Data;
 
 namespace Services.Match
@@ -12,12 +7,10 @@ namespace Services.Match
     public class MatchService : IMatchService
     {
         private readonly ApplicationDbContext _dbContext;
-
         public MatchService(ApplicationDbContext dbContext)
         {
             _dbContext = dbContext;
         }
-
         public int CreateMatch(MatchDTO matchDTO)
         {
             var match = new DataAccessLayer.Data.Models.TableTennisMatch
@@ -32,15 +25,10 @@ namespace Services.Match
                 MatchDate = matchDTO.MatchDate,
                 BestOfSets = matchDTO.BestOfSets,
             };
-
             _dbContext.Match.Add(match);
             _dbContext.SaveChanges();
-
             return match.Id;
         }
-
-
-
         public MatchDTO FindMatchId(int matchId)
         {
             var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
@@ -62,7 +50,6 @@ namespace Services.Match
             }
             return null;
         }
-
         public string CheckMatchWinner(int matchId) 
         {
             var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
@@ -94,10 +81,26 @@ namespace Services.Match
             }
             return null;
         }
-
-
-
-        
+        public List<MatchDTO> GetAllMatches()
+        {
+            return _dbContext.Match
+                .OrderByDescending(m => m.MatchDate)
+                .Select(m => new MatchDTO
+                {
+                    Id = m.Id,
+                    Player1FirstName = m.Player1FirstName,
+                    Player1LastName = m.Player1LastName,
+                    Player2FirstName = m.Player2FirstName,
+                    Player2LastName = m.Player2LastName,
+                    Player1Age = m.Player1Age,
+                    Player2Age = m.Player2Age,
+                    SetGender = m.SetGender,
+                    MatchDate = m.MatchDate,
+                    BestOfSets = m.BestOfSets,
+                    WinnerPlayer = m.WinnerPlayer
+                })
+                .ToList();
+        }
         //// TO DO
         //public SetsDTO AddPointToPlayer2(int matchId)
         //{

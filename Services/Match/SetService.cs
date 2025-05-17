@@ -156,5 +156,9 @@ namespace Services.Match
             };
             return setDTO;
         }
+        public int GetSetsWonByPlayerName(int matchId, string playerName)
+        {
+            return _dbContext.Sets.Count(s => s.MatchId == matchId && s.WinnerPlayer == playerName);
+        }
     }
 }
