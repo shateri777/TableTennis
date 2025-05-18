@@ -100,7 +100,6 @@ namespace TableTennis.Pages.Game.Create
             {
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
-                SetCounter++;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -111,7 +110,6 @@ namespace TableTennis.Pages.Game.Create
             {
                 SetVM.WinnerPlayer = match.Player2FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
-                SetCounter++;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -166,7 +164,6 @@ namespace TableTennis.Pages.Game.Create
             {
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
-                SetCounter++;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -178,7 +175,6 @@ namespace TableTennis.Pages.Game.Create
             {
                 SetVM.WinnerPlayer = match.Player2FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
-                SetCounter++;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -230,6 +226,7 @@ namespace TableTennis.Pages.Game.Create
                 ServeCounter = set.ServeCounter,
                 IsPlayer1Serve = set.IsPlayer1Serve,
             };
+            SetCounter++;
             return Page();
         }
     }
