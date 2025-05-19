@@ -2,18 +2,23 @@
 @model TableTennis.Pages.Game.Create.IndexModel
 @{
 }
-<h2>Table Tennis Scoreboard</h2>
+@* <h2>Table Tennis Scoreboard</h2>
 
-<p>Välj kön till matchen.</p>
+<p>Välj kön till matchen.</p> *@
+
+<!DOCTYPE html>
+<html lang="sv">
 
 <head>
     <meta charset="UTF-8">
-    <title>Välj kön</title>
+    <title>Välj spelartyp</title>
 </head>
+<body>
 <section class="gender">
 
     <div class="gender-selection">
-        <h1>Välj kön</h1>
+        <h1>Välj Spelartyp</h1>
+            <p class="subtext">Ange kön på spelaren som ska delta i matchen.</p>
         <div class="gender-buttons">
             <a asp-page="./MatchForm" asp-route-gender="Male" class="gender-button male">♂️ Kille</a>
             <a asp-page="./MatchForm" asp-route-gender="Female" class="gender-button female">♀️ Tjej</a>
@@ -22,4 +27,5 @@
     </div>
 
 </section>
+</body>
 </html>
