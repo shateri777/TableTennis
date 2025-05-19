@@ -8,57 +8,68 @@
 
     @if (string.IsNullOrEmpty(@Model.SetVM.WinnerPlayer))
     {
-        <form method="post">
-            <input type="hidden" asp-for="@Model.Id" />
-            <input type="hidden" asp-for="@Model.MatchId" />
-            <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
-            <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
-            <input type="hidden" asp-for="@Model.SetCounter" />
-            <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
+        <section class="gender">
 
-            <div>
-                <p>Spelar @Model.SetCounter av @Model.MatchFormVM.BestOfSets</p>
-                <p>Player 1: @Model.MatchFormVM.Player1FirstName</p>
-                <p>Player 2: @Model.MatchFormVM.Player2FirstName</p>
+            <div class="gender-selection">
+                <form method="post">
+                    <input type="hidden" asp-for="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.MatchId" />
+                    <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                    <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                    <input type="hidden" asp-for="@Model.SetCounter" />
+                    <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
+
+                    <div>
+                        <p>Spelar @Model.SetCounter av @Model.MatchFormVM.BestOfSets</p>
+                        <p>Player 1: @Model.MatchFormVM.Player1FirstName</p>
+                        <p>Player 2: @Model.MatchFormVM.Player2FirstName</p>
+                    </div>
+
+
+                    <div>
+                        <p>Player 1 Score: @Model.SetVM.Player1Score</p>
+                        <p>Player 2 Score: @Model.SetVM.Player2Score</p>
+                        <p>Current Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)</p>
+                    </div>
+
+                    <div>
+                        <button asp-page-handler="AddPointToPlayer1" class="submit-btn">Add Point to Player 1</button>
+                        <button asp-page-handler="AddPointToPlayer2" class="submit-btn">Add Point to Player 2</button>
+                    </div>
+                </form>
             </div>
-
-
-            <div>
-                <p>Player 1 Score: @Model.SetVM.Player1Score</p>
-                <p>Player 2 Score: @Model.SetVM.Player2Score</p>
-                <p>Current Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)</p>
-            </div>
-
-            <div>
-                <button asp-page-handler="AddPointToPlayer1">Add Point to Player 1</button>
-                <button asp-page-handler="AddPointToPlayer2">Add Point to Player 2</button>
-            </div>
-        </form>
+        </section>
     }
 
     else
     {
-        <div>
-            <h3>Vinnaren för detta set är @Model.SetVM.WinnerPlayer!</h3>
-            <form method="post">
-                <input type="hidden" asp-for="@Model.Id" />
-                <input type="hidden" asp-for="@Model.MatchId" />
-                <input type="hidden" asp-for="@Model.SetVM" />
-                <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
-                <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
-                <input type="hidden" asp-for="@Model.SetCounter" />
-                <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
-                <button asp-page-handler="ContinueSet">Spela nästa set</button>
-            </form>
-        </div>
+        <section class="gender">
+
+            <div class="gender-selection">
+                <h3>Vinnaren för detta set är @Model.SetVM.WinnerPlayer!</h3>
+                <form method="post">
+                    <input type="hidden" asp-for="@Model.Id" />
+                    <input type="hidden" asp-for="@Model.MatchId" />
+                    <input type="hidden" asp-for="@Model.SetVM" />
+                    <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                    <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                    <input type="hidden" asp-for="@Model.SetCounter" />
+                    <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
+                    <button asp-page-handler="ContinueSet" class="submit-btn">Spela nästa set</button>
+                </form>
+            </div>
+        </section>
     }
 }
 
 else
 {
-    <div>
+    <section class="gender">
+
+            <div class="gender-selection">
         <h3>Vinnaren för hela matchen @Model.MatchFormVM.WinnerPlayer!</h3>
-        <a asp-page="/Game/Create/Index" class="btn btn-primary">Starta ny match</a>
-        <a asp-page="/Index" class="btn btn-secondary">Startmeny</a>
+        <a asp-page="/Game/Create/Index" class="submit-btn">Starta ny match</a>
+        <a asp-page="/Index" class="submit-btn">Startmeny</a>
     </div>
+    </section>
 }
