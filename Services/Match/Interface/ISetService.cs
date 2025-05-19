@@ -19,5 +19,6 @@ namespace Services.Match.Interface
         string CheckEndOfSet(int matchId);
         void SetWinnerPlayer(int matchId, string winner);
         SetsDTO GetActiveSetId(int matchId);
+        int GetSetsWonByPlayerName(int matchId, string playerName);
     }
 }
