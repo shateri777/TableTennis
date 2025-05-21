@@ -10,75 +10,139 @@
     <title>Starta Pingismatch</title>
 
 </head>
-<body>
+    <body>
 
-    <section class="match-setup">
-        <div class="match-container">
-            <h1 class="match-title">Starta Pingismatch</h1>
+        <section class="match-setup">
+            <div class="match-container">
+                <h1 class="match-title">Starta Pingismatch</h1>
 
-            <form method="post">
-                <input type="hidden" asp-for="FormVM.SetGender" />
+                <form method="post">
+                    <div asp-validation-summary="ModelOnly" class="text-danger form-group"></div>
+                    <input type="hidden" asp-for="FormVM.SetGender" />
 
-                <div class="form-wrapper">
-                    <!-- Spelare 1 -->
-                    <div class="player-form">
-                        <h2>Spelare 1</h2>
-                        <label>
-                            Förnamn:
-                            <input type="text" asp-for="@Model.FormVM.Player1FirstName">
-                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player1FirstName"></span>
-                        </label>
-                        <label>
-                            Efternamn:
-                            <input type="text" asp-for="@Model.FormVM.Player1LastName">
-                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player1LastName"></span>
-                        </label>
-                        <label>
-                            Ålder:
-                            <input type="number" asp-for="@Model.FormVM.Player1Age">
-                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player1Age"></span>
-                        </label>
+                    <div class="form-wrapper">
+                        <div class="player-form">
+                            <h2>Spelare 1</h2>
+                            <div class="form-group">
+                                <label for="player1Select">Välj befintlig spelare:</label>
+                                <select id="player1Select" asp-for="SelectedPlayer1Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FormVM.Player1FirstName">Förnamn:</label>
+                                <input type="text" id="p1FirstName" asp-for="FormVM.Player1FirstName" class="form-control">
+                                <span asp-validation-for="FormVM.Player1FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FormVM.Player1LastName">Efternamn:</label>
+                                <input type="text" id="p1LastName" asp-for="FormVM.Player1LastName" class="form-control">
+                                <span asp-validation-for="FormVM.Player1LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FormVM.Player1Age">Ålder:</label>
+                                <input type="number" id="p1Age" asp-for="FormVM.Player1Age" class="form-control">
+                                <span asp-validation-for="FormVM.Player1Age" class="text-danger"></span>
+                            </div>
+                        </div>
+
+                        <div class="player-form">
+                            <h2>Spelare 2</h2>
+                            <div class="form-group">
+                                <label for="player2Select">Välj befintlig spelare:</label>
+                                <select id="player2Select" asp-for="SelectedPlayer2Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FormVM.Player2FirstName">Förnamn:</label>
+                                <input type="text" id="p2FirstName" asp-for="FormVM.Player2FirstName" class="form-control">
+                                <span asp-validation-for="FormVM.Player2FirstName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FormVM.Player2LastName">Efternamn:</label>
+                                <input type="text" id="p2LastName" asp-for="FormVM.Player2LastName" class="form-control">
+                                <span asp-validation-for="FormVM.Player2LastName" class="text-danger"></span>
+                            </div>
+
+                            <div class="form-group">
+                                <label asp-for="FormVM.Player2Age">Ålder:</label>
+                                <input type="number" id="p2Age" asp-for="FormVM.Player2Age" class="form-control">
+                                <span asp-validation-for="FormVM.Player2Age" class="text-danger"></span>
+                            </div>
+                        </div>
                     </div>
 
-                    <!-- Spelare 2 -->
-                    <div class="player-form">
-                        <h2>Spelare 2</h2>
-                        <label>
-                            Förnamn:
-                            <input type="text" asp-for="@Model.FormVM.Player2FirstName">
-                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player2FirstName"></span>
-                        </label>
-                        <label>
-                            Efternamn:
-                            <input type="text" asp-for="@Model.FormVM.Player2LastName">
-                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player2LastName"></span>
-                        </label>
-                        <label>
-                            Ålder:
-                            <input type="number" asp-for="@Model.FormVM.Player2Age">
-                            <span class="validation-error" asp-validation-for="@Model.FormVM.Player2Age"></span>
-                        </label>
+                    <div class="set-options">
+                        <h2>Välj matchformat</h2>
+                        <div class="set-radios">
+                            <label><input type="radio" asp-for="FormVM.BestOfSets" value="3" required> Bäst av 3</label>
+                            <label><input type="radio" asp-for="FormVM.BestOfSets" value="5"> Bäst av 5</label>
+                            <label><input type="radio" asp-for="FormVM.BestOfSets" value="7"> Bäst av 7</label>
+                        </div>
+                        <span asp-validation-for="FormVM.BestOfSets" class="text-danger"></span>
                     </div>
-                </div>
 
-                <!-- Set-alternativ -->
-                <div class="set-options">
-                    <h2>Välj matchformat</h2>
-                    <div class="set-radios">
-                        <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="3" required> Bäst av 3</label>
-                        <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="5"> Bäst av 5</label>
-                        <label><input type="radio" asp-for="@Model.FormVM.BestOfSets" value="7"> Bäst av 7</label>
+                    <div class="submit-btn-container">
+                        <button type="submit" class="submit-btn">Starta Match</button>
                     </div>
-                </div>
+                </form>
+            </div>
+        </section>
 
-
-
-                <button type="submit" class="submit-btn">Starta Match</button>
-
-
-            </form>
-        </div>
-    </section>
-
-</body>
+    </body>
 </html>
+@section Scripts {
+    <partial name="_ValidationScriptsPartial" />
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            const allPlayersData = @Html.Raw(Newtonsoft.Json.JsonConvert.SerializeObject(Model.AllPlayerDetailsForJs ?? new List<TableTennis.ViewModels.PlayerInfoVM>()));
+
+            function setupPlayerDropdown(playerNumber) {
+                const selectElement = document.getElementById('player' + playerNumber + 'Select');
+                const firstNameInput = document.getElementById('p' + playerNumber + 'FirstName');
+                const lastNameInput = document.getElementById('p' + playerNumber + 'LastName');
+                const ageInput = document.getElementById('p' + playerNumber + 'Age');
+
+                function handleDropdownChange(selectedPlayerId) {
+                    if (selectedPlayerId && selectedPlayerId !== "") {
+                        const playerData = allPlayersData.find(p => p.Id === selectedPlayerId);
+                        if (playerData) {
+                            firstNameInput.value = playerData.FirstName;
+                            lastNameInput.value = playerData.LastName;
+                            ageInput.value = playerData.Age;
+
+                            firstNameInput.readOnly = true;
+                            lastNameInput.readOnly = true;
+                            ageInput.readOnly = true;
+                        } else {
+                            firstNameInput.readOnly = false;
+                            lastNameInput.readOnly = false;
+                            ageInput.readOnly = false;
+                        }
+                    } else {
+                        firstNameInput.value = '';
+                        lastNameInput.value = '';
+                        ageInput.value = '';
+
+                        firstNameInput.readOnly = false;
+                        lastNameInput.readOnly = false;
+                        ageInput.readOnly = false;
+                    }
+                }
+
+                if (selectElement) {
+                    selectElement.addEventListener('change', function () {
+                        handleDropdownChange(this.value);
+                    });
+
+                    handleDropdownChange(selectElement.value);
+                }
+            }
+
+            setupPlayerDropdown(1);
+            setupPlayerDropdown(2);
+        });
+    </script>
+}
