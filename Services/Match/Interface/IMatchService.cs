@@ -17,5 +17,6 @@ namespace Services.Match.Interface
         MatchDTO FindMatchId(int matchId);
         string CheckMatchWinner(int matchId);
         List<MatchDTO> GetAllMatches(string searchTerm);
+        List<PlayerInfoDTO> GetDistinctPlayers();
     }
 }

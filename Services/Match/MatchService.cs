@@ -1,6 +1,7 @@
 ﻿using DataAccessLayer.Data.DTO;
 using Services.Match.Interface;
 using DataAccessLayer.Data;
+using Microsoft.EntityFrameworkCore;
 
 namespace Services.Match
 {
@@ -112,6 +113,56 @@ namespace Services.Match
                     BestOfSets = m.BestOfSets,
                     WinnerPlayer = m.WinnerPlayer
                 })
+                .ToList();
+        }
+        public List<PlayerInfoDTO> GetDistinctPlayers()
+        {
+            var player1s = _dbContext.Match
+                .Where(m => m.Player1FirstName != null && m.Player1LastName != null)
+                .Select(m => new { m.Player1FirstName, m.Player1LastName, m.Player1Age })
+                .Distinct()
+                .ToList();
+
+            var player2s = _dbContext.Match
+                .Where(m => m.Player2FirstName != null && m.Player2LastName != null)
+                .Select(m => new { m.Player2FirstName, m.Player2LastName, m.Player2Age })
+                .Distinct()
+                .ToList();
+
+            var allPlayers = new List<PlayerInfoDTO>();
+
+            foreach (var p in player1s)
+            {
+                allPlayers.Add(new PlayerInfoDTO
+                {
+                    FirstName = p.Player1FirstName,
+                    LastName = p.Player1LastName,
+                    Age = p.Player1Age,
+                    // Skapa ett unikt ID, t.ex. baserat på namn och ålder. Var försiktig med specialtecken.
+                    Id = $"{p.Player1FirstName}_{p.Player1LastName}_{p.Player1Age}".Replace(" ", "_"),
+                    DisplayName = $"{p.Player1FirstName} {p.Player1LastName} ({p.Player1Age})"
+                });
+            }
+
+            foreach (var p in player2s)
+            {
+                // Lägg bara till om spelaren inte redan finns (baserat på en unik kombination)
+                if (!allPlayers.Any(ap => ap.FirstName == p.Player2FirstName && ap.LastName == p.Player2LastName && ap.Age == p.Player2Age))
+                {
+                    allPlayers.Add(new PlayerInfoDTO
+                    {
+                        FirstName = p.Player2FirstName,
+                        LastName = p.Player2LastName,
+                        Age = p.Player2Age,
+                        Id = $"{p.Player2FirstName}_{p.Player2LastName}_{p.Player2Age}".Replace(" ", "_"),
+                        DisplayName = $"{p.Player2FirstName} {p.Player2LastName} ({p.Player2Age})"
+                    });
+                }
+            }
+            return allPlayers
+                .GroupBy(p => p.Id)
+                .Select(g => g.First())
+                .OrderBy(p => p.DisplayName)
                 .ToList();
         }
         //// TO DO
