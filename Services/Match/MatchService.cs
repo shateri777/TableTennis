@@ -140,7 +140,7 @@ namespace Services.Match
                     Age = p.Player1Age,
                     // Skapa ett unikt ID, t.ex. baserat på namn och ålder. Var försiktig med specialtecken.
                     Id = $"{p.Player1FirstName}_{p.Player1LastName}_{p.Player1Age}".Replace(" ", "_"),
-                    DisplayName = $"{p.Player1FirstName} {p.Player1LastName} ({p.Player1Age})"
+                    DisplayName = $"{p.Player1FirstName} {p.Player1LastName} ({DateTime.Now.Year - p.Player1Age})"
                 });
             }
 
@@ -155,7 +155,7 @@ namespace Services.Match
                         LastName = p.Player2LastName,
                         Age = p.Player2Age,
                         Id = $"{p.Player2FirstName}_{p.Player2LastName}_{p.Player2Age}".Replace(" ", "_"),
-                        DisplayName = $"{p.Player2FirstName} {p.Player2LastName} ({p.Player2Age})"
+                        DisplayName = $"{p.Player2FirstName} {p.Player2LastName} ({DateTime.Now.Year - p.Player2Age})"
                     });
                 }
             }
