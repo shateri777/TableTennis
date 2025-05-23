@@ -46,7 +46,6 @@ namespace Services.Match
                 int score = set.Player1Score;
 
                 return score;
-                //CheckEndOfSet(matchId);
             }
             return 0;
         }
@@ -62,7 +61,6 @@ namespace Services.Match
                 int score = set.Player2Score;
 
                 return score;
-                //CheckEndOfSet(matchId);
             }
             return 0;
         }
@@ -159,6 +157,46 @@ namespace Services.Match
         public int GetSetsWonByPlayerName(int matchId, string playerName)
         {
             return _dbContext.Sets.Count(s => s.MatchId == matchId && s.WinnerPlayer == playerName);
+        }
+
+
+        public int RemovePointPlayer1(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
+            if (set.Player1Score == 0)
+            {
+                return 0;
+            }
+            if (set != null)
+            {
+                set.Player1Score--;
+                _dbContext.Update(set);
+                _dbContext.SaveChanges();
+                int score = set.Player1Score;
+
+                return score;
+            }
+            return 0;
+        }
+
+        public int RemovePointPlayer2(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
+            if (set.Player2Score == 0)
+            {
+                return 0;
+            }
+
+            if (set != null)
+            {
+                set.Player2Score--;
+                _dbContext.Update(set);
+                _dbContext.SaveChanges();
+                int score = set.Player2Score;
+
+                return score;
+            }
+            return 0;
         }
     }
 }

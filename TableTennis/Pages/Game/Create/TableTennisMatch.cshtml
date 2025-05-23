@@ -10,17 +10,30 @@
     {
         if (string.IsNullOrEmpty(Model.SetVM.WinnerPlayer))
         {
+           
             <div class="tt-scoreboard">
                 <div class="tt-mainrow">
                     <div class="tt-playercol">
                         <form method="post">
+                            <input type="hidden" asp-for="@Model.Id" />
+                            <input type="hidden" asp-for="@Model.MatchId" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                            <input type="hidden" asp-for="@Model.SetCounter" />
+                            <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
                             <input type="hidden" name="matchId" value="@Model.MatchId" />
                             <button asp-page-handler="AddPointToPlayer1" class="tt-score-btn tt-plus" type="submit">+</button>
                         </form>
                         <div class="tt-score">@Model.SetVM.Player1Score</div>
                         <form method="post">
+                            <input type="hidden" asp-for="@Model.Id" />
+                            <input type="hidden" asp-for="@Model.MatchId" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                            <input type="hidden" asp-for="@Model.SetCounter" />
+                            <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
                             <input type="hidden" name="matchId" value="@Model.MatchId" />
-                            <button asp-page-handler="RemovePointFromPlayer1" class="tt-score-btn tt-minus" type="submit">-</button>
+                            <button asp-page-handler="RemovePointPlayer1" class="tt-score-btn tt-minus" type="submit">-</button>
                         </form>
                     </div>
                     <div class="tt-middle">
@@ -31,13 +44,25 @@
                     </div>
                     <div class="tt-playercol">
                         <form method="post">
+                            <input type="hidden" asp-for="@Model.Id" />
+                            <input type="hidden" asp-for="@Model.MatchId" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                            <input type="hidden" asp-for="@Model.SetCounter" />
+                            <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
                             <input type="hidden" name="matchId" value="@Model.MatchId" />
                             <button asp-page-handler="AddPointToPlayer2" class="tt-score-btn tt-plus" type="submit">+</button>
                         </form>
                         <div class="tt-score">@Model.SetVM.Player2Score</div>
                         <form method="post">
+                            <input type="hidden" asp-for="@Model.Id" />
+                            <input type="hidden" asp-for="@Model.MatchId" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                            <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                            <input type="hidden" asp-for="@Model.SetCounter" />
+                            <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
                             <input type="hidden" name="matchId" value="@Model.MatchId" />
-                            <button asp-page-handler="RemovePointFromPlayer2" class="tt-score-btn tt-minus" type="submit">-</button>
+                            <button asp-page-handler="RemovePointPlayer2" class="tt-score-btn tt-minus" type="submit">-</button>
                         </form>
                     </div>
                 </div>
@@ -55,22 +80,22 @@
         }
         else
         {
-            <!-- Set-vinnare -->
-            <div class="row justify-content-center">
-                <div class="col-md-6">
-                    <div class="alert alert-success text-center mt-4">
-                        <h4>
-                            Vinnare för set: <b>
-                                @(Model.SetVM.WinnerPlayer == "Player1" ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)
-                            </b>!
-                        </h4>
-                        <form method="post">
-                            <input type="hidden" name="matchId" value="@Model.MatchId" />
-                            <button asp-page-handler="ContinueSet" type="submit" class="btn btn-warning mt-2">Spela nästa set</button>
-                        </form>
-                    </div>
+            <section class="gender">
+
+                <div class="gender-selection">
+                    <h3>Vinnaren för detta set är @Model.SetVM.WinnerPlayer!</h3>
+                    <form method="post">
+                        <input type="hidden" asp-for="@Model.Id" />
+                        <input type="hidden" asp-for="@Model.MatchId" />
+                        <input type="hidden" asp-for="@Model.SetVM" />
+                        <input type="hidden" asp-for="@Model.SetVM.Player1Score" />
+                        <input type="hidden" asp-for="@Model.SetVM.Player2Score" />
+                        <input type="hidden" asp-for="@Model.SetCounter" />
+                        <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
+                        <button asp-page-handler="ContinueSet" class="submit-btn">Spela nästa set</button>
+                    </form>
                 </div>
-            </div>
+            </section>
         }
     }
     else
