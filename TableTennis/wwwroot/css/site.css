@@ -509,3 +509,199 @@ body {
     }
 
 /* END: Match Form Styling */
+
+.tt-scoreboard {
+    background: #383a41;
+    border-radius: 2.7rem;
+    width: 700px;
+    max-width: 97vw;
+    margin: 4rem auto 0 auto;
+    box-shadow: 0 8px 40px #0004;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    position: relative;
+    padding-bottom: 0;
+    overflow: visible;
+}
+
+.tt-sets {
+    display: flex;
+    justify-content: center;
+    gap: 0.5rem;
+    margin-top: 1.4rem;
+    margin-bottom: 1rem;
+}
+
+.tt-set {
+    background: #ff8e6d;
+    color: #fff;
+    font-weight: bold;
+    font-size: 2.1rem;
+    padding: 0.2rem 1.35rem;
+    border-radius: 0.45rem 0.45rem 0 0;
+    margin-bottom: 0.2rem;
+    margin-left: 0.18rem;
+    box-shadow: 0 2px 8px #0002;
+    transition: border 0.2s;
+}
+
+.tt-set-active {
+    border: 2.5px solid #fff;
+}
+
+.tt-mainrow {
+    display: flex;
+    flex-direction: row;
+    background: #383a41;
+    border-radius: 2.2rem 2.2rem 0 0;
+    align-items: stretch;
+    justify-content: center;
+    position: relative;
+    z-index: 2;
+}
+
+.tt-playercol {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 140px;
+    position: relative;
+}
+
+.tt-score {
+    color: #fff;
+    font-size: 6rem;
+    font-weight: 700;
+    margin: 2.3rem 0 2.3rem 0;
+    letter-spacing: 0.07em;
+    text-shadow: 0 2px 6px #0006;
+}
+
+.tt-score-btn {
+    background: #e23a36;
+    border: none;
+    color: #fff;
+    font-size: 2.2rem;
+    width: 3.2rem;
+    height: 3.2rem;
+    border-radius: 50%;
+    margin: 0.4rem 0;
+    cursor: pointer;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 8px #0001;
+    transition: background 0.2s, transform 0.1s;
+}
+
+    .tt-score-btn:hover {
+        background: #c82a26;
+        transform: scale(1.09);
+    }
+
+.tt-plus {
+    margin-bottom: 0.6rem;
+}
+
+.tt-minus {
+    margin-top: 0.6rem;
+}
+
+.tt-middle {
+    background: #bdbdbd;
+    width: 180px;
+    min-width: 180px;
+    min-height: 290px;
+    border-radius: 0.8rem;
+    margin: 0 1.7rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    box-shadow: 0 2px 10px #0002;
+}
+
+.tt-cross {
+    color: #7c7c7c;
+    font-size: 3.9rem;
+    margin-top: 2.5rem;
+    margin-bottom: 1.5rem;
+    opacity: 0.6;
+    font-family: Arial, sans-serif;
+}
+
+.tt-time {
+    background: #fff;
+    color: #232323;
+    font-size: 2rem;
+    padding: 0.2rem 2.1rem;
+    border-radius: 0.5rem;
+    font-family: monospace;
+    font-weight: 700;
+    margin-top: 1.8rem;
+    box-shadow: 0 1px 4px #0001;
+    margin-bottom: 1.5rem;
+}
+
+.tt-bottomrow {
+    display: flex;
+    flex-direction: row;
+    align-items: end;
+    background: #c7c7c7;
+    border-radius: 0 0 2.7rem 2.7rem;
+    padding: 1.1rem 2.5rem 1.7rem 2.5rem;
+    border-top: 9px solid #e23a36;
+    min-height: 70px;
+    justify-content: space-between;
+    z-index: 1;
+    font-family: 'Arial Rounded MT Bold', Arial, sans-serif;
+}
+
+.tt-player-name {
+    color: #383a41;
+    font-size: 2.1rem;
+    font-weight: 700;
+    flex: 1;
+    text-align: left;
+}
+
+.tt-bottomrow .tt-player-name:last-child {
+    text-align: right;
+}
+
+.tt-setinfo {
+    text-align: center;
+    flex: 2;
+    font-size: 1.2rem;
+    color: #383a41;
+    font-weight: 600;
+}
+
+@media (max-width: 900px) {
+    .tt-scoreboard {
+        width: 99vw;
+        min-width: 0;
+    }
+
+    .tt-middle {
+        min-width: 95px;
+        min-height: 120px;
+    }
+
+    .tt-score {
+        font-size: 3rem;
+    }
+
+    .tt-player-name {
+        font-size: 1rem;
+    }
+
+    .tt-set {
+        font-size: 1.1rem;
+    }
+}
