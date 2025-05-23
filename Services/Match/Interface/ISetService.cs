@@ -20,5 +20,9 @@ namespace Services.Match.Interface
         void SetWinnerPlayer(int matchId, string winner);
         SetsDTO GetActiveSetId(int matchId);
         int GetSetsWonByPlayerName(int matchId, string playerName);
+        int ChangePlayer1Score(int matchId, int delta);
+        int ChangePlayer2Score(int matchId, int delta);
+        int GetSetCount(int matchId);
+
     }
 }
