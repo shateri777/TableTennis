@@ -132,6 +132,25 @@ namespace Services.Match
             return null;
         }
 
+        public bool CheckIfPlayer1HasSetPoint(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
+
+            bool player1HasSetPoint = set.Player1Score >= 10 && (set.Player1Score - set.Player2Score) == 1;
+
+            return player1HasSetPoint;
+        }
+
+        public bool CheckIfPlayer2HasSetPoint(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
+
+            bool player2HasSetPoint = set.Player2Score >= 10 && (set.Player2Score - set.Player1Score) == 1;
+
+            return player2HasSetPoint;
+        }
+
+
         public void SetWinnerPlayer(int matchId, string winner)
         {
             var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
@@ -199,5 +218,28 @@ namespace Services.Match
             }
             return 0;
         }
+
+        public bool RevertServe(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
+
+
+            // Om ServeCounter är 0 → vi behöver växla tillbaka och sätta counter till 1
+            if (set.ServeCounter == 0)
+            {
+                set.IsPlayer1Serve = !set.IsPlayer1Serve;
+                set.ServeCounter = 1;
+            }
+            else
+            {
+                set.ServeCounter--; // Annars backar vi bara räknaren
+            }
+
+            _dbContext.SaveChanges();
+
+            return set.IsPlayer1Serve;
+        }
+
+
     }
 }

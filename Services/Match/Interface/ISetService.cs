@@ -22,5 +22,8 @@ namespace Services.Match.Interface
         int GetSetsWonByPlayerName(int matchId, string playerName);
         int RemovePointPlayer1(int matchId);
         int RemovePointPlayer2(int matchId);
+        bool RevertServe(int matchId);
+        bool CheckIfPlayer1HasSetPoint(int matchId);
+        bool CheckIfPlayer2HasSetPoint(int matchId);
     }
 }

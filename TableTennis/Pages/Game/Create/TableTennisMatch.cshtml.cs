@@ -28,6 +28,8 @@ namespace TableTennis.Pages.Game.Create
 
         public MatchFormVM MatchFormVM { get; set; }
         public int SetCounter { get; set; } = 1;
+        public bool Player1Setpoint { get; set; }
+        public bool Player2Setpoint { get; set; }
 
 
         public void OnGet(int matchId)
@@ -63,6 +65,9 @@ namespace TableTennis.Pages.Game.Create
             };
 
             _setService.CreateSet(MatchId);
+
+            Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
+            Player2Setpoint = _setService.CheckIfPlayer2HasSetPoint(matchId);
         }
 
         public IActionResult OnPostAddPointToPlayer1(int matchId)
@@ -118,14 +123,18 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
-                SetVM.WinnerPlayer = null;
-                var serve = _setService.UpdateServe(matchId);
+                SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
 
-                if (serve)
-                {
-                    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                }
+                //SetVM.WinnerPlayer = null;
+                //var serve = _setService.UpdateServe(matchId);
+
+                //if (serve)
+                //{
+                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
+                //}
             }
+
+            Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
 
             return Page();
         }
@@ -183,13 +192,15 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
-                SetVM.WinnerPlayer = null;
-                var serve = _setService.UpdateServe(matchId);
+                SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
 
-                if (serve)
-                {
-                    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                }
+                //SetVM.WinnerPlayer = null;
+                //var serve = _setService.UpdateServe(matchId);
+
+                //if (serve)
+                //{
+                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
+                //}
             }
 
             return Page();
@@ -284,13 +295,17 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
-                SetVM.WinnerPlayer = null;
-                var serve = _setService.UpdateServe(matchId);
 
-                if (serve)
-                {
-                    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                }
+
+                SetVM.IsPlayer1Serve = _setService.RevertServe(matchId);
+                //SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
+                //SetVM.WinnerPlayer = null;
+                //var serve = _setService.UpdateServe(matchId);
+
+                //if (serve)
+                //{
+                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
+                //}
             }
 
             return Page();
@@ -349,13 +364,16 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
-                SetVM.WinnerPlayer = null;
-                var serve = _setService.UpdateServe(matchId);
+                SetVM.IsPlayer1Serve = _setService.RevertServe(matchId);
 
-                if (serve)
-                {
-                    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                }
+                //SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
+                //SetVM.WinnerPlayer = null;
+                //var serve = _setService.UpdateServe(matchId);
+
+                //if (serve)
+                //{
+                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
+                //}
             }
 
             return Page();

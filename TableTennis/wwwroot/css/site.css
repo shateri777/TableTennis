@@ -603,6 +603,17 @@ body {
         transform: scale(1.09);
     }
 
+    .tt-score-btn[disabled] {
+        opacity: 0.5;
+        cursor: not-allowed;
+    }
+
+    .tt-score-btn[disabled]:hover {
+        background: #c82a26;
+        transform: scale(1);
+    }
+
+
 .tt-plus {
     margin-bottom: 0.6rem;
 }
@@ -681,6 +692,10 @@ body {
     color: #383a41;
     font-weight: 600;
 }
+
+
+
+
 
 @media (max-width: 900px) {
     .tt-scoreboard {

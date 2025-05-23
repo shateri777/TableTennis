@@ -33,7 +33,18 @@
                             <input type="hidden" asp-for="@Model.SetCounter" />
                             <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
                             <input type="hidden" name="matchId" value="@Model.MatchId" />
-                            <button asp-page-handler="RemovePointPlayer1" class="tt-score-btn tt-minus" type="submit">-</button>
+
+                            @if (Model.SetVM.Player1Score > 0)
+                            {
+                                <button asp-page-handler="RemovePointPlayer1" class="tt-score-btn tt-minus" type="submit">-</button>
+                            }
+                            else
+                            {
+                                <button class="tt-score-btn tt-minus" type="button" disabled>-</button>
+                            }
+
+                            @* <button asp-page-handler="RemovePointPlayer1" class="tt-score-btn tt-minus" type="submit">-</button> *@
+
                         </form>
                     </div>
                     <div class="tt-middle">
@@ -66,7 +77,19 @@
                             <input type="hidden" asp-for="@Model.SetCounter" />
                             <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" />
                             <input type="hidden" name="matchId" value="@Model.MatchId" />
-                            <button asp-page-handler="RemovePointPlayer2" class="tt-score-btn tt-minus" type="submit">-</button>
+
+                            @if (Model.SetVM.Player2Score > 0)
+                            {
+                                <button asp-page-handler="RemovePointPlayer2" class="tt-score-btn tt-minus" type="submit">-</button>
+                            }
+                            else
+                            {
+                                <button class="tt-score-btn tt-minus" type="button" disabled>-</button>
+                            }
+
+
+                            @* <button asp-page-handler="RemovePointPlayer2" class="tt-score-btn tt-minus" type="submit">-</button> *@
+
                         </form>
                     </div>
                 </div>
@@ -87,7 +110,11 @@
                         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
                     }
                     <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div>
-                    
+                    @if (Model.Player1Setpoint)
+                    {
+                        <div class="set-point">SET POINT!</div>
+                    }
+                               
                 </div>
             </div>
         }
