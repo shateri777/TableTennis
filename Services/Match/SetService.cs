@@ -85,6 +85,7 @@ namespace Services.Match
             return 0;
         }
 
+
         public bool UpdateServe(int matchId)
         {
             var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);

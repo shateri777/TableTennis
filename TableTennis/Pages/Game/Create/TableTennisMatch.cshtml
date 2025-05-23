@@ -10,7 +10,7 @@
     {
         if (string.IsNullOrEmpty(Model.SetVM.WinnerPlayer))
         {
-           
+
             <div class="tt-scoreboard">
                 <div class="tt-mainrow">
                     <div class="tt-playercol">
@@ -39,8 +39,8 @@
                     <div class="tt-middle">
                         <div class="tt-cross">
                             <img src="https://static.wixstatic.com/media/47d5b4_dd3b09af552847cbbe7e0e351451ae16~mv2.gif"
-                                 alt="Ängbylogga"
-                                 class="logo-image" />
+                            alt="Ängbylogga"
+                            class="logo-image" />
                         </div>
                         <div class="tt-time">
                             <span id="timer">00:00</span>
@@ -72,13 +72,22 @@
                 </div>
                 <div class="tt-bottomrow">
                     <div class="tt-player-name">@Model.MatchFormVM.Player1FirstName</div>
+                    @if (Model.SetVM.IsPlayer1Serve == true && Model.SetVM.WinnerPlayer == null)
+                    {
+                        <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
+                    }
                     <div class="tt-setinfo">
                         Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br />
                         @*    <span style="color: #e23a36; font-weight:bold;">
                             Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)
                         </span> *@
                     </div>
+                    @if (Model.SetVM.IsPlayer1Serve == false && Model.SetVM.WinnerPlayer == null)
+                    {
+                        <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
+                    }
                     <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div>
+                    
                 </div>
             </div>
         }
