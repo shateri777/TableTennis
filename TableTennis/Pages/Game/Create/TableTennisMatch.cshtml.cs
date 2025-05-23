@@ -66,8 +66,8 @@ namespace TableTennis.Pages.Game.Create
 
             _setService.CreateSet(MatchId);
 
-            Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
-            Player2Setpoint = _setService.CheckIfPlayer2HasSetPoint(matchId);
+            //Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
+            //Player2Setpoint = _setService.CheckIfPlayer2HasSetPoint(matchId);
         }
 
         public IActionResult OnPostAddPointToPlayer1(int matchId)
@@ -98,6 +98,8 @@ namespace TableTennis.Pages.Game.Create
 
             MatchId = matchId;
             SetVM.Player1Score = _setService.AddPointToPlayer1(matchId);
+
+            Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
 
             var endOfset =_setService.CheckEndOfSet(matchId);
 
@@ -134,7 +136,7 @@ namespace TableTennis.Pages.Game.Create
                 //}
             }
 
-            Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
+            
 
             return Page();
         }
@@ -166,6 +168,8 @@ namespace TableTennis.Pages.Game.Create
 
             MatchId = matchId;
             SetVM.Player2Score = _setService.AddPointToPlayer2(matchId);
+
+            Player2Setpoint = _setService.CheckIfPlayer2HasSetPoint(matchId);
 
             var endOfset = _setService.CheckEndOfSet(matchId);
 

@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Data.Models;
+using System.Text.RegularExpressions;
 
 namespace Services.Match
 {
@@ -136,18 +137,52 @@ namespace Services.Match
         {
             var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
 
-            bool player1HasSetPoint = set.Player1Score >= 10 && (set.Player1Score - set.Player2Score) == 1;
+            //bool player1HasSetPoint = set.Player1Score >= 10 && (set.Player1Score - set.Player2Score) == 1;
 
-            return player1HasSetPoint;
+            if (set.Player1Score >= 10 || set.Player2Score >= 10)
+            {
+                if (Math.Abs(set.Player1Score - set.Player2Score) >= 1)
+                {
+                    // Kontrollera vem som har flest poäng för att avgöra vinnaren
+                    if (set.Player1Score > set.Player2Score)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+
+            return false;
         }
 
         public bool CheckIfPlayer2HasSetPoint(int matchId)
         {
             var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
 
-            bool player2HasSetPoint = set.Player2Score >= 10 && (set.Player2Score - set.Player1Score) == 1;
+            //bool player2HasSetPoint = set.Player2Score >= 10 && (set.Player2Score - set.Player1Score) == 1;
 
-            return player2HasSetPoint;
+            if (set.Player1Score >= 10 || set.Player2Score >= 10)
+            {
+                if (Math.Abs(set.Player1Score - set.Player2Score) >= 1)
+                {
+                    // Kontrollera vem som har flest poäng för att avgöra vinnaren
+                    if (set.Player2Score > set.Player1Score)
+                    {
+                        return true;
+                    }
+                    else
+                    {
+                        return false;
+                    }
+                }
+            }
+
+
+            return false;
         }
 
 

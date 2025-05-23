@@ -99,6 +99,10 @@
                     {
                         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
                     }
+                    @if (Model.Player1Setpoint)
+                    {
+                        <div class="set-point">SET POINT!</div>
+                    }
                     <div class="tt-setinfo">
                         Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br />
                         @*    <span style="color: #e23a36; font-weight:bold;">
@@ -110,7 +114,7 @@
                         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
                     }
                     <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div>
-                    @if (Model.Player1Setpoint)
+                    @if (Model.Player2Setpoint)
                     {
                         <div class="set-point">SET POINT!</div>
                     }
