@@ -4,7 +4,7 @@
 }
 
 <div class="container mt-4">
-    <h2 class="mb-4 text-center">Poängtavla</h2>
+    @* <h2 class="mb-4 text-center">Poängtavla</h2> *@
 
     @if (string.IsNullOrEmpty(Model.MatchFormVM.WinnerPlayer))
     {
@@ -48,6 +48,11 @@
                         </form>
                     </div>
                     <div class="tt-middle">
+                        <div class="setScore">
+                            <span>1</span>
+                            <span class="space">:</span>
+                            <span>2</span>
+                        </div>
                         <div class="tt-cross">
                             <img src="https://static.wixstatic.com/media/47d5b4_dd3b09af552847cbbe7e0e351451ae16~mv2.gif"
                             alt="Ängbylogga"
@@ -55,6 +60,9 @@
                         </div>
                         <div class="tt-time">
                             <span id="timer">00:00</span>
+                        </div>
+                        <div class="tt-setinfo">
+                            Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br />
                         </div>
                     </div>
                     <div class="tt-playercol">
@@ -96,38 +104,52 @@
 
                 <div class="tt-bottomrow">
                     <div class="tt-player-info">
-                        <div class="tt-player-name">@Model.MatchFormVM.Player1FirstName</div>
+                        <div class="tt-player-name">
+                            @Model.MatchFormVM.Player1FirstName @if (Model.SetVM.IsPlayer1Serve == true && Model.SetVM.WinnerPlayer == null)
+                            {
+                                <div class="tennisIconDiv @(Model.SetVM.IsPlayer1Serve ? "" : "invisible")"><i class="tennisIcon1 fa-solid fa-table-tennis-paddle-ball"></i></div>
+                            }
+                        </div>
+                        
 
-                        @if (!Model.Player1Matchpoint)
-                        {
-                            <div class="set-point-text @(Model.Player1Setpoint ? "" : "invisible")">SET POINT!</div>
-                        }
-                        <div class="match-point-text @(Model.Player1Matchpoint ? "" : "invisible")">🔥 MATCH POINT!</div>
+                        <div class="set-point-text @(Model.Player1Setpoint && !Model.Player1Matchpoint ? "" : "invisible")">
+                            SET POINT!
+                        </div>
+                        <div class="set-point-text @(Model.Player1Matchpoint ? "" : "invisible")">
+                            MATCH POINT! 🔥
+                        </div>
                     </div>
 
-                    @if (Model.SetVM.IsPlayer1Serve == true && Model.SetVM.WinnerPlayer == null)
-                    {
-                        <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
-                    }
 
                     <div class="tt-setinfo">
-                        Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br />
+                        
                     </div>
 
-                    @if (Model.SetVM.IsPlayer1Serve == false && Model.SetVM.WinnerPlayer == null)
-                    {
-                        <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
-                    }
 
                     <div class="tt-player-info">
-                        <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div>
+                        <div class="tt-player-name2">
+                            @if (Model.SetVM.IsPlayer1Serve == false && Model.SetVM.WinnerPlayer == null)
+                            {
+                                <div class="tennisIconDiv @(Model.SetVM.IsPlayer1Serve ? "invisible" : "")"><i class="tennisIcon2 fa-solid fa-table-tennis-paddle-ball"></i></div>
+                            } @Model.MatchFormVM.Player2FirstName
+                        </div>
+
+                        <div class="set-point-text2 @(Model.Player2Setpoint && !Model.Player2Matchpoint ? "" : "invisible")">
+                            SET POINT!
+                        </div>
+                        <div class="set-point-text2 @(Model.Player2Matchpoint ? "" : "invisible")">
+                            MATCH POINT! 🔥
+                        </div>
+                    </div>
+                    @* <div class="tt-player-info">
+                        <div class="tt-player-name2">@Model.MatchFormVM.Player2FirstName</div>
 
                         @if (!Model.Player2Matchpoint)
                         {
-                            <div class="set-point-text @(Model.Player2Setpoint ? "" : "invisible")">SET POINT!</div>
+                            <div class="set-point-text2 @(Model.Player2Setpoint ? "" : "invisible")">SET POINT!</div>
                         }
-                        <div class="match-point-text @(Model.Player2Matchpoint ? "" : "invisible")">🔥 MATCH POINT!</div>
-                    </div>
+                        <div class="set-point-text2 @(Model.Player2Matchpoint ? "" : "invisible")">MATCH POINT! 🔥</div>
+                    </div> *@
                 </div>
 
 

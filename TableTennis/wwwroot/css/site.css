@@ -281,7 +281,7 @@ body {
     display: flex;
     justify-content: center;
     align-items: center;
-    height: calc(100vh - 100px); /* Leaving room for header/footer */
+    height: calc(70vh - 100px); /* Leaving room for header/footer */
     padding: 40px 20px;
 }
 
@@ -640,8 +640,8 @@ body {
 .tt-cross {
     color: #7c7c7c;
     font-size: 3.9rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1.5rem;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
     opacity: 0.6;
     font-family: Arial, sans-serif;
 }
@@ -681,6 +681,14 @@ body {
     text-align: left;
 }
 
+.tt-player-name2 {
+    color: #383a41;
+    font-size: 2.1rem;
+    font-weight: 700;
+    flex: 1;
+    text-align: right;
+}
+
 .tt-bottomrow .tt-player-name:last-child {
     text-align: right;
 }
@@ -694,13 +702,51 @@ body {
 }
 
 .set-point-text {
-    color: red;
+    color: darkorange;
     font-weight: bold;
-    font-size: 1rem;
+    font-size: 1.4rem;
     text-shadow: 1px 1px 2px black;
     margin-top: 4px;
     min-height: 24px; /* så att det inte hoppar när det visas */
     animation: pulse 0.6s ease-in-out infinite alternate;
+}
+
+.tennisIconDiv {
+    color: darkorange;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px black;
+    margin-top: 4px;
+    min-height: 24px; /* så att det inte hoppar när det visas */
+    animation: pulse 0.6s ease-in-out infinite alternate;
+    display: inline;
+}
+
+.set-point-text2 {
+    color: darkorange;
+    font-weight: bold;
+    font-size: 1.4rem;
+    text-shadow: 1px 1px 2px black;
+    margin-top: 4px;
+    min-height: 24px; /* så att det inte hoppar när det visas */
+    animation: pulse 0.6s ease-in-out infinite alternate;
+    text-align: right;
+}
+
+.setScore {
+    background: #ff7734;
+    color: rgb(35, 35, 35);
+    font-size: 3rem;
+    font-family: monospace;
+    font-weight: 700;
+    box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 4px;
+    margin-bottom: 1.5rem;
+    padding: 1rem 1.3rem;
+}
+
+.space {
+    background: #bdbdbd;
+    padding: 1.5rem 0.203rem;
 }
 
 @keyframes pulse {
@@ -719,12 +765,22 @@ body {
     visibility: hidden;
 }
 
+.tennisIcon1 {
+    font-size: 2rem;
+    color: #ffd800;
+    text-align: left;
+}
+
+.tennisIcon2 {
+    font-size: 2rem;
+    color: #ffd800;
+    text-align: right;
+}
 
 
 
-
-    @media (max-width: 900px) {
-        .tt-scoreboard {
+@media (max-width: 900px) {
+    .tt-scoreboard {
             width: 99vw;
             min-width: 0;
         }
