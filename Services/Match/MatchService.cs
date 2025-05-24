@@ -165,6 +165,77 @@ namespace Services.Match
                 .OrderBy(p => p.DisplayName)
                 .ToList();
         }
+
+        public bool CheckIfPlayer1HasMatchPoint(int matchId)
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            if (match == null)
+                return false;
+
+            // Hur många set krävs för att vinna matchen?
+            int setsToWin = (int)Math.Ceiling(match.BestOfSets / 2.0);
+
+            // Hur många set har spelare 1 redan vunnit?
+            int setsWonByPlayer1 = _dbContext.Sets
+                .Count(s => s.MatchId == matchId && s.WinnerPlayer == match.Player1FirstName);
+
+            // Om spelare 1 är ett set från matchvinst...
+            if (setsWonByPlayer1 == setsToWin - 1)
+            {
+                // ...och leder nuvarande set och kan vinna med nästa poäng:
+                var currentSet = _dbContext.Sets.FirstOrDefault(
+                    s => s.MatchId == matchId && s.WinnerPlayer == null
+                );
+
+                if (currentSet == null)
+                    return false;
+
+                int nextScore = currentSet.Player1Score + 1;
+                int lead = nextScore - currentSet.Player2Score;
+
+                if (nextScore >= 11 && lead >= 2)
+                {
+                    return true; // MATCH POINT!
+                }
+            }
+
+            return false;
+        }
+
+
+        public bool CheckIfPlayer2HasMatchPoint(int matchId)
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            if (match == null)
+                return false;
+
+            int setsToWin = (int)Math.Ceiling(match.BestOfSets / 2.0);
+            int setsWonByPlayer2 = _dbContext.Sets
+                .Count(s => s.MatchId == matchId && s.WinnerPlayer == match.Player2FirstName);
+
+            if (setsWonByPlayer2 == setsToWin - 1)
+            {
+                var currentSet = _dbContext.Sets.FirstOrDefault(
+                    s => s.MatchId == matchId && s.WinnerPlayer == null
+                );
+
+                if (currentSet == null)
+                    return false;
+
+                int nextScore = currentSet.Player2Score + 1;
+                int lead = nextScore - currentSet.Player1Score;
+
+                if (nextScore >= 11 && lead >= 2)
+                {
+                    return true;
+                }
+            }
+
+            return false;
+        }
+
+
+
         //// TO DO
         //public SetsDTO AddPointToPlayer2(int matchId)
         //{

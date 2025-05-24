@@ -137,27 +137,50 @@ namespace Services.Match
         {
             var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
 
-            //bool player1HasSetPoint = set.Player1Score >= 10 && (set.Player1Score - set.Player2Score) == 1;
+            if (set == null)
+                return false;
 
-            if (set.Player1Score >= 10 || set.Player2Score >= 10)
+            int nextScore = set.Player1Score + 1;
+            int newLead = nextScore - set.Player2Score;
+
+            // Nästa poäng skulle ge minst 11 och minst 2 poängs ledning
+            if (nextScore >= 11 && newLead >= 2)
             {
-                if (Math.Abs(set.Player1Score - set.Player2Score) >= 1)
-                {
-                    // Kontrollera vem som har flest poäng för att avgöra vinnaren
-                    if (set.Player1Score > set.Player2Score)
-                    {
-                        return true;
-                    }
-                    else
-                    {
-                        return false;
-                    }
-                }
+                return true;
             }
-
 
             return false;
         }
+
+
+
+
+
+        //public bool CheckIfPlayer1HasSetPoint(int matchId)
+        //{
+        //    var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
+
+        //    //bool player1HasSetPoint = set.Player1Score >= 10 && (set.Player1Score - set.Player2Score) == 1;
+
+        //    if (set.Player1Score >= 10 || set.Player2Score >= 10)
+        //    {
+        //        if (Math.Abs(set.Player1Score - set.Player2Score) >= 1)
+        //        {
+        //            // Kontrollera vem som har flest poäng för att avgöra vinnaren
+        //            if (set.Player1Score > set.Player2Score)
+        //            {
+        //                return true;
+        //            }
+        //            else
+        //            {
+        //                return false;
+        //            }
+        //        }
+        //    }
+
+
+        //    return false;
+        //}
 
         public bool CheckIfPlayer2HasSetPoint(int matchId)
         {

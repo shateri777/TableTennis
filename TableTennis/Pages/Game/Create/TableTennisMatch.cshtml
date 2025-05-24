@@ -93,34 +93,75 @@
                         </form>
                     </div>
                 </div>
+
                 <div class="tt-bottomrow">
-                    <div class="tt-player-name">@Model.MatchFormVM.Player1FirstName</div>
+                    <div class="tt-player-info">
+                        <div class="tt-player-name">@Model.MatchFormVM.Player1FirstName</div>
+
+                        @if (!Model.Player1Matchpoint)
+                        {
+                            <div class="set-point-text @(Model.Player1Setpoint ? "" : "invisible")">SET POINT!</div>
+                        }
+                        <div class="match-point-text @(Model.Player1Matchpoint ? "" : "invisible")">🔥 MATCH POINT!</div>
+                    </div>
+
                     @if (Model.SetVM.IsPlayer1Serve == true && Model.SetVM.WinnerPlayer == null)
                     {
                         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
                     }
-                    @if (Model.Player1Setpoint)
-                    {
-                        <div class="set-point">SET POINT!</div>
-                    }
+
                     <div class="tt-setinfo">
                         Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br />
-                        @*    <span style="color: #e23a36; font-weight:bold;">
-                            Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)
-                        </span> *@
                     </div>
+
                     @if (Model.SetVM.IsPlayer1Serve == false && Model.SetVM.WinnerPlayer == null)
                     {
                         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p>
                     }
-                    <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div>
-                    @if (Model.Player2Setpoint)
-                    {
-                        <div class="set-point">SET POINT!</div>
-                    }
-                               
+
+                    <div class="tt-player-info">
+                        <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div>
+
+                        @if (!Model.Player2Matchpoint)
+                        {
+                            <div class="set-point-text @(Model.Player2Setpoint ? "" : "invisible")">SET POINT!</div>
+                        }
+                        <div class="match-point-text @(Model.Player2Matchpoint ? "" : "invisible")">🔥 MATCH POINT!</div>
+                    </div>
                 </div>
+
+
+
+
+
+                @* <div class="tt-bottomrow"> *@
+                @*     <div class="tt-player-name">@Model.MatchFormVM.Player1FirstName</div> *@
+                @*     @if (Model.SetVM.IsPlayer1Serve == true && Model.SetVM.WinnerPlayer == null) *@
+                @*     { *@
+                @*         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p> *@
+                @*     } *@
+                @*     @if (Model.Player1Setpoint) *@
+                @*     { *@
+                @*         <div class="set-point">SET POINT!</div> *@
+                @*     } *@
+                @*     <div class="tt-setinfo"> *@
+                @*         Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br /> *@
+
+                @*     </div> *@
+                @*     @if (Model.SetVM.IsPlayer1Serve == false && Model.SetVM.WinnerPlayer == null) *@
+                @*     { *@
+                @*         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p> *@
+                @*     } *@
+                @*     <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div> *@
+                @*     @if (Model.Player2Setpoint) *@
+                @*     { *@
+                @*         <div class="set-point">SET POINT!</div> *@
+                @*     }  *@
+                @* </div> *@
             </div>
+            @*    <span style="color: #e23a36; font-weight:bold;">
+                            Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)
+                        </span> *@
         }
         else
         {
