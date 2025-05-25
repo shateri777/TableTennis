@@ -23,6 +23,8 @@ namespace DataAccessLayer.Data.DTO
         public int ServeCounter { get; set; }
         //public DateTime MatchDate { get; set; }
         public string? WinnerPlayer { get; set; }
+        public int SetTime { get; set; }
+        public bool IsActive { get; set; }
 
     }
 }

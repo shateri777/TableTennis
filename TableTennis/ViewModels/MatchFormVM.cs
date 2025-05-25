@@ -34,5 +34,7 @@ namespace TableTennis.ViewModels
         public int BestOfSets { get; set; }
         public DateTime MatchDate { get; set; }
         public string? WinnerPlayer { get; set; }
+        public int TotalMatchTime { get; set; }
+
     }
 }

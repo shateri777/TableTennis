@@ -26,5 +26,7 @@ namespace Services.Match.Interface
         bool CheckIfPlayer1HasSetPoint(int matchId);
         bool CheckIfPlayer2HasSetPoint(int matchId);
         bool CheckIfDeuce(int matchId);
+        void UpdateSet(SetsDTO setDTO);
+        SetsDTO GetActiveSetAsDTO(int matchId);
     }
 }
