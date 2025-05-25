@@ -733,7 +733,26 @@ body {
     text-align: right;
 }
 
+.setContainer {
+    display: flex;
+    gap: 1.5rem; /* mellanrum mellan rutorna */
+    justify-content: center;
+    align-items: center;
+}
+
 .setScore {
+    background: #ff7734;
+    color: rgb(35, 35, 35);
+    font-size: 3rem;
+    font-family: monospace;
+    font-weight: 700;
+    box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 4px;
+    padding: 1rem 1.3rem;
+    border-radius: 0.5rem;
+    min-width: 3rem;
+    text-align: center;
+}
+/*.setScore {
     background: #ff7734;
     color: rgb(35, 35, 35);
     font-size: 3rem;
@@ -742,7 +761,7 @@ body {
     box-shadow: rgba(0, 0, 0, 0.067) 0px 1px 4px;
     margin-bottom: 1.5rem;
     padding: 1rem 1.3rem;
-}
+}*/
 
 .space {
     background: #bdbdbd;
