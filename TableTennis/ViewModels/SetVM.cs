@@ -8,8 +8,9 @@
         public bool IsPlayer1Serve { get; set; } = true;
         public int ServeCounter { get; set; } = 0;
         public string? WinnerPlayer { get; set; }
+        public int TotalMatchTime { get; set; }
+        public int SetTime { get; set; }
 
-       
 
         //public void AddPointToPlayer2()
         //{

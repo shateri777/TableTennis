@@ -22,5 +22,6 @@ namespace DataAccessLayer.Data.Models
         public string? WinnerPlayer { get; set; }
         public DateTime MatchDate { get; set; }
         public bool IsAcitve { get; set; } = true;
+        public int TotalMatchTime { get; set; }
     }
 }

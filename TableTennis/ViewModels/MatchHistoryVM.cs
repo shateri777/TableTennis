@@ -12,5 +12,6 @@
         public int Player2Score { get; set; }
         public DateTime MatchDate { get; set; }
         public int BestOfSets { get; set; }
+        public int TotalMatchTime { get; set; }
     }
 }

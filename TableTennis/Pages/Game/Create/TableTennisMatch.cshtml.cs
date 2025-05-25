@@ -25,7 +25,6 @@ namespace TableTennis.Pages.Game.Create
         public int MatchId { get; set; }
 
         public SetVM SetVM { get; set; }
-
         public MatchFormVM MatchFormVM { get; set; }
         public int SetCounter { get; set; } = 1;
         public bool Player1Setpoint { get; set; }
@@ -35,6 +34,7 @@ namespace TableTennis.Pages.Game.Create
         public bool Player2Matchpoint { get; set; }
 
         public bool IsDeuce { get; set; }
+        public int CompletedSetDurationSeconds { get; set; }
 
 
         public void OnGet(int matchId)
@@ -113,10 +113,12 @@ namespace TableTennis.Pages.Game.Create
 
             IsDeuce = _setService.CheckIfDeuce(matchId);
 
-            var endOfset =_setService.CheckEndOfSet(matchId);
-
+            var endOfset = _setService.CheckEndOfSet(matchId);
+            var finishedSetEntity = _setService.GetActiveSetAsDTO(matchId);
             if (endOfset == "Player1")
             {
+                finishedSetEntity.SetTime = CompletedSetDurationSeconds;
+                _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
@@ -127,6 +129,8 @@ namespace TableTennis.Pages.Game.Create
             }
             else if (endOfset == "Player2")
             {
+                finishedSetEntity.SetTime = CompletedSetDurationSeconds;
+                _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player2FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
@@ -137,6 +141,8 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
+                finishedSetEntity.SetTime = CompletedSetDurationSeconds;
+                _setService.UpdateSet(finishedSetEntity);
                 SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
 
                 //SetVM.WinnerPlayer = null;
@@ -148,7 +154,7 @@ namespace TableTennis.Pages.Game.Create
                 //}
             }
 
-            
+
 
             return Page();
         }
@@ -190,9 +196,11 @@ namespace TableTennis.Pages.Game.Create
             IsDeuce = _setService.CheckIfDeuce(matchId);
 
             var endOfset = _setService.CheckEndOfSet(matchId);
-
+            var finishedSetEntity = _setService.GetActiveSetAsDTO(matchId);
             if (endOfset == "Player1")
             {
+                finishedSetEntity.SetTime = CompletedSetDurationSeconds;
+                _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
@@ -200,10 +208,11 @@ namespace TableTennis.Pages.Game.Create
                 {
                     MatchFormVM.WinnerPlayer = matchWinner;
                 }
-
             }
             else if (endOfset == "Player2")
             {
+                finishedSetEntity.SetTime = CompletedSetDurationSeconds;
+                _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player2FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
@@ -214,6 +223,8 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
+                finishedSetEntity.SetTime = CompletedSetDurationSeconds;
+                _setService.UpdateSet(finishedSetEntity);
                 SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
 
                 //SetVM.WinnerPlayer = null;
@@ -258,6 +269,7 @@ namespace TableTennis.Pages.Game.Create
                 WinnerPlayer = set.WinnerPlayer,
                 ServeCounter = set.ServeCounter,
                 IsPlayer1Serve = set.IsPlayer1Serve,
+                SetTime = CompletedSetDurationSeconds
             };
             SetCounter++;
             return Page();

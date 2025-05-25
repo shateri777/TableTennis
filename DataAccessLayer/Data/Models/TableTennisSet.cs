@@ -13,6 +13,7 @@ namespace DataAccessLayer.Data.Models
         public int ServeCounter { get; set; }
         public string? WinnerPlayer { get; set; }
         public bool IsActive { get; set; }
+        public int SetTime { get; set; }
 
         //public void AddPointToPlayer1()
         //{

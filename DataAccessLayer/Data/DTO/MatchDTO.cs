@@ -19,5 +19,7 @@ namespace DataAccessLayer.Data.DTO
         public DateTime MatchDate { get; set; }
         public int BestOfSets { get; set; }
         public string? WinnerPlayer { get; set; }
+        public int TotalMatchTime { get; set; }
+
     }
 }

@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using DataAccessLayer.Data.Models;
 using System.Text.RegularExpressions;
+using Microsoft.Extensions.FileSystemGlobbing;
 
 namespace Services.Match
 {
@@ -133,6 +134,21 @@ namespace Services.Match
             return null;
         }
 
+        public void UpdateSet(SetsDTO setDTO)
+        {
+            var setEntity = _dbContext.Sets.Find(setDTO.Id);
+            if (setEntity != null)
+            {
+                setEntity.Player1Score = setDTO.Player1Score;
+                setEntity.Player2Score = setDTO.Player2Score;
+                setEntity.WinnerPlayer = setDTO.WinnerPlayer;
+                setEntity.SetTime = setDTO.SetTime;
+                setEntity.IsPlayer1Serve = setDTO.IsPlayer1Serve;
+                setEntity.ServeCounter = setDTO.ServeCounter;
+                _dbContext.SaveChanges();
+            }
+        }
+
         public bool CheckIfPlayer1HasSetPoint(int matchId)
         {
             var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
@@ -231,6 +247,27 @@ namespace Services.Match
                 IsPlayer1Serve = true
             };
             return setDTO;
+        }
+        public SetsDTO GetActiveSetAsDTO(int matchId)
+        {
+            var activeSetEntity = _dbContext.Sets.FirstOrDefault(set => set.MatchId == matchId && set.WinnerPlayer == null);
+
+            if (activeSetEntity != null)
+            {
+                return new SetsDTO
+                {
+                    Id = activeSetEntity.Id,
+                    Player1Score = activeSetEntity.Player1Score,
+                    Player2Score = activeSetEntity.Player2Score,
+                    WinnerPlayer = activeSetEntity.WinnerPlayer,
+                    ServeCounter = activeSetEntity.ServeCounter,
+                    IsPlayer1Serve = activeSetEntity.IsPlayer1Serve,
+                    SetTime = activeSetEntity.SetTime, 
+                    IsActive = activeSetEntity.IsActive,
+                    MatchId = activeSetEntity.MatchId  
+                };
+            }
+            return null;
         }
         public int GetSetsWonByPlayerName(int matchId, string playerName)
         {

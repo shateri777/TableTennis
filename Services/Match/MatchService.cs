@@ -51,33 +51,34 @@ namespace Services.Match
             }
             return null;
         }
-        public string CheckMatchWinner(int matchId) 
+        public string CheckMatchWinner(int matchId)
         {
             var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
-            var sets = _dbContext.Sets.Where(m => m.MatchId == matchId);
-            if (sets != null)
-            {
-                var player1Wins = sets.Count(s => s.WinnerPlayer == match.Player1FirstName);
-                var player2Wins = sets.Count(s => s.WinnerPlayer == match.Player2FirstName);
-                int winsNeeded = (match.BestOfSets / 2) + 1;
+            var completedSets = _dbContext.Sets
+                                    .Where(s => s.MatchId == matchId && s.WinnerPlayer != null)
+                                    .ToList();
 
+            if (completedSets.Any())
+            {
+                var player1Wins = completedSets.Count(s => s.WinnerPlayer == match.Player1FirstName);
+                var player2Wins = completedSets.Count(s => s.WinnerPlayer == match.Player2FirstName);
+                int winsNeeded = (match.BestOfSets / 2) + 1;
+                string determinedWinner = null;
                 if (player1Wins >= winsNeeded)
                 {
-                    match.WinnerPlayer = match.Player1FirstName;
-                    _dbContext.Update(match);
-                    _dbContext.SaveChanges();
-                    return match.Player1FirstName;
+                    determinedWinner = match.Player1FirstName;
                 }
                 else if (player2Wins >= winsNeeded)
                 {
-                    match.WinnerPlayer = match.Player2FirstName;
-                    _dbContext.Update(match);
-                    _dbContext.SaveChanges();
-                    return match.Player2FirstName;
+                    determinedWinner = match.Player2FirstName;
                 }
-                else
+                if (determinedWinner != null)
                 {
-                    return null;
+                    match.WinnerPlayer = determinedWinner;
+                    match.TotalMatchTime = completedSets.Sum(s => s.SetTime);
+                    _dbContext.Update(match); 
+                    _dbContext.SaveChanges();
+                    return determinedWinner;
                 }
             }
             return null;
