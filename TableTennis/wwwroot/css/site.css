@@ -456,15 +456,15 @@ body {
     }
 
         .player-form input[readonly] {
-        background-color: #e9ecef;
-        color: #495057;
-        cursor: default;
+            background-color: #e9ecef;
+            color: #495057;
+            cursor: default;
         }
 
-        .player-form input[readonly]:focus {
-            border-color: #ced4da; 
-            box-shadow: none; 
-        }
+            .player-form input[readonly]:focus {
+                border-color: #ced4da;
+                box-shadow: none;
+            }
 
 .validation-error {
     color: #d32f2f;
@@ -608,10 +608,10 @@ body {
         cursor: not-allowed;
     }
 
-    .tt-score-btn[disabled]:hover {
-        background: #c82a26;
-        transform: scale(1);
-    }
+        .tt-score-btn[disabled]:hover {
+            background: #c82a26;
+            transform: scale(1);
+        }
 
 
 .tt-plus {
@@ -812,24 +812,39 @@ body {
 
 @media (max-width: 900px) {
     .tt-scoreboard {
-            width: 99vw;
-            min-width: 0;
-        }
-
-        .tt-middle {
-            min-width: 95px;
-            min-height: 120px;
-        }
-
-        .tt-score {
-            font-size: 3rem;
-        }
-
-        .tt-player-name {
-            font-size: 1rem;
-        }
-
-        .tt-set {
-            font-size: 1.1rem;
-        }
+        width: 99vw;
+        min-width: 0;
     }
+
+    .tt-middle {
+        min-width: 95px;
+        min-height: 120px;
+    }
+
+    .tt-score {
+        font-size: 6rem;
+    }
+
+   /* .tt-player-name {
+        font-size: 1rem;
+    }*/
+
+    .tt-set {
+        font-size: 1.1rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .site-title {
+        font-size: x-large;
+    }
+
+    .header-top-row {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    ol, ul {
+        padding-left: 0.1rem;
+    }
+}
