@@ -20,6 +20,8 @@ namespace DataAccessLayer.Data.DTO
         public int BestOfSets { get; set; }
         public string? WinnerPlayer { get; set; }
         public int TotalMatchTime { get; set; }
+        public int Player1WonSets { get; set; }
+        public int Player2WonSets { get; set; }
 
     }
 }

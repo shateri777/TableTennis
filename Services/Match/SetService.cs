@@ -31,7 +31,7 @@ namespace Services.Match
                 Player2Score = 0,
                 IsPlayer1Serve = true,
                 ServeCounter = 0,
-                WinnerPlayer = null
+                WinnerPlayer = null,
             };
             _dbContext.Sets.Add(set);
             _dbContext.SaveChanges();
@@ -244,7 +244,7 @@ namespace Services.Match
                 WinnerPlayer = null,
                 Player2Score = 0,
                 ServeCounter = 0,
-                IsPlayer1Serve = true
+                IsPlayer1Serve = true,
             };
             return setDTO;
         }
@@ -346,5 +346,7 @@ namespace Services.Match
 
             return false; // Not deuce
         }
+
+        
     }
 }

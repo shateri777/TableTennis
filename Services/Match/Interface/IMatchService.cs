@@ -9,10 +9,6 @@ namespace Services.Match.Interface
 {
     public interface IMatchService
     {
-        //SetsDTO AddPointToPlayer1(int matchId);
-        //SetsDTO AddPointToPlayer2(int matchId);
-        //string CheckEndOfSet(int matchId);
-        //void UpdateServe(int matchId);
         int CreateMatch(MatchDTO matchDTO);
         MatchDTO FindMatchId(int matchId);
         string CheckMatchWinner(int matchId);
@@ -20,5 +16,7 @@ namespace Services.Match.Interface
         List<PlayerInfoDTO> GetDistinctPlayers();
         bool CheckIfPlayer1HasMatchPoint(int matchId);
         bool CheckIfPlayer2HasMatchPoint(int matchId);
+        int Player1WonSets(int matchId);
+        int Player2WonSets(int matchId);
     }
 }

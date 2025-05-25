@@ -25,6 +25,8 @@ namespace Services.Match
                 SetGender = matchDTO.SetGender,
                 MatchDate = matchDTO.MatchDate,
                 BestOfSets = matchDTO.BestOfSets,
+                Player1WonSets = 0,
+                Player2WonSets = 0,
             };
             _dbContext.Match.Add(match);
             _dbContext.SaveChanges();
@@ -46,7 +48,9 @@ namespace Services.Match
                     Player2Age = match.Player2Age,
                     BestOfSets = match.BestOfSets,
                     SetGender = match.SetGender,
-                    MatchDate = match.MatchDate
+                    MatchDate = match.MatchDate,
+                    Player1WonSets = match.Player1WonSets,
+                    Player2WonSets = match.Player2WonSets,
                 };
             }
             return null;
@@ -233,6 +237,24 @@ namespace Services.Match
             }
 
             return false;
+        }
+
+        public int Player1WonSets(int matchId)
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            match.Player1WonSets++;
+            _dbContext.Update(match);
+            _dbContext.SaveChanges();
+            return match.Player1WonSets;
+        }
+
+        public int Player2WonSets(int matchId)
+        {
+            var match = _dbContext.Match.FirstOrDefault(m => m.Id == matchId);
+            match.Player2WonSets++;
+            _dbContext.Update(match);
+            _dbContext.SaveChanges();
+            return match.Player2WonSets;
         }
 
 

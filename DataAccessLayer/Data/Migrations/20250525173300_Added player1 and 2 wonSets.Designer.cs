@@ -4,6 +4,7 @@ using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 #nullable disable
@@ -11,9 +12,11 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace TableTennis.Data.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250525173300_Added player1 and 2 wonSets")]
+    partial class Addedplayer1and2wonSets
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -50,9 +53,6 @@ namespace TableTennis.Data.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Player1WonSets")
-                        .HasColumnType("int");
-
                     b.Property<int>("Player2Age")
                         .HasColumnType("int");
 
@@ -63,9 +63,6 @@ namespace TableTennis.Data.Migrations
                     b.Property<string>("Player2LastName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Player2WonSets")
-                        .HasColumnType("int");
 
                     b.Property<string>("SetGender")
                         .IsRequired()
@@ -102,7 +99,13 @@ namespace TableTennis.Data.Migrations
                     b.Property<int>("Player1Score")
                         .HasColumnType("int");
 
+                    b.Property<int>("Player1WonSets")
+                        .HasColumnType("int");
+
                     b.Property<int>("Player2Score")
+                        .HasColumnType("int");
+
+                    b.Property<int>("Player2WonSets")
                         .HasColumnType("int");
 
                     b.Property<int>("ServeCounter")

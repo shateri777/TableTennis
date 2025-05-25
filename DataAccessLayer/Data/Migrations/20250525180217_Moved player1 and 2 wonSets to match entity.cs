@@ -1,0 +1,62 @@
+﻿using Microsoft.EntityFrameworkCore.Migrations;
+
+#nullable disable
+
+namespace TableTennis.Data.Migrations
+{
+    /// <inheritdoc />
+    public partial class Movedplayer1and2wonSetstomatchentity : Migration
+    {
+        /// <inheritdoc />
+        protected override void Up(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Player1WonSets",
+                table: "Sets");
+
+            migrationBuilder.DropColumn(
+                name: "Player2WonSets",
+                table: "Sets");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Player1WonSets",
+                table: "Match",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "Player2WonSets",
+                table: "Match",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+        }
+
+        /// <inheritdoc />
+        protected override void Down(MigrationBuilder migrationBuilder)
+        {
+            migrationBuilder.DropColumn(
+                name: "Player1WonSets",
+                table: "Match");
+
+            migrationBuilder.DropColumn(
+                name: "Player2WonSets",
+                table: "Match");
+
+            migrationBuilder.AddColumn<int>(
+                name: "Player1WonSets",
+                table: "Sets",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+
+            migrationBuilder.AddColumn<int>(
+                name: "Player2WonSets",
+                table: "Sets",
+                type: "int",
+                nullable: false,
+                defaultValue: 0);
+        }
+    }
+}

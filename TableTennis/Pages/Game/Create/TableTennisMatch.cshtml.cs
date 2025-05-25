@@ -58,6 +58,8 @@ namespace TableTennis.Pages.Game.Create
                 Player1Age = match.Player1Age,
                 Player2Age = match.Player2Age,
                 BestOfSets = match.BestOfSets,
+                Player1WonSets = match.Player1WonSets,
+                Player2WonSets = match.Player2WonSets,
             };
 
 
@@ -96,6 +98,8 @@ namespace TableTennis.Pages.Game.Create
                 Player1Age = match.Player1Age,
                 Player2Age = match.Player2Age,
                 BestOfSets = match.BestOfSets,
+                Player1WonSets = match.Player1WonSets,
+                Player2WonSets = match.Player2WonSets,
             };
 
             SetVM.Player1Score = _setService.GetPlayer1Score(matchId);
@@ -121,6 +125,8 @@ namespace TableTennis.Pages.Game.Create
                 _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+                var player1WonSets = _matchService.Player1WonSets(matchId);
+                MatchFormVM.Player1WonSets = player1WonSets;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -133,6 +139,8 @@ namespace TableTennis.Pages.Game.Create
                 _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player2FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
+                var player2WonSets = _matchService.Player2WonSets(matchId);
+                MatchFormVM.Player2WonSets = player2WonSets;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -179,6 +187,8 @@ namespace TableTennis.Pages.Game.Create
                 Player1Age = match.Player1Age,
                 Player2Age = match.Player2Age,
                 BestOfSets = match.BestOfSets,
+                Player1WonSets = match.Player1WonSets,
+                Player2WonSets = match.Player2WonSets,
             };
 
             SetVM.Player1Score = _setService.GetPlayer1Score(matchId);
@@ -203,6 +213,8 @@ namespace TableTennis.Pages.Game.Create
                 _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player1FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player1FirstName);
+                var player1WonSets = _matchService.Player1WonSets(matchId);
+                MatchFormVM.Player1WonSets = player1WonSets;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -215,6 +227,8 @@ namespace TableTennis.Pages.Game.Create
                 _setService.UpdateSet(finishedSetEntity);
                 SetVM.WinnerPlayer = match.Player2FirstName;
                 _setService.SetWinnerPlayer(matchId, match.Player2FirstName);
+                var player2WonSets = _matchService.Player2WonSets(matchId);
+                MatchFormVM.Player2WonSets = player2WonSets;
                 var matchWinner = _matchService.CheckMatchWinner(matchId);
                 if (matchWinner != null)
                 {
@@ -259,6 +273,8 @@ namespace TableTennis.Pages.Game.Create
                 Player1Age = match.Player1Age,
                 Player2Age = match.Player2Age,
                 BestOfSets = match.BestOfSets,
+                Player1WonSets = match.Player1WonSets,
+                Player2WonSets = match.Player2WonSets,
             };
             _setService.CreateSet(matchId);
             var set = _setService.GetActiveSetId(matchId);
@@ -269,7 +285,7 @@ namespace TableTennis.Pages.Game.Create
                 WinnerPlayer = set.WinnerPlayer,
                 ServeCounter = set.ServeCounter,
                 IsPlayer1Serve = set.IsPlayer1Serve,
-                SetTime = CompletedSetDurationSeconds
+                SetTime = CompletedSetDurationSeconds,
             };
             SetCounter++;
             return Page();
@@ -297,6 +313,8 @@ namespace TableTennis.Pages.Game.Create
                 Player1Age = match.Player1Age,
                 Player2Age = match.Player2Age,
                 BestOfSets = match.BestOfSets,
+                Player1WonSets = match.Player1WonSets,
+                Player2WonSets = match.Player2WonSets,
             };
 
             SetVM.Player1Score = _setService.GetPlayer1Score(matchId);
@@ -365,6 +383,8 @@ namespace TableTennis.Pages.Game.Create
                 Player1Age = match.Player1Age,
                 Player2Age = match.Player2Age,
                 BestOfSets = match.BestOfSets,
+                Player1WonSets = match.Player1WonSets,
+                Player2WonSets = match.Player2WonSets,
             };
 
             SetVM.Player1Score = _setService.GetPlayer1Score(matchId);
