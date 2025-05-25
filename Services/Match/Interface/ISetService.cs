@@ -25,5 +25,6 @@ namespace Services.Match.Interface
         bool RevertServe(int matchId);
         bool CheckIfPlayer1HasSetPoint(int matchId);
         bool CheckIfPlayer2HasSetPoint(int matchId);
+        bool CheckIfDeuce(int matchId);
     }
 }

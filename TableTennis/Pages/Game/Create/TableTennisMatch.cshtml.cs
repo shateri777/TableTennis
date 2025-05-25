@@ -34,6 +34,8 @@ namespace TableTennis.Pages.Game.Create
         public bool Player1Matchpoint { get; set; }
         public bool Player2Matchpoint { get; set; }
 
+        public bool IsDeuce { get; set; }
+
 
         public void OnGet(int matchId)
         {
@@ -109,6 +111,7 @@ namespace TableTennis.Pages.Game.Create
             Player1Matchpoint = _matchService.CheckIfPlayer1HasMatchPoint(matchId);
             Player2Matchpoint = _matchService.CheckIfPlayer2HasMatchPoint(matchId);
 
+            IsDeuce = _setService.CheckIfDeuce(matchId);
 
             var endOfset =_setService.CheckEndOfSet(matchId);
 
@@ -183,6 +186,8 @@ namespace TableTennis.Pages.Game.Create
 
             Player1Matchpoint = _matchService.CheckIfPlayer1HasMatchPoint(matchId);
             Player2Matchpoint = _matchService.CheckIfPlayer2HasMatchPoint(matchId);
+
+            IsDeuce = _setService.CheckIfDeuce(matchId);
 
             var endOfset = _setService.CheckEndOfSet(matchId);
 

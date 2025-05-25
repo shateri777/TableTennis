@@ -298,6 +298,16 @@ namespace Services.Match
             return set.IsPlayer1Serve;
         }
 
+        public bool CheckIfDeuce(int matchId)
+        {
+            var set = _dbContext.Sets.FirstOrDefault(m => m.MatchId == matchId && m.WinnerPlayer == null);
 
+            if (set.Player1Score >= 10 && set.Player2Score >= 10)
+            {
+                return true; // Deuce
+            }
+
+            return false; // Not deuce
+        }
     }
 }
