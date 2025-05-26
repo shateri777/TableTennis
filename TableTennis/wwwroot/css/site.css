@@ -398,14 +398,14 @@ body {
 /* START: Match Form Styling */
 
 .match-setup {
-    padding: 60px 20px;
+    padding: 20px;
     display: flex;
     justify-content: center;
 }
 
 .match-container {
     background-color: #ffffff;
-    padding: 50px 60px;
+    padding: 25px 60px;
     border-radius: 12px;
     box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
     width: 100%;
@@ -417,7 +417,7 @@ body {
     text-align: center;
     font-size: 32px;
     color: #4a0012;
-    margin-bottom: 40px;
+    margin-bottom: 20px;
 }
 
 .form-wrapper {
@@ -474,7 +474,7 @@ body {
 }
 
 .set-options {
-    margin-top: 40px;
+    margin-top: 20px;
     text-align: center;
 }
 
@@ -515,7 +515,7 @@ body {
     border-radius: 2.7rem;
     width: 700px;
     max-width: 97vw;
-    margin: 4rem auto 0 auto;
+    margin: 0 auto;
     box-shadow: 0 8px 40px #0004;
     display: flex;
     flex-direction: column;

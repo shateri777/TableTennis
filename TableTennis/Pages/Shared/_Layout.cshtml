@@ -65,12 +65,14 @@
                     @if (User.IsInRole("Admin"))
                     {
                         <li><a asp-page="/Game/ReadAll/Index">Visa Historik</a></li>
+                        <li><a asp-page="/Game/Leaderboard/LeaderboardPage">Ledartavlan</a></li>
+                        <li><a asp-page="/Game/Statistics/StatisticsPage">Spelarstatistik</a></li>
                     }
                     <li class="logout"><partial name="_LoginPartial" /></li>
                 }
                 else
                 {
-                    <li><a asp-area="Identity" asp-page="/Account/Login">Login</a></li>
+                    <li><a asp-area="Identity" asp-page="/Account/Login">Logga in</a></li>
                 }
             </ul>
         </nav>
@@ -82,11 +84,11 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2025 - TableTennis - <a asp-area="" asp-page="/Privacy">Privacy</a>
-        </div>
-    </footer>
+    @* <footer class="border-top footer text-muted"> *@
+    @*     <div class="container"> *@
+    @*         &copy; 2025 - TableTennis - <a asp-area="" asp-page="/Privacy">Privacy</a> *@
+    @*     </div> *@
+    @* </footer> *@
 
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
