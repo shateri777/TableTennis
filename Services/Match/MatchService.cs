@@ -2,6 +2,7 @@
 using Services.Match.Interface;
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
+using TableTennis.Data.Migrations;
 
 namespace Services.Match
 {
@@ -51,9 +52,22 @@ namespace Services.Match
                     MatchDate = match.MatchDate,
                     Player1WonSets = match.Player1WonSets,
                     Player2WonSets = match.Player2WonSets,
+                    IsActive = match.IsActive
                 };
             }
             return null;
+        }
+        public void SoftDeleteMatch(MatchDTO matchDTO)
+        {
+            var matchEntity = _dbContext.Match.FirstOrDefault(m => m.Id == matchDTO.Id);
+            matchEntity.IsActive = false;
+            _dbContext.SaveChanges();
+        }
+        public void RestoreDeletedMatch(int selectedId)
+        {
+            var matchEntity = _dbContext.Match.FirstOrDefault(m => m.Id == selectedId);
+            matchEntity.IsActive = true;
+            _dbContext.SaveChanges();
         }
         public string CheckMatchWinner(int matchId)
         {
@@ -89,7 +103,7 @@ namespace Services.Match
         }
         public List<MatchDTO> GetAllMatches(string searchTerm)
         {
-            var query = _dbContext.Match.AsQueryable();
+            var query = _dbContext.Match.AsQueryable().Where(m => m.IsActive == true);
             if (!string.IsNullOrEmpty(searchTerm))
             {
                 var lowerSearchTerm = searchTerm.ToLower();
@@ -104,6 +118,26 @@ namespace Services.Match
             }
             return query
                 .OrderByDescending(m => m.MatchDate)
+                .Select(m => new MatchDTO
+                {
+                    Id = m.Id,
+                    Player1FirstName = m.Player1FirstName,
+                    Player1LastName = m.Player1LastName,
+                    Player2FirstName = m.Player2FirstName,
+                    Player2LastName = m.Player2LastName,
+                    Player1Age = m.Player1Age,
+                    Player2Age = m.Player2Age,
+                    SetGender = m.SetGender,
+                    MatchDate = m.MatchDate,
+                    BestOfSets = m.BestOfSets,
+                    WinnerPlayer = m.WinnerPlayer
+                })
+                .ToList();
+        }
+        public List<MatchDTO> GetAllInactiveMatches()
+        {
+            var inactiveMatchesDTO = _dbContext.Match.Where(m => m.IsActive == false);
+            return inactiveMatchesDTO.OrderByDescending(m => m.Id)
                 .Select(m => new MatchDTO
                 {
                     Id = m.Id,

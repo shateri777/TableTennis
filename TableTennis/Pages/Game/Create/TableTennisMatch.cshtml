@@ -330,8 +330,6 @@
             const matchId = "@Model.MatchId";
             const setCounter = "@Model.SetCounter";
             const timerKey = `set_timer_match_${matchId}_set_${setCounter}`;
-
-            // Funktion för att uppdatera det dolda fältet med den senaste tiden
             function updateHiddenTimeField(formElement) {
                 const hiddenInput = formElement.querySelector('input[name="CompletedSetDurationSeconds"]');
                 if (hiddenInput) {
@@ -339,30 +337,24 @@
                     hiddenInput.value = latestSeconds;
                 }
             }
-
-            // Lägg till en lyssnare för poäng-formulären
             const p1Form = document.getElementById('player1AddPointForm');
             if (p1Form) {
                 p1Form.addEventListener('submit', function() {
                     updateHiddenTimeField(this);
                 });
             }
-
             const p2Form = document.getElementById('player2AddPointForm');
             if (p2Form) {
                 p2Form.addEventListener('submit', function() {
                     updateHiddenTimeField(this);
                 });
             }
-
-            // Starta och hantera själva timern om den ska visas
             if (timerElement) {
                 let seconds = 0;
                 const storedSeconds = sessionStorage.getItem(timerKey);
                 if (storedSeconds) {
                     seconds = parseInt(storedSeconds, 10);
                 }
-
                 function updateTimerDisplay() {
                     const minutes = Math.floor(seconds / 60);
                     const remainingSeconds = seconds % 60;
@@ -371,15 +363,13 @@
                         (remainingSeconds < 10 ? '0' + remainingSeconds : remainingSeconds);
                     timerElement.innerText = formattedTime;
                 }
-
                 function tick() {
                     seconds++;
                     updateTimerDisplay();
                     sessionStorage.setItem(timerKey, seconds.toString());
                 }
-
                 if(window.currentSetTimerIntervalId) clearInterval(window.currentSetTimerIntervalId);
-                updateTimerDisplay(); // Visa direkt
+                updateTimerDisplay();
                 window.currentSetTimerIntervalId = setInterval(tick, 1000);
             }
         });

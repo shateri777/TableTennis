@@ -15,6 +15,29 @@
         </div>
     </form>
 
+    @if (Model.InactiveMatchHistories != null && Model.InactiveMatchHistories.Any())
+    {
+        <div class="card mb-4">
+            <div class="card-header">
+                Återställ Inaktiv Match
+            </div>
+            <div class="card-body">
+                <form method="post" asp-page-handler="Restore">
+                    <div class="form-group mb-3">
+                        <label for="inactiveMatchId">Välj en match att återställa:</label>
+                        <select  asp-for="SelectedInactiveMatchId" class="form-control"
+                                asp-items="@(new SelectList(Model.InactiveMatchHistories, "Id", "DisplayText"))">
+                            <option value="">-- Välj en match --</option>
+                        </select>
+                    </div>
+                    <button type="submit" class="btn btn-success">
+                        <i class="fas fa-undo-alt"></i> Återställ Vald Match
+                    </button>
+                </form>
+            </div>
+        </div>
+    }
+
     @if (Model.MatchHistories == null || !Model.MatchHistories.Any())
     {
         @if (!string.IsNullOrEmpty(Model.SearchTerm))
@@ -56,6 +79,14 @@
                             <td class="text-center">@match.BestOfSets</td>
                             <td>@match.SetGender</td>
                             <td>@(string.IsNullOrEmpty(match.WinnerPlayer) ? "Ej avgjord" : match.WinnerPlayer)</td>
+                            <td>
+                                <form method="post" asp-page-handler="SoftDelete" style="display:inline;">
+                                    <input type="hidden" name="matchId" value="@match.Id" />
+                                    <button type="submit" class="btn btn-sm btn-danger" title="Markera som inaktiv">
+                                        <i class="fas fa-trash-alt"></i>
+                                    </button>
+                                </form>
+                            </td>
                         </tr>
                     }
                 </tbody>

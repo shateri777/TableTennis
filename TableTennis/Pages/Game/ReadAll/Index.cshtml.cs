@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using TableTennis.ViewModels;
 using Services.Match.Interface;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 
 namespace TableTennis.Pages.Game.ReadAll
 {
@@ -17,8 +18,11 @@ namespace TableTennis.Pages.Game.ReadAll
             _setService = setService;
         }
         public IList<MatchHistoryVM> MatchHistories { get; set; } = new List<MatchHistoryVM>();
+        public IList<MatchHistoryVM> InactiveMatchHistories { get; set; } = new List<MatchHistoryVM>();
         [BindProperty(SupportsGet = true)]
         public string SearchTerm { get; set; }
+        [BindProperty]
+        public int SelectedInactiveMatchId { get; set; }
         public void OnGet()
         {
             var allMatchDTOs = _matchService.GetAllMatches(SearchTerm);
@@ -30,6 +34,7 @@ namespace TableTennis.Pages.Game.ReadAll
                     int player2SetsWon = _setService.GetSetsWonByPlayerName(matchDto.Id, matchDto.Player2FirstName);
                     var matchHistoryVm = new MatchHistoryVM
                     {
+                        Id = matchDto.Id,
                         Player1FullName = $"{matchDto.Player1FirstName} {matchDto.Player1LastName}",
                         Player2FullName = $"{matchDto.Player2FirstName} {matchDto.Player2LastName}",
                         Player1Age = matchDto.Player1Age,
@@ -44,6 +49,56 @@ namespace TableTennis.Pages.Game.ReadAll
                     MatchHistories.Add(matchHistoryVm);
                 }
             }
+            var inactiveMatchDTOs = _matchService.GetAllInactiveMatches();
+            InactiveMatchHistories.Clear();
+            if (inactiveMatchDTOs != null)
+            {
+                foreach (var matchDto in inactiveMatchDTOs)
+                {
+                    InactiveMatchHistories.Add(new MatchHistoryVM
+                    {
+                        Id = matchDto.Id,
+                        DisplayText = $"ID: {matchDto.Id} - {matchDto.Player1FirstName} {matchDto.Player1LastName} vs {matchDto.Player2FirstName} {matchDto.Player2LastName} ({matchDto.MatchDate:yyyy-MM-dd})"
+                    });
+                }
+            }
+        }
+        public IActionResult OnPostSoftDelete(int matchId)
+        {
+            if (matchId <= 0)
+            {
+                return NotFound();
+            }
+            var matchToDelete = _matchService.FindMatchId(matchId);
+            if (matchToDelete != null)
+            {
+                _matchService.SoftDeleteMatch(matchToDelete);
+                TempData["StatusMessage"] = $"Matchen med ID {matchId} har tagits bort.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = $"Kunde inte hitta matchen med ID {matchId}.";
+            }
+            return RedirectToPage();
+        }
+        public IActionResult OnPostRestore() 
+        {
+            if (SelectedInactiveMatchId <= 0)
+            {
+                TempData["ErrorMessage"] = "Inget giltigt match-ID valdes för återställning.";
+                return RedirectToPage();
+            }
+
+            if (SelectedInactiveMatchId > 0)
+            {
+                _matchService.RestoreDeletedMatch(SelectedInactiveMatchId);
+                TempData["StatusMessage"] = $"Matchen med ID {SelectedInactiveMatchId} har återställts.";
+            }
+            else
+            {
+                TempData["ErrorMessage"] = $"Kunde inte hitta eller återställa matchen med ID {SelectedInactiveMatchId}.";
+            }
+            return RedirectToPage();
         }
     }
 }
