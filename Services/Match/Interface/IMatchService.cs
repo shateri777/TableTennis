@@ -13,6 +13,7 @@ namespace Services.Match.Interface
         MatchDTO FindMatchId(int matchId);
         string CheckMatchWinner(int matchId);
         List<MatchDTO> GetAllMatches(string searchTerm);
+        List<MatchDTO> GetAllMatches();
         List<PlayerInfoDTO> GetDistinctPlayers();
         bool CheckIfPlayer1HasMatchPoint(int matchId);
         bool CheckIfPlayer2HasMatchPoint(int matchId);

@@ -120,6 +120,27 @@ namespace Services.Match
                 })
                 .ToList();
         }
+        public List<MatchDTO> GetAllMatches()
+        {
+            var allMatches = _dbContext.Match.Where(m => m.IsAcitve == true);
+            return allMatches
+                .OrderByDescending(m => m.MatchDate)
+                .Select(m => new MatchDTO
+                {
+                    Id = m.Id,
+                    Player1FirstName = m.Player1FirstName,
+                    Player1LastName = m.Player1LastName,
+                    Player2FirstName = m.Player2FirstName,
+                    Player2LastName = m.Player2LastName,
+                    Player1Age = m.Player1Age,
+                    Player2Age = m.Player2Age,
+                    SetGender = m.SetGender,
+                    MatchDate = m.MatchDate,
+                    BestOfSets = m.BestOfSets,
+                    WinnerPlayer = m.WinnerPlayer
+                })
+                .ToList();
+        }
         public List<PlayerInfoDTO> GetDistinctPlayers()
         {
             var player1s = _dbContext.Match
