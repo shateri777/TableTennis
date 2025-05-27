@@ -3,6 +3,8 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 using Services.Match;
 using Services.Match.Interface;
+using Services.Player;
+using Services.Player.Interface;
 using TableTennis.Data;
 
 namespace TableTennis
@@ -27,6 +29,7 @@ namespace TableTennis
             builder.Services.AddTransient<DataInitializer>();
             builder.Services.AddTransient<IMatchService, MatchService>();
             builder.Services.AddTransient<ISetService, SetService>();
+            builder.Services.AddTransient<IPlayerService, PlayerService>();
             var app = builder.Build();
 
             using (var scope = app.Services.CreateScope())
