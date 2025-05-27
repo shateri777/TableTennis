@@ -2,6 +2,7 @@
 {
     public class MatchHistoryVM
     {
+        public int Id { get; set; }
         public string Player1FullName { get; set; }
         public string Player2FullName { get; set; }
         public int Player1Age { get; set; }
@@ -13,5 +14,6 @@
         public DateTime MatchDate { get; set; }
         public int BestOfSets { get; set; }
         public int TotalMatchTime { get; set; }
+        public string DisplayText { get; set; }
     }
 }
