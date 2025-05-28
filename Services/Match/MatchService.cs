@@ -122,7 +122,7 @@ namespace Services.Match
         }
         public List<MatchDTO> GetAllMatches()
         {
-            var allMatches = _dbContext.Match.Where(m => m.IsAcitve == true);
+            var allMatches = _dbContext.Match.Where(m => m.IsActive == true);
             return allMatches
                 .OrderByDescending(m => m.MatchDate)
                 .Select(m => new MatchDTO

@@ -21,7 +21,7 @@ namespace DataAccessLayer.Data.Models
         public int BestOfSets { get; set; }
         public string? WinnerPlayer { get; set; }
         public DateTime MatchDate { get; set; }
-        public bool IsAcitve { get; set; } = true;
+        public bool IsActive { get; set; } = true;
         public int TotalMatchTime { get; set; }
         public int Player1WonSets { get; set; }
         public int Player2WonSets { get; set; }
