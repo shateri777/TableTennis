@@ -860,6 +860,63 @@ body {
     justify-content: center;
 }
 
+/*Start Statistics*/
+.stats-page-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.stats-select-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.stats-player-select {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.stats-player-dropdown {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.stats-card-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stats-player-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 300px;
+}
+
+    .stats-player-card h2 {
+        margin-bottom: 1rem;
+    }
+
+.stats-extra-section {
+    margin-top: 2rem;
+}
+
+.stats-match-duration-card,
+.stats-opponent-performance-card {
+    background: #e9ecef;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+}
+
+/*End Statistics*/
+
 
 @media (max-width: 900px) {
     .tt-scoreboard {

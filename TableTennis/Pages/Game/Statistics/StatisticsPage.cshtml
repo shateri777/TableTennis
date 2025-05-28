@@ -2,3 +2,66 @@
 @model TableTennis.Pages.Game.Statistics.statisticsModel
 @{
 }
+
+<div class="stats-page-container">
+    <!-- Spelare-väljare -->
+    <div class="stats-select-row">
+        <div class="stats-player-select left ">
+            <label for="stats-player1-select">Spelare 1</label>
+            @* <select id="stats-player1-select" class="stats-player-dropdown"></select> *@
+            <select id="player1Select" asp-for="SelectedPlayer1Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
+        </div>
+        <div class="stats-player-select right">
+            <label for="stats-player2-select">Spelare 2</label>
+           @*  <select id="stats-player2-select" class="stats-player-dropdown"></select> *@
+            <select id="player2Select" asp-for="SelectedPlayer2Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
+        </div>
+    </div>
+
+    <!-- Spelarstatistik -->
+    <div class="stats-card-row">
+        <!-- Spelare 1 -->
+        <div id="stats-player1-card" class="stats-player-card">
+            <h2>Spelare 1</h2>
+            <ul>
+                <li>Total Games: <span id="stats-player1-total"></span></li>
+                <li>Wins: <span id="stats-player1-wins"></span></li>
+                <li>Losses: <span id="stats-player1-losses"></span></li>
+                <li>Win %: <span id="stats-player1-winpercent"></span></li>
+            </ul>
+            <!-- Extra statistik -->
+            <div class="stats-extra-section">
+                <div class="stats-match-duration-card">
+                    <h3>Längsta match</h3>
+                    <p id="stats-player1-longest-time"></p>
+                    <p id="stats-player1-longest-opponent"></p>
+
+                    <h3>Snabbaste match</h3>
+                    <p id="stats-player1-fastest-time"></p>
+                    <p id="stats-player1-fastest-opponent"></p>
+                </div>
+
+                <div class="stats-opponent-performance-card">
+                    <h3>Bäst statistik mot</h3>
+                    <p id="stats-player1-best-opponent-name"></p>
+                    <p id="stats-player1-best-opponent-percent"></p>
+
+                    <h3>Sämst statistik mot</h3>
+                    <p id="stats-player1-worst-opponent-name"></p>
+                    <p id="stats-player1-worst-opponent-percent"></p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Spelare 2 -->
+        <div id="stats-player2-card" class="stats-player-card">
+            <h2>Spelare 2</h2>
+            <ul>
+                <li>Total Games: <span id="stats-player2-total"></span></li>
+                <li>Wins: <span id="stats-player2-wins"></span></li>
+                <li>Losses: <span id="stats-player2-losses"></span></li>
+                <li>Win %: <span id="stats-player2-winpercent"></span></li>
+            </ul>
+        </div>
+    </div>
+</div>
