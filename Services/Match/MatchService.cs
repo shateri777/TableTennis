@@ -3,6 +3,7 @@ using Services.Match.Interface;
 using DataAccessLayer.Data;
 using Microsoft.EntityFrameworkCore;
 using TableTennis.Data.Migrations;
+using DataAccessLayer.Data.Models;
 
 namespace Services.Match
 {
@@ -94,7 +95,7 @@ namespace Services.Match
                 {
                     match.WinnerPlayer = determinedWinner;
                     match.TotalMatchTime = completedSets.Sum(s => s.SetTime);
-                    _dbContext.Update(match); 
+                    _dbContext.Update(match);
                     _dbContext.SaveChanges();
                     return determinedWinner;
                 }
@@ -312,59 +313,70 @@ namespace Services.Match
             return match.Player2WonSets;
         }
 
+        public StatisticsDTO GetStats(string player)
+        {
+            var firstName = player.Split('_')[0];
+            var lastName = player.Split('_')[1];
+            var age = player.Split('_')[2];
+
+            var matches = _dbContext.Match
+                .Where(m => (m.Player1FirstName == firstName && m.Player1LastName == lastName && m.Player1Age.ToString() == age))
+                .ToList();
+
+            var wins = matches.Count(m => m.WinnerPlayer == m.Player1FirstName);
+
+            var losses = matches.Count(m => m.WinnerPlayer != m.Player1FirstName);
+
+            var longestMatch = matches.OrderByDescending(m => m.TotalMatchTime).FirstOrDefault();
+
+            var fastestMatch = matches.OrderBy(m => m.TotalMatchTime).FirstOrDefault();
+
+            var groupedOpponents = matches
+                .GroupBy(m => new { m.Player2FirstName, m.Player2LastName, m.Player2Age })
+                .Select(group => new
+                {
+                    OpponentName = $"{group.Key.Player2FirstName} {group.Key.Player2LastName}",
+                    OpponentAge = group.Key.Player2Age,
+                    TotalGames = group.Count(),
+                    WinsAgainstOpponent = group.Count(m => m.WinnerPlayer == m.Player1FirstName),
+                })
+                .Where(x => x.TotalGames > 0)
+                .Select(x => new
+                {
+                    x.OpponentName,
+                    WinRate = Math.Round((double)x.WinsAgainstOpponent / x.TotalGames, 2)
+                })
+                .ToList();
+
+            var bestOpponent = groupedOpponents.OrderByDescending(x => x.WinRate).FirstOrDefault();
+            var worstOpponent = groupedOpponents.OrderBy(x => x.WinRate).FirstOrDefault();
+
+            var bestOpponentName = bestOpponent?.OpponentName ?? "N/A";
+            var bestOpponentWinRate = $"{bestOpponent?.WinRate * 100:F2}%";
+
+            var worstOpponentName = worstOpponent?.OpponentName ?? "N/A";
+            var worstOpponentWinRate = $"{(1 - (worstOpponent?.WinRate ?? 0)) * 100:F2}%";
 
 
-        //// TO DO
-        //public SetsDTO AddPointToPlayer2(int matchId)
-        //{
-        //    var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
-        //    var matchDTO = new SetsDTO
-        //    {
-        //        Player2Score = match.Player2Score,
-        //    };
-        //    match.Player2Score += matchDTO.Player2Score;
-        //    _dbContext.Update(match);
-        //    _dbContext.SaveChanges();
-        //    CheckEndOfSet(matchId);
-        //    return matchDTO;
-        //}
+            StatisticsDTO statisticsDTO = new StatisticsDTO
+            {
+                PlayerFullName = $"{firstName} {lastName}",
+                TotalGamesPlayed = matches.Count,
+                Wins = wins,
+                Losses = losses,
+                WinPercentage = $"{Math.Round((double)wins / matches.Count * 100, 2)}%",
+                LongestMatch = longestMatch.TotalMatchTime,
+                FastestMatch = fastestMatch.TotalMatchTime,
+                BestAgainstName = bestOpponentName,
+                BestAgainstWinRate = bestOpponentWinRate,
+                WorstAgainstName = worstOpponentName,
+                WorstAgainstWinRate = worstOpponentWinRate,
 
-        //public string CheckEndOfSet(int matchId)
-        //{
-        //    var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
-        //    if (match.Player1Score >= 11 || match.Player2Score >= 11)
-        //    {
-        //        if (Math.Abs(match.Player1Score - match.Player2Score) >= 2)
-        //        {
-        //            // Kontrollera vem som har flest poäng för att avgöra vinnaren
-        //            if (match.Player1Score > match.Player2Score)
-        //            {
-        //                return "Player1";
-        //            }
-        //            else
-        //            {
-        //                return "Player2";
-        //            }
-        //        }
-        //    }
-        //    return null;
-        //}
+            };
+            return statisticsDTO;
+        }
 
-        //public void UpdateServe(int matchId)
-        //{
-        //    var match = _dbContext.Sets.FirstOrDefault(m => m.Id == matchId);
 
-        //    // Öka ServeCounter varje gång en poäng läggs till
-        //    match.ServeCounter++;
-
-        //    // När ServeCounter når 2, växla servern och nollställ räknaren
-        //    if (match.ServeCounter >= 2)
-        //    {
-        //        match.IsPlayer1Serve = !match.IsPlayer1Serve; // Växla servern
-        //        match.ServeCounter = 0; // Nollställ räknaren
-        //    }
-        //    _dbContext.SaveChanges();
-        //}
 
     }
 }

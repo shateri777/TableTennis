@@ -19,10 +19,37 @@ namespace TableTennis.Pages.Game.Statistics
         public List<PlayerInfoVM> AllPlayerDetailsForJs { get; set; } = new List<PlayerInfoVM>();
         public string? SelectedPlayer1Id { get; set; }
         public string? SelectedPlayer2Id { get; set; }
+        public StatisticsVM Player1VM { get; set; }
+        public StatisticsVM Player2VM { get; set; }
 
         public void OnGet()
         {
             PopulateAvailablePlayers();
+        }
+
+        public IActionResult OnPostPlayer1()
+        {
+            PopulateAvailablePlayers();
+
+            var player1StatsDTO = _matchService.GetStats(SelectedPlayer1Id);
+            StatisticsVM player1Stats = new StatisticsVM
+            {
+                PlayerFullName = player1StatsDTO.PlayerFullName,
+                Wins = player1StatsDTO.Wins,
+                Losses = player1StatsDTO.Losses,
+                TotalGamesPlayed = player1StatsDTO.TotalGamesPlayed,
+                WinPercentage = player1StatsDTO.WinPercentage,
+                LongestMatch = player1StatsDTO.LongestMatch,
+                FastestMatch = player1StatsDTO.FastestMatch,
+                BestAgainstName = player1StatsDTO.BestAgainstName,
+                BestAgainstWinRate = player1StatsDTO.BestAgainstWinRate,
+                WorstAgainstName = player1StatsDTO.WorstAgainstName,
+                WorstAgainstWinRate = player1StatsDTO.WorstAgainstWinRate
+
+            };
+            Player1VM = player1Stats;
+
+            return Page();
         }
 
         private void PopulateAvailablePlayers()

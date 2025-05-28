@@ -22,5 +22,6 @@ namespace Services.Match.Interface
         int Player2WonSets(int matchId);
         void SoftDeleteMatch(MatchDTO match);
         void RestoreDeletedMatch(int selectedId);
+        StatisticsDTO GetStats(string player);
     }
 }
