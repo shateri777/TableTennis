@@ -225,7 +225,16 @@
 
 
                     <div class="tt-setinfo">
-                        
+                        @if (Model.IsDeuce)
+                        {
+                            <div class="deuce-slot text-center">
+
+                                <strong>DEUCE!</strong>
+
+                                <br />
+
+                            </div>
+                        }
                     </div>
 
 
@@ -253,17 +262,10 @@
                         }
                         <div class="set-point-text2 @(Model.Player2Matchpoint ? "" : "invisible")">MATCH POINT! 🔥</div>
                     </div> *@
+                    
                 </div>
 
-
-                <div class="deuce-slot text-center">
-                    @if (Model.IsDeuce)
-                    {
-                        <strong>DEUCE!</strong>
-
-                        <br />
-                    }
-                </div>
+                
 
 
 
