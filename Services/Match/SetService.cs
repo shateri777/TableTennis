@@ -95,11 +95,21 @@ namespace Services.Match
             // Öka ServeCounter varje gång en poäng läggs till
             set.ServeCounter++;
 
-            // När ServeCounter når 2, växla servern och nollställ räknaren
-            if (set.ServeCounter >= 2)
+            if (set.Player1Score >= 10 && set.Player2Score >= 10)
             {
+                // Om båda spelare har minst 10 poäng, växla servern efter varje poäng
                 set.IsPlayer1Serve = !set.IsPlayer1Serve; // Växla servern
                 set.ServeCounter = 0; // Nollställ räknaren
+            }
+            else
+            {
+
+                // När ServeCounter når 2, växla servern och nollställ räknaren
+                if (set.ServeCounter >= 2)
+                {
+                    set.IsPlayer1Serve = !set.IsPlayer1Serve; // Växla servern
+                    set.ServeCounter = 0; // Nollställ räknaren
+                }
             }
             _dbContext.SaveChanges();
 

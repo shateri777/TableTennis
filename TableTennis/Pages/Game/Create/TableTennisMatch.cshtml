@@ -111,12 +111,12 @@
                             <span>2</span>
                         </div> *@
 
-                        <div class="deuce-slot text-center">
+                        @* <div class="deuce-slot text-center">
                         @if (Model.IsDeuce)
                         {                          
                                 <strong>DEUCE!</strong><br />                         
                         }
-                        </div>
+                        </div> *@
 
                         <div class="tt-cross">
                             <img src="https://static.wixstatic.com/media/47d5b4_dd3b09af552847cbbe7e0e351451ae16~mv2.gif"
@@ -253,6 +253,16 @@
                         }
                         <div class="set-point-text2 @(Model.Player2Matchpoint ? "" : "invisible")">MATCH POINT! 🔥</div>
                     </div> *@
+                </div>
+
+
+                <div class="deuce-slot text-center">
+                    @if (Model.IsDeuce)
+                    {
+                        <strong>DEUCE!</strong>
+
+                        <br />
+                    }
                 </div>
 
 
