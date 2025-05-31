@@ -313,40 +313,71 @@ namespace Services.Match
             return match.Player2WonSets;
         }
 
+
         public StatisticsDTO GetStats(string player)
         {
             var firstName = player.Split('_')[0];
             var lastName = player.Split('_')[1];
             var age = player.Split('_')[2];
 
+            // Hitta alla matcher där spelaren deltog (oavsett om Player1 eller Player2)
             var matches = _dbContext.Match
-                .Where(m => (m.Player1FirstName == firstName && m.Player1LastName == lastName && m.Player1Age.ToString() == age))
+                .Where(m =>
+                    (m.Player1FirstName == firstName && m.Player1LastName == lastName && m.Player1Age.ToString() == age) ||
+                    (m.Player2FirstName == firstName && m.Player2LastName == lastName && m.Player2Age.ToString() == age)
+                )
                 .ToList();
 
-            var wins = matches.Count(m => m.WinnerPlayer == m.Player1FirstName);
+            if (!matches.Any())
+            {
+                return new StatisticsDTO
+                {
+                    PlayerFullName = $"{firstName} {lastName}",
+                    TotalGamesPlayed = 0,
+                    Wins = 0,
+                    Losses = 0,
+                    WinPercentage = "0%",
+                    LongestMatch = 0,
+                    FastestMatch = 0,
+                    BestAgainstName = "N/A",
+                    BestAgainstWinRate = "0%",
+                    WorstAgainstName = "N/A",
+                    WorstAgainstWinRate = "0%"
+                };
+            }
 
-            var losses = matches.Count(m => m.WinnerPlayer != m.Player1FirstName);
+            var wins = matches.Count(m => m.WinnerPlayer == firstName);
+            var losses = matches.Count - wins;
 
             var longestMatch = matches.OrderByDescending(m => m.TotalMatchTime).FirstOrDefault();
-
             var fastestMatch = matches.OrderBy(m => m.TotalMatchTime).FirstOrDefault();
 
-            var groupedOpponents = matches
-                .GroupBy(m => new { m.Player2FirstName, m.Player2LastName, m.Player2Age })
-                .Select(group => new
+            // Hämta motståndare, oavsett om spelaren är Player1 eller Player2
+            var groupedOpponents = matches.Select(m =>
+            {
+                bool isPlayer1 = m.Player1FirstName == firstName && m.Player1LastName == lastName && m.Player1Age.ToString() == age;
+                return new
                 {
-                    OpponentName = $"{group.Key.Player2FirstName} {group.Key.Player2LastName}",
-                    OpponentAge = group.Key.Player2Age,
-                    TotalGames = group.Count(),
-                    WinsAgainstOpponent = group.Count(m => m.WinnerPlayer == m.Player1FirstName),
-                })
-                .Where(x => x.TotalGames > 0)
-                .Select(x => new
-                {
-                    x.OpponentName,
-                    WinRate = Math.Round((double)x.WinsAgainstOpponent / x.TotalGames, 2)
-                })
-                .ToList();
+                    OpponentFirstName = isPlayer1 ? m.Player2FirstName : m.Player1FirstName,
+                    OpponentLastName = isPlayer1 ? m.Player2LastName : m.Player1LastName,
+                    OpponentAge = isPlayer1 ? m.Player2Age : m.Player1Age,
+                    IsWin = m.WinnerPlayer == firstName
+                };
+            })
+            .GroupBy(x => new { x.OpponentFirstName, x.OpponentLastName, x.OpponentAge })
+            .Select(group => new
+            {
+                OpponentName = $"{group.Key.OpponentFirstName} {group.Key.OpponentLastName}",
+                TotalGames = group.Count(),
+                WinsAgainstOpponent = group.Count(x => x.IsWin)
+            })
+            .Where(x => x.TotalGames > 0)
+            .Select(x => new
+            {
+                x.OpponentName,
+                WinRate = Math.Round((double)x.WinsAgainstOpponent / x.TotalGames, 2)
+            })
+            .ToList();
 
             var bestOpponent = groupedOpponents.OrderByDescending(x => x.WinRate).FirstOrDefault();
             var worstOpponent = groupedOpponents.OrderBy(x => x.WinRate).FirstOrDefault();
@@ -357,24 +388,135 @@ namespace Services.Match
             var worstOpponentName = worstOpponent?.OpponentName ?? "N/A";
             var worstOpponentWinRate = $"{(1 - (worstOpponent?.WinRate ?? 0)) * 100:F2}%";
 
-
-            StatisticsDTO statisticsDTO = new StatisticsDTO
+            return new StatisticsDTO
             {
                 PlayerFullName = $"{firstName} {lastName}",
                 TotalGamesPlayed = matches.Count,
                 Wins = wins,
                 Losses = losses,
                 WinPercentage = $"{Math.Round((double)wins / matches.Count * 100, 2)}%",
-                LongestMatch = longestMatch.TotalMatchTime,
-                FastestMatch = fastestMatch.TotalMatchTime,
+                LongestMatch = longestMatch?.TotalMatchTime ?? 0,
+                FastestMatch = fastestMatch?.TotalMatchTime ?? 0,
                 BestAgainstName = bestOpponentName,
                 BestAgainstWinRate = bestOpponentWinRate,
                 WorstAgainstName = worstOpponentName,
-                WorstAgainstWinRate = worstOpponentWinRate,
-
+                WorstAgainstWinRate = worstOpponentWinRate
             };
-            return statisticsDTO;
         }
+
+        public PlayerComparisonDTO ComparePlayers(string player1Id, string player2Id)
+        {
+            var p1 = player1Id.Split('_');
+            var p2 = player2Id.Split('_');
+
+            var p1First = p1[0]; var p1Last = p1[1]; var p1Age = p1[2];
+            var p2First = p2[0]; var p2Last = p2[1]; var p2Age = p2[2];
+
+            var matches = _dbContext.Match
+                .Where(m =>
+                    (
+                        m.Player1FirstName == p1First && m.Player1LastName == p1Last && m.Player1Age.ToString() == p1Age &&
+                        m.Player2FirstName == p2First && m.Player2LastName == p2Last && m.Player2Age.ToString() == p2Age
+                    ) ||
+                    (
+                        m.Player1FirstName == p2First && m.Player1LastName == p2Last && m.Player1Age.ToString() == p2Age &&
+                        m.Player2FirstName == p1First && m.Player2LastName == p1Last && m.Player2Age.ToString() == p1Age
+                    )
+                ).ToList();
+
+            if (!matches.Any())
+            {
+                return new PlayerComparisonDTO
+                {
+                    Player1Name = $"{p1First} {p1Last}",
+                    Player2Name = $"{p2First} {p2Last}",
+                    TotalMatches = 0,
+                    Player1Wins = 0,
+                    Player2Wins = 0,
+                    Player1WinRate = "0%",
+                    Player2WinRate = "0%"
+                };
+            }
+
+            int p1Wins = matches.Count(m => m.WinnerPlayer == p1First);
+            int p2Wins = matches.Count(m => m.WinnerPlayer == p2First);
+            int total = matches.Count;
+
+            return new PlayerComparisonDTO
+            {
+                Player1Name = $"{p1First} {p1Last}",
+                Player2Name = $"{p2First} {p2Last}",
+                TotalMatches = total,
+                Player1Wins = p1Wins,
+                Player2Wins = p2Wins,
+                Player1WinRate = $"{(double)p1Wins / total * 100:F2}%",
+                Player2WinRate = $"{(double)p2Wins / total * 100:F2}%"
+            };
+        }
+
+
+        //public StatisticsDTO GetStats(string player)
+        //{
+        //    var firstName = player.Split('_')[0];
+        //    var lastName = player.Split('_')[1];
+        //    var age = player.Split('_')[2];
+
+        //    var matches = _dbContext.Match
+        //        .Where(m => (m.Player1FirstName == firstName && m.Player1LastName == lastName && m.Player1Age.ToString() == age))
+        //        .ToList();
+
+        //    var wins = matches.Count(m => m.WinnerPlayer == m.Player1FirstName);
+
+        //    var losses = matches.Count(m => m.WinnerPlayer != m.Player1FirstName);
+
+        //    var longestMatch = matches.OrderByDescending(m => m.TotalMatchTime).FirstOrDefault();
+
+        //    var fastestMatch = matches.OrderBy(m => m.TotalMatchTime).FirstOrDefault();
+
+        //    var groupedOpponents = matches
+        //        .GroupBy(m => new { m.Player2FirstName, m.Player2LastName, m.Player2Age })
+        //        .Select(group => new
+        //        {
+        //            OpponentName = $"{group.Key.Player2FirstName} {group.Key.Player2LastName}",
+        //            OpponentAge = group.Key.Player2Age,
+        //            TotalGames = group.Count(),
+        //            WinsAgainstOpponent = group.Count(m => m.WinnerPlayer == m.Player1FirstName),
+        //        })
+        //        .Where(x => x.TotalGames > 0)
+        //        .Select(x => new
+        //        {
+        //            x.OpponentName,
+        //            WinRate = Math.Round((double)x.WinsAgainstOpponent / x.TotalGames, 2)
+        //        })
+        //        .ToList();
+
+        //    var bestOpponent = groupedOpponents.OrderByDescending(x => x.WinRate).FirstOrDefault();
+        //    var worstOpponent = groupedOpponents.OrderBy(x => x.WinRate).FirstOrDefault();
+
+        //    var bestOpponentName = bestOpponent?.OpponentName ?? "N/A";
+        //    var bestOpponentWinRate = $"{bestOpponent?.WinRate * 100:F2}%";
+
+        //    var worstOpponentName = worstOpponent?.OpponentName ?? "N/A";
+        //    var worstOpponentWinRate = $"{(1 - (worstOpponent?.WinRate ?? 0)) * 100:F2}%";
+
+
+        //    StatisticsDTO statisticsDTO = new StatisticsDTO
+        //    {
+        //        PlayerFullName = $"{firstName} {lastName}",
+        //        TotalGamesPlayed = matches.Count,
+        //        Wins = wins,
+        //        Losses = losses,
+        //        WinPercentage = $"{Math.Round((double)wins / matches.Count * 100, 2)}%",
+        //        LongestMatch = longestMatch?.TotalMatchTime ?? 0,
+        //        FastestMatch = fastestMatch?.TotalMatchTime ?? 0,
+        //        BestAgainstName = bestOpponentName,
+        //        BestAgainstWinRate = bestOpponentWinRate,
+        //        WorstAgainstName = worstOpponentName,
+        //        WorstAgainstWinRate = worstOpponentWinRate,
+
+        //    };
+        //    return statisticsDTO;
+        //}
 
 
 

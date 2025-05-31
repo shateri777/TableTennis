@@ -23,5 +23,6 @@ namespace Services.Match.Interface
         void SoftDeleteMatch(MatchDTO match);
         void RestoreDeletedMatch(int selectedId);
         StatisticsDTO GetStats(string player);
+        PlayerComparisonDTO ComparePlayers(string player1Id, string player2Id);
     }
 }
