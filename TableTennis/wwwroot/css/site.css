@@ -927,14 +927,14 @@ body {
 
         .setScore:nth-child(2) {
             top: 0;
-            right: -80px; /* Flytta set boxen över player 1 score (inte klar, de hänger inte med poängen) */
+            right: -80px; /* Flytta set boxen över player 2 score (inte klar, de hänger inte med poängen) */
         } 
 
         .tt-time 
         {
             margin: 5px;
             padding: 5px; /* Timer boxen är mindre */
-            z-index: 10; /* timer boxen är längst upp */
+            z-index: 10; /* timer boxen är längst upp av boxarna */
 
         }
 }
