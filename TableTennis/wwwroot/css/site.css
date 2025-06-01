@@ -912,7 +912,7 @@ body {
 @media (max-width: 452px){
 
     .setScore {
-        position: absolute; /* Gör så setScore är över poäng rutorna */
+        position: absolute; /* Gör så setScore kan flyttas till över poäng rutorna */
         height: 80px;
         display: flex; 
         align-items: center; /* Set siffrorna är i mitten av boxen */
