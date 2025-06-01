@@ -908,4 +908,46 @@ body {
 
 }
 
+/* Mobil */
+@media (max-width: 452px){
+
+    .setScore {
+        position: absolute; /* Gör så setScore är över poäng rutorna */
+        height: 80px;
+        display: flex; 
+        align-items: center; /* Set siffrorna är i mitten av boxen */
+        margin-top: 5px;
+    }
+
+    .setScore:nth-child(1){ 
+        top: 0;
+        right: 80px; /* Flytta set boxen över player 1 score (inte klar, de hänger inte med poängen) */
+
+    }
+
+        .setScore:nth-child(2) {
+            top: 0;
+            right: -80px; /* Flytta set boxen över player 1 score (inte klar, de hänger inte med poängen) */
+        } 
+
+        .tt-time 
+        {
+            margin: 5px;
+            padding: 5px; /* Timer boxen är mindre */
+            z-index: 10; /* timer boxen är längst upp */
+
+        }
+}
+
+/* Mobil liggande */
+@media(max-height: 452px){
+
+    .site-title
+    {
+        font-size: 40px; /* När telefon är i liggande läge så minskas font size "Ängby Sportklubb" titlen */
+    }
+
+
+
+}
 
