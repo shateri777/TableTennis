@@ -53,10 +53,28 @@
 
                 <div class="stats-extra-section mt-3">
                     <h4>Längsta match</h4>
-                    <p>@Model.Player1VM.LongestMatch sekunder</p>
+                    <p>
+                        @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
+                        {
+                            @($"{Model.ComparisonVM.LongestMatchTime} sekunder")
+                        }
+                        else
+                        {
+                            @($"{Model.Player1VM.LongestMatch} sekunder")
+                        }
+                    </p>
 
                     <h4>Snabbaste match</h4>
-                    <p>@Model.Player1VM.FastestMatch sekunder</p>
+                    <p>
+                        @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
+                        {
+                            @($"{Model.ComparisonVM.FastestMatchTime} sekunder")
+                        }
+                        else
+                        {
+                            @($"{Model.Player1VM.FastestMatch} sekunder")
+                        }
+                    </p>
 
                     <h4>Bäst mot</h4>
                     <p>@Model.Player1VM.BestAgainstName – @Model.Player1VM.BestAgainstWinRate</p>
@@ -90,10 +108,28 @@
 
                 <div class="stats-extra-section mt-3">
                     <h4>Längsta match</h4>
-                    <p>@Model.Player2VM.LongestMatch sekunder</p>
+                    <p>
+                        @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
+                        {
+                            @($"{Model.ReverseComparisonVM.LongestMatchTime} sekunder")
+                        }
+                        else
+                        {
+                            @($"{Model.Player2VM.LongestMatch} sekunder")
+                        }
+                    </p>
 
                     <h4>Snabbaste match</h4>
-                    <p>@Model.Player2VM.FastestMatch sekunder</p>
+                    <p>
+                        @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
+                        {
+                            @($"{Model.ReverseComparisonVM.FastestMatchTime} sekunder")
+                        }
+                        else
+                        {
+                            @($"{Model.Player2VM.FastestMatch} sekunder")
+                        }
+                    </p>
 
                     <h4>Bäst mot</h4>
                     <p>@Model.Player2VM.BestAgainstName – @Model.Player2VM.BestAgainstWinRate</p>
@@ -105,6 +141,7 @@
         }
     </div>
 </div>
+
 
 
 

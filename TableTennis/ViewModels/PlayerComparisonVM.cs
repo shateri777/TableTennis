@@ -9,6 +9,9 @@
         public int Player2Wins { get; set; }
         public string Player1WinRate { get; set; } = "0%";
         public string Player2WinRate { get; set; } = "0%";
+        public int LongestMatchTime { get; set; }
+        public int FastestMatchTime { get; set; }
+
     }
 
 

@@ -15,6 +15,9 @@ namespace DataAccessLayer.Data.DTO
         public int Player2Wins { get; set; }
         public string Player1WinRate { get; set; }
         public string Player2WinRate { get; set; }
+        public int LongestMatchTime { get; set; }
+        public int FastestMatchTime { get; set; }
+
 
     }
 

@@ -91,7 +91,9 @@ namespace TableTennis.Pages.Game.Statistics
                         Player1Wins = comparisonDTO.Player1Wins,
                         Player2Wins = comparisonDTO.Player2Wins,
                         Player1WinRate = comparisonDTO.Player1WinRate,
-                        Player2WinRate = comparisonDTO.Player2WinRate
+                        Player2WinRate = comparisonDTO.Player2WinRate,
+                        LongestMatchTime = comparisonDTO.LongestMatchTime,
+                        FastestMatchTime = comparisonDTO.FastestMatchTime
                     };
 
                     ReverseComparisonVM = new PlayerComparisonVM
@@ -102,13 +104,16 @@ namespace TableTennis.Pages.Game.Statistics
                         Player1Wins = comparisonDTO.Player2Wins,
                         Player2Wins = comparisonDTO.Player1Wins,
                         Player1WinRate = comparisonDTO.Player2WinRate,
-                        Player2WinRate = comparisonDTO.Player1WinRate
+                        Player2WinRate = comparisonDTO.Player1WinRate,
+                        LongestMatchTime = comparisonDTO.LongestMatchTime,
+                        FastestMatchTime = comparisonDTO.FastestMatchTime
                     };
                 }
             }
 
             return Page();
         }
+
 
 
         //public IActionResult OnPostPlayer1()
@@ -197,7 +202,9 @@ namespace TableTennis.Pages.Game.Statistics
                         Player1Wins = comparisonDTO.Player1Wins,
                         Player2Wins = comparisonDTO.Player2Wins,
                         Player1WinRate = comparisonDTO.Player1WinRate,
-                        Player2WinRate = comparisonDTO.Player2WinRate
+                        Player2WinRate = comparisonDTO.Player2WinRate,
+                        LongestMatchTime = comparisonDTO.LongestMatchTime,
+                        FastestMatchTime = comparisonDTO.FastestMatchTime
                     };
 
                     ReverseComparisonVM = new PlayerComparisonVM
@@ -208,13 +215,16 @@ namespace TableTennis.Pages.Game.Statistics
                         Player1Wins = comparisonDTO.Player2Wins,
                         Player2Wins = comparisonDTO.Player1Wins,
                         Player1WinRate = comparisonDTO.Player2WinRate,
-                        Player2WinRate = comparisonDTO.Player1WinRate
+                        Player2WinRate = comparisonDTO.Player1WinRate,
+                        LongestMatchTime = comparisonDTO.LongestMatchTime,
+                        FastestMatchTime = comparisonDTO.FastestMatchTime
                     };
                 }
             }
 
             return Page();
         }
+
 
 
 

@@ -441,6 +441,10 @@ namespace Services.Match
             int p1Wins = matches.Count(m => m.WinnerPlayer == p1First);
             int p2Wins = matches.Count(m => m.WinnerPlayer == p2First);
             int total = matches.Count;
+            int longestMatchTime = matches.Max(m => m.TotalMatchTime);
+            int fastestMatchTime = matches.Min(m => m.TotalMatchTime);
+
+
 
             return new PlayerComparisonDTO
             {
@@ -450,7 +454,9 @@ namespace Services.Match
                 Player1Wins = p1Wins,
                 Player2Wins = p2Wins,
                 Player1WinRate = $"{(double)p1Wins / total * 100:F2}%",
-                Player2WinRate = $"{(double)p2Wins / total * 100:F2}%"
+                Player2WinRate = $"{(double)p2Wins / total * 100:F2}%",
+                LongestMatchTime = longestMatchTime,
+                FastestMatchTime = fastestMatchTime
             };
         }
 
