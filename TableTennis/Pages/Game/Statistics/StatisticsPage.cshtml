@@ -3,144 +3,149 @@
 @{
 }
 
-<div class="stats-page-container">
+<section class="match-setup">
+    <div class="match-container">
 
-    <!-- Väljar-rad -->
-    <div class="stats-select-row mb-4 d-flex gap-4">
-        <!-- Spelare 1 Form -->
-        <div class="stats-player-select flex-fill">
-            <form method="post">
-                <label for="player1Select">Spelare 1</label>
-                <select id="player1Select" asp-for="SelectedPlayer1Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
-                <input type="hidden" asp-for="SelectedPlayer2Id" />
-                <button asp-page-handler="Player1" type="submit" class="btn btn-primary mt-2">Välj spelare</button>
-            </form>
+        <!-- Väljar-rad -->
+        <div class="stats-select-row mb-4 d-flex gap-4">
+            <!-- Spelare 1 Form -->
+            <div class="stats-player-select flex-fill playerSelect-buttons">
+                <form method="post">
+                    <label for="player1Select">Spelare 1</label>
+                    <select id="player1Select" asp-for="SelectedPlayer1Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
+                    <input type="hidden" asp-for="SelectedPlayer2Id" />
+                    <button asp-page-handler="Player1" type="submit" class="playerSelect-button one">Välj spelare</button>
+                </form>
+            </div>
+
+            <!-- Spelare 2 Form -->
+            <div class="stats-player-select flex-fill playerSelect-buttons">
+                <form method="post">
+                    <label for="player2Select">Spelare 2</label>
+                    <select id="player2Select" asp-for="SelectedPlayer2Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
+                    <input type="hidden" asp-for="SelectedPlayer1Id" />
+                    <button asp-page-handler="Player2" type="submit" class="playerSelect-button two">Välj spelare 2</button>
+                </form>
+            </div>
         </div>
 
-        <!-- Spelare 2 Form -->
-        <div class="stats-player-select flex-fill">
-            <form method="post">
-                <label for="player2Select">Spelare 2</label>
-                <select id="player2Select" asp-for="SelectedPlayer2Id" asp-items="Model.AvailablePlayers" class="form-control"></select>
-                <input type="hidden" asp-for="SelectedPlayer1Id" />
-                <button asp-page-handler="Player2" type="submit" class="btn btn-secondary mt-2">Välj spelare 2</button>
-            </form>
+        <!-- Statistikrutor -->
+        
+        <div class="stats-card-row d-flex justify-content-between gap-4 flex-wrap">
+            @if (Model.Player1VM != null)
+            {
+                <div class="stats-display">
+                @* <div class="stats-player-card w-50"> *@
+                    <h2>@Model.Player1VM.PlayerFullName</h2>
+                    <ul>
+                        @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
+                        {
+                            <li>Matcher mot @Model.ComparisonVM.Player2Name: @Model.ComparisonVM.TotalMatches</li>
+                            <li>Vinster: @Model.ComparisonVM.Player1Wins</li>
+                            <li>Förluster: @(Model.ComparisonVM.TotalMatches - Model.ComparisonVM.Player1Wins)</li>
+                            <li>Vinstprocent: @Model.ComparisonVM.Player1WinRate</li>
+                        }
+                        else
+                        {
+                            <li>Spelade matcher: @Model.Player1VM.TotalGamesPlayed</li>
+                            <li>Vinster: @Model.Player1VM.Wins</li>
+                            <li>Förluster: @Model.Player1VM.Losses</li>
+                            <li>Vinstprocent: @Model.Player1VM.WinPercentage</li>
+                        }
+                    </ul>
+
+                    <div class="stats-extra-section mt-3">
+                        <h4>Längsta match</h4>
+                        <p>
+                            @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
+                            {
+                                @($"{Model.ComparisonVM.LongestMatchTime} sekunder")
+                            }
+                            else
+                            {
+                                @($"{Model.Player1VM.LongestMatch} sekunder")
+                            }
+                        </p>
+
+                        <h4>Snabbaste match</h4>
+                        <p>
+                            @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
+                            {
+                                @($"{Model.ComparisonVM.FastestMatchTime} sekunder")
+                            }
+                            else
+                            {
+                                @($"{Model.Player1VM.FastestMatch} sekunder")
+                            }
+                        </p>
+
+                        <h4>Bäst mot</h4>
+                        <p>@Model.Player1VM.BestAgainstName – @Model.Player1VM.BestAgainstWinRate</p>
+
+                        <h4>Sämst mot</h4>
+                        <p>@Model.Player1VM.WorstAgainstName – @Model.Player1VM.WorstAgainstWinRate</p>
+                    </div>
+                </div>
+            }
+
+            @if (!string.IsNullOrEmpty(Model.SelectedPlayer2Id) && Model.Player2VM != null)
+            {
+                <div class="stats-display">
+                @* <div class="stats-player-card w-50"> *@
+                    <h2>@Model.Player2VM.PlayerFullName</h2>
+                    <ul>
+                        @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
+                        {
+                            <li>Matcher mot @Model.ReverseComparisonVM.Player2Name: @Model.ReverseComparisonVM.TotalMatches</li>
+                            <li>Vinster: @Model.ReverseComparisonVM.Player1Wins</li>
+                            <li>Förluster: @(Model.ReverseComparisonVM.TotalMatches - Model.ReverseComparisonVM.Player1Wins)</li>
+                            <li>Vinstprocent: @Model.ReverseComparisonVM.Player1WinRate</li>
+                        }
+                        else
+                        {
+                            <li>Spelade matcher: @Model.Player2VM.TotalGamesPlayed</li>
+                            <li>Vinster: @Model.Player2VM.Wins</li>
+                            <li>Förluster: @Model.Player2VM.Losses</li>
+                            <li>Vinstprocent: @Model.Player2VM.WinPercentage</li>
+                        }
+                    </ul>
+
+                    <div class="stats-extra-section mt-3">
+                        <h4>Längsta match</h4>
+                        <p>
+                            @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
+                            {
+                                @($"{Model.ReverseComparisonVM.LongestMatchTime} sekunder")
+                            }
+                            else
+                            {
+                                @($"{Model.Player2VM.LongestMatch} sekunder")
+                            }
+                        </p>
+
+                        <h4>Snabbaste match</h4>
+                        <p>
+                            @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
+                            {
+                                @($"{Model.ReverseComparisonVM.FastestMatchTime} sekunder")
+                            }
+                            else
+                            {
+                                @($"{Model.Player2VM.FastestMatch} sekunder")
+                            }
+                        </p>
+
+                        <h4>Bäst mot</h4>
+                        <p>@Model.Player2VM.BestAgainstName – @Model.Player2VM.BestAgainstWinRate</p>
+
+                        <h4>Sämst mot</h4>
+                        <p>@Model.Player2VM.WorstAgainstName – @Model.Player2VM.WorstAgainstWinRate</p>
+                    </div>
+                </div>
+            }
         </div>
     </div>
-
-    <!-- Statistikrutor -->
-    <div class="stats-card-row d-flex justify-content-between gap-4 flex-wrap">
-        @if (Model.Player1VM != null)
-        {
-            <div class="stats-player-card w-50">
-                <h2>@Model.Player1VM.PlayerFullName</h2>
-                <ul>
-                    @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
-                    {
-                        <li>Matcher mot @Model.ComparisonVM.Player2Name: @Model.ComparisonVM.TotalMatches</li>
-                        <li>Vinster: @Model.ComparisonVM.Player1Wins</li>
-                        <li>Förluster: @(Model.ComparisonVM.TotalMatches - Model.ComparisonVM.Player1Wins)</li>
-                        <li>Vinstprocent: @Model.ComparisonVM.Player1WinRate</li>
-                    }
-                    else
-                    {
-                        <li>Spelade matcher: @Model.Player1VM.TotalGamesPlayed</li>
-                        <li>Vinster: @Model.Player1VM.Wins</li>
-                        <li>Förluster: @Model.Player1VM.Losses</li>
-                        <li>Vinstprocent: @Model.Player1VM.WinPercentage</li>
-                    }
-                </ul>
-
-                <div class="stats-extra-section mt-3">
-                    <h4>Längsta match</h4>
-                    <p>
-                        @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
-                        {
-                            @($"{Model.ComparisonVM.LongestMatchTime} sekunder")
-                        }
-                        else
-                        {
-                            @($"{Model.Player1VM.LongestMatch} sekunder")
-                        }
-                    </p>
-
-                    <h4>Snabbaste match</h4>
-                    <p>
-                        @if (Model.SelectedPlayer2Id != null && Model.ComparisonVM != null)
-                        {
-                            @($"{Model.ComparisonVM.FastestMatchTime} sekunder")
-                        }
-                        else
-                        {
-                            @($"{Model.Player1VM.FastestMatch} sekunder")
-                        }
-                    </p>
-
-                    <h4>Bäst mot</h4>
-                    <p>@Model.Player1VM.BestAgainstName – @Model.Player1VM.BestAgainstWinRate</p>
-
-                    <h4>Sämst mot</h4>
-                    <p>@Model.Player1VM.WorstAgainstName – @Model.Player1VM.WorstAgainstWinRate</p>
-                </div>
-            </div>
-        }
-
-        @if (!string.IsNullOrEmpty(Model.SelectedPlayer2Id) && Model.Player2VM != null)
-        {
-            <div class="stats-player-card w-50">
-                <h2>@Model.Player2VM.PlayerFullName</h2>
-                <ul>
-                    @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
-                    {
-                        <li>Matcher mot @Model.ReverseComparisonVM.Player2Name: @Model.ReverseComparisonVM.TotalMatches</li>
-                        <li>Vinster: @Model.ReverseComparisonVM.Player1Wins</li>
-                        <li>Förluster: @(Model.ReverseComparisonVM.TotalMatches - Model.ReverseComparisonVM.Player1Wins)</li>
-                        <li>Vinstprocent: @Model.ReverseComparisonVM.Player1WinRate</li>
-                    }
-                    else
-                    {
-                        <li>Spelade matcher: @Model.Player2VM.TotalGamesPlayed</li>
-                        <li>Vinster: @Model.Player2VM.Wins</li>
-                        <li>Förluster: @Model.Player2VM.Losses</li>
-                        <li>Vinstprocent: @Model.Player2VM.WinPercentage</li>
-                    }
-                </ul>
-
-                <div class="stats-extra-section mt-3">
-                    <h4>Längsta match</h4>
-                    <p>
-                        @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
-                        {
-                            @($"{Model.ReverseComparisonVM.LongestMatchTime} sekunder")
-                        }
-                        else
-                        {
-                            @($"{Model.Player2VM.LongestMatch} sekunder")
-                        }
-                    </p>
-
-                    <h4>Snabbaste match</h4>
-                    <p>
-                        @if (Model.SelectedPlayer1Id != null && Model.ReverseComparisonVM != null)
-                        {
-                            @($"{Model.ReverseComparisonVM.FastestMatchTime} sekunder")
-                        }
-                        else
-                        {
-                            @($"{Model.Player2VM.FastestMatch} sekunder")
-                        }
-                    </p>
-
-                    <h4>Bäst mot</h4>
-                    <p>@Model.Player2VM.BestAgainstName – @Model.Player2VM.BestAgainstWinRate</p>
-
-                    <h4>Sämst mot</h4>
-                    <p>@Model.Player2VM.WorstAgainstName – @Model.Player2VM.WorstAgainstWinRate</p>
-                </div>
-            </div>
-        }
-    </div>
-</div>
+</section>
 
 
 
