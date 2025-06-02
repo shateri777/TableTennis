@@ -915,6 +915,12 @@ body {
     margin-bottom: 1.5rem;
 }
 
+.statistic-card 
+{
+    display: flex;
+    justify-content: space-between;
+}
+
 .stats-display {
     background-color: #ffffff;
     padding: 50px 60px;
