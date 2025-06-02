@@ -34,6 +34,12 @@ namespace TableTennis.Pages.Game.Statistics
         {
             PopulateAvailablePlayers();
 
+            if (string.IsNullOrEmpty(SelectedPlayer1Id))
+            {
+                ModelState.AddModelError("SelectedPlayer1Id", "Du måste välja en spelare.");
+                return Page();
+            }
+
             if (!string.IsNullOrEmpty(SelectedPlayer1Id))
             {
                 var dto1 = _matchService.GetStats(SelectedPlayer1Id);
@@ -262,7 +268,14 @@ namespace TableTennis.Pages.Game.Statistics
             var playerDTOs = _matchService.GetDistinctPlayers();
             AllPlayerDetailsForJs = new List<PlayerInfoVM>();
             AvailablePlayers.Clear();
-            AvailablePlayers.Add(new SelectListItem("--- Välj befintlig spelare ---", ""));
+            AvailablePlayers.Add(new SelectListItem
+            {
+                Text = "--- Välj befintlig spelare ---",
+                Value = "",
+                Disabled = true,
+                Selected = true
+            });
+
 
             if (playerDTOs != null)
             {
