@@ -860,6 +860,140 @@ body {
     justify-content: center;
 }
 
+/*Start Statistics*/
+.stats-page-container {
+    padding: 2rem;
+    max-width: 1200px;
+    margin: auto;
+}
+
+.stats-select-row {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 2rem;
+    flex-wrap: wrap;
+}
+
+.stats-player-select {
+    display: flex;
+    flex-direction: column;
+    width: 48%;
+}
+
+.stats-player-dropdown {
+    padding: 0.5rem;
+    font-size: 1rem;
+}
+
+.stats-card-row {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
+.stats-player-card {
+    background: #f8f8f8;
+    border-radius: 8px;
+    padding: 1.5rem;
+    flex: 1;
+    min-width: 300px;
+}
+
+    .stats-player-card h2 {
+        margin-bottom: 1rem;
+    }
+
+.stats-extra-section {
+    margin-top: 2rem;
+}
+
+.stats-match-duration-card,
+.stats-opponent-performance-card {
+    background: #e9ecef;
+    padding: 1rem;
+    border-radius: 6px;
+    margin-bottom: 1.5rem;
+}
+
+.statistic-card 
+{
+    display: flex;
+    justify-content: space-between;
+}
+
+.stats-display {
+    background-color: #ffffff;
+    padding: 50px 60px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+    text-align: center;
+    max-width: 500px;
+    border-top: 8px solid #c85a46;
+    width: 46%;
+}
+
+    .stats-display h2 {
+        font-size: 28px;
+        margin-bottom: 10px;
+        color: #4a0012;
+    }
+
+    .stats-display .subtext {
+        font-size: 16px;
+        color: #666666;
+        margin-bottom: 40px;
+    }
+
+.playerSelect-buttons {
+    display: flex;
+    justify-content: center;
+    gap: 30px;
+}
+
+.playerSelect-button {
+    padding: 5px 20px;
+    font-size: 16px;
+    font-weight: 600;
+    text-decoration: none;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    border: 2px solid transparent;
+    min-width: 120px;
+    text-align: center;
+    margin-top: 0.5rem
+}
+
+    .playerSelect-button:hover {
+        transform: translateY(-2px);
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    .playerSelect-button.one {
+        background-color: #4a0012;
+        color: white;
+        border-color: #4a0012;
+    }
+
+    .playerSelect-button.two {
+        background-color: #c85a46;
+        color: white;
+        border-color: #c85a46;
+    }
+
+/*End Statistics*/
+
+/*Start matchHistory*/
+.match-container-history {
+    background-color: #ffffff;
+    padding: 25px 60px;
+    border-radius: 12px;
+    box-shadow: 0 8px 30px rgba(0, 0, 0, 0.12);
+    width: 100%;
+    border-top: 8px solid #c85a46;
+}
+
+/*END matchHistory*/
+
 
 @media (max-width: 900px) {
     .tt-scoreboard {
