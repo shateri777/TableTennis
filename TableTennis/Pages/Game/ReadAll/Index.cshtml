@@ -64,7 +64,7 @@
                             <th>Resultat (Set)</th>
                             <th>Bäst av</th>
                             <th>Kön (Match)</th>
-                            <th>Matchvinnare</th>
+                            <th>Åtgärd</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -72,14 +72,37 @@
                         {
                             <tr>
                                 <td>@match.MatchDate.ToString("yyyy-MM-dd HH:mm")</td>
-                                <td>@match.Player1FullName</td>
+                                <td>
+                                    @match.Player1FullName
+                                    @if (match.IsPlayer1Winner)
+                                    {
+                                        <text>🏆</text>
+                                    }
+                                </td>
                                 <td>@match.Player1Age</td>
-                                <td>@match.Player2FullName</td>
+                                <td>
+                                    @match.Player2FullName
+                                    @if (match.IsPlayer2Winner)
+                                    {
+                                        <text>🏆</text>
+                                    }
+                                </td>
                                 <td>@match.Player2Age</td>
-                                <td class="text-center">@match.Player1Score - @match.Player2Score</td>
+                                <td class="text-center">
+                                    @match.Player1Score - @match.Player2Score
+                                        <span tabindex="0"
+                                              class="ms-2" @* Margin start 2 för lite avstånd *@
+                                              role="button"
+                                              data-bs-toggle="popover"
+                                              data-bs-trigger="focus" @* Visas vid klick/fokus, döljs vid nästa klick *@
+                                              data-bs-html="true"
+                                              title="Set-detaljer"
+                                              data-bs-content="@(string.Join("<br>", match.SetScoresDetails))">
+                                            <i class="fa-solid fa-circle-info"></i> @* Font Awesome ikon, eller texten "(i)" *@
+                                        </span>
+                                </td>
                                 <td class="text-center">@match.BestOfSets</td>
                                 <td>@match.SetGender</td>
-                                <td>@(string.IsNullOrEmpty(match.WinnerPlayer) ? "Ej avgjord" : match.WinnerPlayer)</td>
                                 <td>
                                     <form method="post" asp-page-handler="SoftDelete" style="display:inline;">
                                         <input type="hidden" name="matchId" value="@match.Id" />
@@ -96,3 +119,13 @@
         }
     </div>
 </section>
+
+@section Scripts {
+    <script>
+        // Initiera alla Bootstrap Popovers på sidan
+        var popoverTriggerList = [].slice.call(document.querySelectorAll('[data-bs-toggle="popover"]'))
+        var popoverList = popoverTriggerList.map(function (popoverTriggerEl) {
+          return new bootstrap.Popover(popoverTriggerEl)
+        })
+    </script>
+}

@@ -279,6 +279,20 @@ namespace Services.Match
             }
             return null;
         }
+        public IEnumerable<SetsInfoDTO> GetSetsForMatch(int matchId)
+        {
+            var listOfSets = _dbContext.Sets.Where(set => set.MatchId == matchId).ToList();
+            var listOfSetsDTO = listOfSets.Select(set => new SetsInfoDTO
+            {
+                Id = set.Id,
+                MatchId = set.MatchId,
+                Player1Score = set.Player1Score,
+                Player2Score = set.Player2Score,
+                WinnerPlayer = set.WinnerPlayer,
+                IsActive = set.IsActive,
+            });
+            return listOfSetsDTO;
+        }
         public int GetSetsWonByPlayerName(int matchId, string playerName)
         {
             return _dbContext.Sets.Count(s => s.MatchId == matchId && s.WinnerPlayer == playerName);

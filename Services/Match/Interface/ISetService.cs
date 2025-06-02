@@ -28,5 +28,6 @@ namespace Services.Match.Interface
         bool CheckIfDeuce(int matchId);
         void UpdateSet(SetsDTO setDTO);
         SetsDTO GetActiveSetAsDTO(int matchId);
+        IEnumerable<SetsInfoDTO> GetSetsForMatch(int matchId);
     }
 }

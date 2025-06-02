@@ -30,6 +30,16 @@ namespace TableTennis.Pages.Game.ReadAll
             {
                 foreach (var matchDto in allMatchDTOs)
                 {
+                    var setsForMatch = _setService.GetSetsForMatch(matchDto.Id);
+                    List<string> setScoreDetailsList = new List<string>();
+                    if (setsForMatch != null)
+                    {
+                        setScoreDetailsList = setsForMatch
+                            .Where(s => s.WinnerPlayer != null) // Inkludera bara avslutade set
+                            .OrderBy(s => s.Id)          // Antag att TableTennisSet har SetNumber
+                            .Select((s, index) => $"Set {index + 1}: {s.Player1Score}-{s.Player2Score}") // Player1Score/Player2Score är poäng här
+                            .ToList();
+                    }
                     int player1SetsWon = _setService.GetSetsWonByPlayerName(matchDto.Id, matchDto.Player1FirstName);
                     int player2SetsWon = _setService.GetSetsWonByPlayerName(matchDto.Id, matchDto.Player2FirstName);
                     var matchHistoryVm = new MatchHistoryVM
@@ -40,11 +50,14 @@ namespace TableTennis.Pages.Game.ReadAll
                         Player1Age = matchDto.Player1Age,
                         Player2Age = matchDto.Player2Age,
                         SetGender = matchDto.SetGender,
-                        WinnerPlayer = matchDto.WinnerPlayer,
                         Player1Score = player1SetsWon,
                         Player2Score = player2SetsWon, 
                         MatchDate = matchDto.MatchDate,
-                        BestOfSets = matchDto.BestOfSets
+                        BestOfSets = matchDto.BestOfSets,
+                        WinnerPlayer = matchDto.WinnerPlayer,
+                        IsPlayer1Winner = !string.IsNullOrEmpty(matchDto.WinnerPlayer) && matchDto.WinnerPlayer.Equals(matchDto.Player1FirstName, StringComparison.OrdinalIgnoreCase),
+                        IsPlayer2Winner = !string.IsNullOrEmpty(matchDto.WinnerPlayer) && matchDto.WinnerPlayer.Equals(matchDto.Player2FirstName, StringComparison.OrdinalIgnoreCase),
+                        SetScoresDetails = setScoreDetailsList,
                     };
                     MatchHistories.Add(matchHistoryVm);
                 }
