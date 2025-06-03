@@ -1,5 +1,3 @@
-using DataAccessLayer.Data.DTO;
-using DataAccessLayer.Data.Models;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Pingis.ViewModels;
@@ -39,7 +37,6 @@ namespace TableTennis.Pages.Game.Create
 
         public void OnGet(int matchId)
         {
-
             var match = _matchService.FindMatchId(matchId);
 
             if (match == null)
@@ -47,7 +44,6 @@ namespace TableTennis.Pages.Game.Create
                 RedirectToPage("/Error");
                 return;
             }
-
 
             MatchFormVM = new MatchFormVM
             {
@@ -62,9 +58,7 @@ namespace TableTennis.Pages.Game.Create
                 Player2WonSets = match.Player2WonSets,
             };
 
-
             MatchId = matchId;
-
 
             SetVM = new SetVM
             {
@@ -73,13 +67,10 @@ namespace TableTennis.Pages.Game.Create
 
             _setService.CreateSet(MatchId);
 
-            //Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
-            //Player2Setpoint = _setService.CheckIfPlayer2HasSetPoint(matchId);
         }
 
         public IActionResult OnPostAddPointToPlayer1(int matchId)
         {
-
             var match = _matchService.FindMatchId(matchId);
 
             if (match == null)
@@ -87,7 +78,6 @@ namespace TableTennis.Pages.Game.Create
                 RedirectToPage("/Error");
                 return Page();
             }
-
 
             MatchFormVM = new MatchFormVM
             {
@@ -110,7 +100,6 @@ namespace TableTennis.Pages.Game.Create
 
             Player1Setpoint = _setService.CheckIfPlayer1HasSetPoint(matchId);
             Player2Setpoint = _setService.CheckIfPlayer2HasSetPoint(matchId);
-
 
             Player1Matchpoint = _matchService.CheckIfPlayer1HasMatchPoint(matchId);
             Player2Matchpoint = _matchService.CheckIfPlayer2HasMatchPoint(matchId);
@@ -153,16 +142,7 @@ namespace TableTennis.Pages.Game.Create
                 _setService.UpdateSet(finishedSetEntity);
                 SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
 
-                //SetVM.WinnerPlayer = null;
-                //var serve = _setService.UpdateServe(matchId);
-
-                //if (serve)
-                //{
-                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                //}
             }
-
-
 
             return Page();
         }
@@ -241,13 +221,6 @@ namespace TableTennis.Pages.Game.Create
                 _setService.UpdateSet(finishedSetEntity);
                 SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
 
-                //SetVM.WinnerPlayer = null;
-                //var serve = _setService.UpdateServe(matchId);
-
-                //if (serve)
-                //{
-                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                //}
             }
 
             return Page();
@@ -291,10 +264,8 @@ namespace TableTennis.Pages.Game.Create
             return Page();
         }
 
-
         public IActionResult OnPostRemovePointPlayer1(int matchId)
         {
-
             var match = _matchService.FindMatchId(matchId);
 
             if (match == null)
@@ -302,7 +273,6 @@ namespace TableTennis.Pages.Game.Create
                 RedirectToPage("/Error");
                 return Page();
             }
-
 
             MatchFormVM = new MatchFormVM
             {
@@ -347,17 +317,7 @@ namespace TableTennis.Pages.Game.Create
             }
             else
             {
-
-
                 SetVM.IsPlayer1Serve = _setService.RevertServe(matchId);
-                //SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
-                //SetVM.WinnerPlayer = null;
-                //var serve = _setService.UpdateServe(matchId);
-
-                //if (serve)
-                //{
-                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                //}
             }
 
             return Page();
@@ -372,7 +332,6 @@ namespace TableTennis.Pages.Game.Create
                 RedirectToPage("/Error");
                 return Page();
             }
-
 
             MatchFormVM = new MatchFormVM
             {
@@ -420,14 +379,6 @@ namespace TableTennis.Pages.Game.Create
             {
                 SetVM.IsPlayer1Serve = _setService.RevertServe(matchId);
 
-                //SetVM.IsPlayer1Serve = _setService.UpdateServe(matchId);
-                //SetVM.WinnerPlayer = null;
-                //var serve = _setService.UpdateServe(matchId);
-
-                //if (serve)
-                //{
-                //    SetVM.IsPlayer1Serve = !SetVM.IsPlayer1Serve;
-                //}
             }
 
             return Page();

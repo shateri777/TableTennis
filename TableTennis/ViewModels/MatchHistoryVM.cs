@@ -14,9 +14,8 @@
         public int BestOfSets { get; set; }
         public string? WinnerPlayer { get; set; }
         public string DisplayText { get; set; }
-        // Nya egenskaper
         public bool IsPlayer1Winner { get; set; }
         public bool IsPlayer2Winner { get; set; }
-        public List<string> SetScoresDetails { get; set; } = new List<string>(); // För poängen i varje set
+        public List<string> SetScoresDetails { get; set; } = new List<string>(); 
     }
 }

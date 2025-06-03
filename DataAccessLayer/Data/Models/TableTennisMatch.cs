@@ -8,7 +8,6 @@ namespace DataAccessLayer.Data.Models
 {
     public class TableTennisMatch
     {
-        // Player information
         public int Id { get; set; }
         public List<TableTennisSet> Sets { get; set; }
         public string Player1FirstName { get; set; }

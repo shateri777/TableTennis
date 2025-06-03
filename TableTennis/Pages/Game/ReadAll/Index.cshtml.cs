@@ -1,9 +1,8 @@
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Mvc.RazorPages;
-using TableTennis.ViewModels;
-using Services.Match.Interface;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
+using Microsoft.AspNetCore.Mvc.RazorPages;
+using Services.Match.Interface;
+using TableTennis.ViewModels;
 
 namespace TableTennis.Pages.Game.ReadAll
 {
@@ -51,7 +50,7 @@ namespace TableTennis.Pages.Game.ReadAll
                         Player2Age = matchDto.Player2Age,
                         SetGender = matchDto.SetGender,
                         Player1Score = player1SetsWon,
-                        Player2Score = player2SetsWon, 
+                        Player2Score = player2SetsWon,
                         MatchDate = matchDto.MatchDate,
                         BestOfSets = matchDto.BestOfSets,
                         WinnerPlayer = matchDto.WinnerPlayer,
@@ -94,7 +93,7 @@ namespace TableTennis.Pages.Game.ReadAll
             }
             return RedirectToPage();
         }
-        public IActionResult OnPostRestore() 
+        public IActionResult OnPostRestore()
         {
             if (SelectedInactiveMatchId <= 0)
             {

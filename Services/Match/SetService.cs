@@ -1,14 +1,7 @@
-﻿using DataAccessLayer.Data.DTO;
-using DataAccessLayer.Data;
-using Services.Match.Interface;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using DataAccessLayer.Data;
+using DataAccessLayer.Data.DTO;
 using DataAccessLayer.Data.Models;
-using System.Text.RegularExpressions;
-using Microsoft.Extensions.FileSystemGlobbing;
+using Services.Match.Interface;
 
 namespace Services.Match
 {
@@ -272,9 +265,9 @@ namespace Services.Match
                     WinnerPlayer = activeSetEntity.WinnerPlayer,
                     ServeCounter = activeSetEntity.ServeCounter,
                     IsPlayer1Serve = activeSetEntity.IsPlayer1Serve,
-                    SetTime = activeSetEntity.SetTime, 
+                    SetTime = activeSetEntity.SetTime,
                     IsActive = activeSetEntity.IsActive,
-                    MatchId = activeSetEntity.MatchId  
+                    MatchId = activeSetEntity.MatchId
                 };
             }
             return null;
@@ -371,6 +364,6 @@ namespace Services.Match
             return false; // Not deuce
         }
 
-        
+
     }
 }

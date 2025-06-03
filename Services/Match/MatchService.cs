@@ -1,9 +1,6 @@
-﻿using DataAccessLayer.Data.DTO;
+﻿using DataAccessLayer.Data;
+using DataAccessLayer.Data.DTO;
 using Services.Match.Interface;
-using DataAccessLayer.Data;
-using Microsoft.EntityFrameworkCore;
-using TableTennis.Data.Migrations;
-using DataAccessLayer.Data.Models;
 
 namespace Services.Match
 {
@@ -459,71 +456,6 @@ namespace Services.Match
                 FastestMatchTime = fastestMatchTime
             };
         }
-
-
-        //public StatisticsDTO GetStats(string player)
-        //{
-        //    var firstName = player.Split('_')[0];
-        //    var lastName = player.Split('_')[1];
-        //    var age = player.Split('_')[2];
-
-        //    var matches = _dbContext.Match
-        //        .Where(m => (m.Player1FirstName == firstName && m.Player1LastName == lastName && m.Player1Age.ToString() == age))
-        //        .ToList();
-
-        //    var wins = matches.Count(m => m.WinnerPlayer == m.Player1FirstName);
-
-        //    var losses = matches.Count(m => m.WinnerPlayer != m.Player1FirstName);
-
-        //    var longestMatch = matches.OrderByDescending(m => m.TotalMatchTime).FirstOrDefault();
-
-        //    var fastestMatch = matches.OrderBy(m => m.TotalMatchTime).FirstOrDefault();
-
-        //    var groupedOpponents = matches
-        //        .GroupBy(m => new { m.Player2FirstName, m.Player2LastName, m.Player2Age })
-        //        .Select(group => new
-        //        {
-        //            OpponentName = $"{group.Key.Player2FirstName} {group.Key.Player2LastName}",
-        //            OpponentAge = group.Key.Player2Age,
-        //            TotalGames = group.Count(),
-        //            WinsAgainstOpponent = group.Count(m => m.WinnerPlayer == m.Player1FirstName),
-        //        })
-        //        .Where(x => x.TotalGames > 0)
-        //        .Select(x => new
-        //        {
-        //            x.OpponentName,
-        //            WinRate = Math.Round((double)x.WinsAgainstOpponent / x.TotalGames, 2)
-        //        })
-        //        .ToList();
-
-        //    var bestOpponent = groupedOpponents.OrderByDescending(x => x.WinRate).FirstOrDefault();
-        //    var worstOpponent = groupedOpponents.OrderBy(x => x.WinRate).FirstOrDefault();
-
-        //    var bestOpponentName = bestOpponent?.OpponentName ?? "N/A";
-        //    var bestOpponentWinRate = $"{bestOpponent?.WinRate * 100:F2}%";
-
-        //    var worstOpponentName = worstOpponent?.OpponentName ?? "N/A";
-        //    var worstOpponentWinRate = $"{(1 - (worstOpponent?.WinRate ?? 0)) * 100:F2}%";
-
-
-        //    StatisticsDTO statisticsDTO = new StatisticsDTO
-        //    {
-        //        PlayerFullName = $"{firstName} {lastName}",
-        //        TotalGamesPlayed = matches.Count,
-        //        Wins = wins,
-        //        Losses = losses,
-        //        WinPercentage = $"{Math.Round((double)wins / matches.Count * 100, 2)}%",
-        //        LongestMatch = longestMatch?.TotalMatchTime ?? 0,
-        //        FastestMatch = fastestMatch?.TotalMatchTime ?? 0,
-        //        BestAgainstName = bestOpponentName,
-        //        BestAgainstWinRate = bestOpponentWinRate,
-        //        WorstAgainstName = worstOpponentName,
-        //        WorstAgainstWinRate = worstOpponentWinRate,
-
-        //    };
-        //    return statisticsDTO;
-        //}
-
 
 
     }

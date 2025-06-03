@@ -1,22 +1,9 @@
 ﻿@page
 @model TableTennis.Pages.Game.Create.TableTennisMatchModel
 @{
-    Func<int, string> FormatTime = (totalSeconds) =>
-    {
-        if (totalSeconds <= 0) return "00:00";
-        int hours = totalSeconds / 3600;
-        int minutes = (totalSeconds % 3600) / 60;
-        int seconds = totalSeconds % 60;
-        if (hours > 0)
-        {
-            return $"{hours:D2}:{minutes:D2}:{seconds:D2}";
-        }
-        return $"{minutes:D2}:{seconds:D2}";
-    };
 }
 
 <div class="container mt-4">
-    @* <h2 class="mb-4 text-center">Poängtavla</h2> *@
 
     @if (string.IsNullOrEmpty(Model.MatchFormVM.WinnerPlayer))
     {
@@ -65,58 +52,11 @@
                         </form>
                     </div>
 
-
-                    @* <div class="tt-playercol"> *@
-                    @*     <form method="post" id="player1AddPointForm"> *@
-                    @*         <input type="hidden" asp-for="@Model.Id" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchId" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player1Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player2Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetCounter" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" /> *@
-                    @*         <input type="hidden" asp-for="@Model.CompletedSetDurationSeconds" /> *@
-                    @*         <input type="hidden" name="matchId" value="@Model.MatchId" /> *@
-                    @*         <button asp-page-handler="AddPointToPlayer1" class="tt-score-btn tt-plus" type="submit">+</button> *@
-                    @*     </form> *@
-                    @*     <div class="tt-score">@Model.SetVM.Player1Score</div> *@
-                    @*     <form method="post" class="minus-form"> *@
-                    @*         <input type="hidden" asp-for="@Model.Id" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchId" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player1Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player2Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetCounter" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" /> *@
-                    @*         <input type="hidden" asp-for="@Model.CompletedSetDurationSeconds" /> *@
-                    @*         <input type="hidden" name="matchId" value="@Model.MatchId" /> *@
-
-                    @*         @if (Model.SetVM.Player1Score > 0) *@
-                    @*         { *@
-                    @*             <button asp-page-handler="RemovePointPlayer1" class="tt-score-btn tt-minus" type="submit">-</button> *@
-                    @*         } *@
-                    @*         else *@
-                    @*         { *@
-                    @*             <button class="tt-score-btn tt-minus" type="button" disabled>-</button> *@
-                    @*         } *@
-
-                    @*     </form> *@
-                    @* </div> *@
                     <div class="tt-middle">
                         <div class="setContainer">
                             <div class="setScore">@Model.MatchFormVM.Player1WonSets</div>
                             <div class="setScore">@Model.MatchFormVM.Player2WonSets</div>
                         </div>
-                        @* <div class="setScore">
-                            <span>1</span>
-                            <span class="space">:</span>
-                            <span>2</span>
-                        </div> *@
-
-                        @* <div class="deuce-slot text-center">
-                        @if (Model.IsDeuce)
-                        {                          
-                                <strong>DEUCE!</strong><br />                         
-                        }
-                        </div> *@
 
                         <div class="tt-cross">
                             <img src="https://static.wixstatic.com/media/47d5b4_dd3b09af552847cbbe7e0e351451ae16~mv2.gif"
@@ -169,40 +109,6 @@
                         </form>
                     </div>
 
-                    @* <div class="tt-playercol"> *@
-                    @*     <form method="post" id="player2AddPointForm"> *@
-                    @*         <input type="hidden" asp-for="@Model.Id" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchId" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player1Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player2Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetCounter" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" /> *@
-                    @*         <input type="hidden" asp-for="@Model.CompletedSetDurationSeconds" /> *@
-                    @*         <input type="hidden" name="matchId" value="@Model.MatchId" /> *@
-                    @*         <button asp-page-handler="AddPointToPlayer2" class="tt-score-btn tt-plus" type="submit">+</button> *@
-                    @*     </form> *@
-                    @*     <div class="tt-score">@Model.SetVM.Player2Score</div> *@
-                    @*     <form method="post" class="minus-form"> *@
-                    @*         <input type="hidden" asp-for="@Model.Id" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchId" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player1Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetVM.Player2Score" /> *@
-                    @*         <input type="hidden" asp-for="@Model.SetCounter" /> *@
-                    @*         <input type="hidden" asp-for="@Model.MatchFormVM.BestOfSets" /> *@
-                    @*         <input type="hidden" asp-for="@Model.CompletedSetDurationSeconds" /> *@
-                    @*         <input type="hidden" name="matchId" value="@Model.MatchId" /> *@
-
-                    @*         @if (Model.SetVM.Player2Score > 0) *@
-                    @*         { *@
-                    @*             <button asp-page-handler="RemovePointPlayer2" class="tt-score-btn tt-minus" type="submit">-</button> *@
-                    @*         } *@
-                    @*         else *@
-                    @*         { *@
-                    @*             <button class="tt-score-btn tt-minus" type="button" disabled>-</button> *@
-                    @*         } *@
-
-                    @*     </form> *@
-                    @* </div> *@
                 </div>
 
                 <div class="tt-bottomrow">
@@ -253,52 +159,12 @@
                             MATCH POINT! 🔥
                         </div>
                     </div>
-                    @* <div class="tt-player-info">
-                        <div class="tt-player-name2">@Model.MatchFormVM.Player2FirstName</div>
-
-                        @if (!Model.Player2Matchpoint)
-                        {
-                            <div class="set-point-text2 @(Model.Player2Setpoint ? "" : "invisible")">SET POINT!</div>
-                        }
-                        <div class="set-point-text2 @(Model.Player2Matchpoint ? "" : "invisible")">MATCH POINT! 🔥</div>
-                    </div> *@
                     
                 </div>
 
-                
 
-
-
-
-
-                @* <div class="tt-bottomrow"> *@
-                @*     <div class="tt-player-name">@Model.MatchFormVM.Player1FirstName</div> *@
-                @*     @if (Model.SetVM.IsPlayer1Serve == true && Model.SetVM.WinnerPlayer == null) *@
-                @*     { *@
-                @*         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p> *@
-                @*     } *@
-                @*     @if (Model.Player1Setpoint) *@
-                @*     { *@
-                @*         <div class="set-point">SET POINT!</div> *@
-                @*     } *@
-                @*     <div class="tt-setinfo"> *@
-                @*         Set: @Model.SetCounter av @Model.MatchFormVM.BestOfSets<br /> *@
-
-                @*     </div> *@
-                @*     @if (Model.SetVM.IsPlayer1Serve == false && Model.SetVM.WinnerPlayer == null) *@
-                @*     { *@
-                @*         <p><i class="fa-solid fa-table-tennis-paddle-ball"></i></p> *@
-                @*     } *@
-                @*     <div class="tt-player-name">@Model.MatchFormVM.Player2FirstName</div> *@
-                @*     @if (Model.Player2Setpoint) *@
-                @*     { *@
-                @*         <div class="set-point">SET POINT!</div> *@
-                @*     }  *@
-                @* </div> *@
             </div>
-            @*    <span style="color: #e23a36; font-weight:bold;">
-                            Server: @(Model.SetVM.IsPlayer1Serve ? Model.MatchFormVM.Player1FirstName : Model.MatchFormVM.Player2FirstName)
-                        </span> *@
+          
         }
         else
         {

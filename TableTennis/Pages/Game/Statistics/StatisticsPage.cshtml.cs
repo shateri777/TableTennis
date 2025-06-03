@@ -121,32 +121,6 @@ namespace TableTennis.Pages.Game.Statistics
         }
 
 
-
-        //public IActionResult OnPostPlayer1()
-        //{
-        //    PopulateAvailablePlayers();
-
-        //    var player1StatsDTO = _matchService.GetStats(SelectedPlayer1Id);
-        //    StatisticsVM player1Stats = new StatisticsVM
-        //    {
-        //        PlayerFullName = player1StatsDTO.PlayerFullName,
-        //        Wins = player1StatsDTO.Wins,
-        //        Losses = player1StatsDTO.Losses,
-        //        TotalGamesPlayed = player1StatsDTO.TotalGamesPlayed,
-        //        WinPercentage = player1StatsDTO.WinPercentage,
-        //        LongestMatch = player1StatsDTO.LongestMatch,
-        //        FastestMatch = player1StatsDTO.FastestMatch,
-        //        BestAgainstName = player1StatsDTO.BestAgainstName,
-        //        BestAgainstWinRate = player1StatsDTO.BestAgainstWinRate,
-        //        WorstAgainstName = player1StatsDTO.WorstAgainstName,
-        //        WorstAgainstWinRate = player1StatsDTO.WorstAgainstWinRate
-
-        //    };
-        //    Player1VM = player1Stats;
-
-        //    return Page();
-        //}
-
         public IActionResult OnPostPlayer2()
         {
             PopulateAvailablePlayers();
@@ -230,38 +204,6 @@ namespace TableTennis.Pages.Game.Statistics
 
             return Page();
         }
-
-
-
-
-        //public IActionResult OnPostPlayer2()
-        //{
-        //    PopulateAvailablePlayers();
-
-        //    var player2StatsDTO = _matchService.GetStats(SelectedPlayer2Id);
-        //    if (player2StatsDTO == null)
-        //    {
-        //        Player2VM = new StatisticsVM(); // tom fallback
-        //        return Page();
-        //    }
-
-        //    Player2VM = new StatisticsVM
-        //    {
-        //        PlayerFullName = player2StatsDTO.PlayerFullName,
-        //        Wins = player2StatsDTO.Wins,
-        //        Losses = player2StatsDTO.Losses,
-        //        TotalGamesPlayed = player2StatsDTO.TotalGamesPlayed,
-        //        WinPercentage = player2StatsDTO.WinPercentage,
-        //        LongestMatch = player2StatsDTO.LongestMatch,
-        //        FastestMatch = player2StatsDTO.FastestMatch,
-        //        BestAgainstName = player2StatsDTO.BestAgainstName,
-        //        BestAgainstWinRate = player2StatsDTO.BestAgainstWinRate,
-        //        WorstAgainstName = player2StatsDTO.WorstAgainstName,
-        //        WorstAgainstWinRate = player2StatsDTO.WorstAgainstWinRate
-        //    };
-
-        //    return Page();
-        //}
 
         private void PopulateAvailablePlayers()
         {

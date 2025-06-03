@@ -1,11 +1,5 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using TableTennis.Data;
 
 namespace DataAccessLayer.Data
 {
@@ -51,7 +45,7 @@ namespace DataAccessLayer.Data
             {
                 UserName = userName,
                 Email = userName,
-                EmailConfirmed = true   
+                EmailConfirmed = true
             };
             _userManager.CreateAsync(user, password).Wait();
             _userManager.AddToRolesAsync(user, roles).Wait();
