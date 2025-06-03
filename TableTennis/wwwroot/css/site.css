@@ -413,6 +413,10 @@ body {
     border-top: 8px solid #c85a46;
 }
 
+.match-container p {
+    justify-self: center;
+}
+
 .match-title {
     text-align: center;
     font-size: 32px;
